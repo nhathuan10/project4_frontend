@@ -1,6 +1,50 @@
-.huan {
-    background-color: blue;
-    .nhat {
-        color: red;
+.navbar {
+    .container {
+        .logo {
+            .book-icon {
+                font-size: 27px;
+                color: rgb(212, 236, 164);
+            }
+        }
+
+        .nav-btn {}
+
+        .nav-col {
+            .navbar-nav {
+                .nav-item {
+                    a {
+                        text-decoration: none;
+                        font-size: 18px;
+                        font-weight: 300;
+                        color: #fff;
+                        transition: all 0.3s;
+                        position: relative;
+                    }
+
+                    a::before {
+                        position: absolute;
+                        content: '';
+                        width: 80%;
+                        height: 2px;
+                        bottom: -2px;
+                        left: 4;
+                        background-color: rgb(248, 248, 16);
+                        transform: scaleX(0);
+                        transition: transform 0.3s;
+                        
+                    }
+
+                    a:hover {
+                        display: flex;
+                        justify-content: center;
+                        &::before {
+                            transform: scaleX(1);
+                        }
+
+                        color: rgb(202, 135, 20);
+                    }
+                }
+            }
+        }
     }
 }

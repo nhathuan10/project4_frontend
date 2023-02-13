@@ -3,3 +3,56 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+:root {
+    --mainOpacity: rgba(0, 0, 0, 0.65);
+}
+
+.dark-overlay {
+    background-color: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-color {
+    background-color: #5e1717;
+    // background-color: red;
+}
+
+.col-image-left {
+    background-image: url('../../img/PublicImages/image-5.jpg');
+    background-size: cover;
+    height: 25em !important;
+}
+
+.col-image-right {
+    background-image: url('../../img/PublicImages/image-7.jpg');
+    background-size: cover;
+    height: 25em !important;
+}
+
+.lost-image {
+    background-image: url('../../img/PublicImages/image-2.jpg');
+    background-size: cover;
+    height: 25em !important;
+    width: "720"
+}
+
+.homepage-carousel-title {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.book-div {
+    width: 480px;
+    height: 384px;
+}
+
+.inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}
