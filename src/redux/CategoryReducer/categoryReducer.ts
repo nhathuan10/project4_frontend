@@ -37,3 +37,13 @@ export const getCategoriesApi = () => {
         }
     }
 }
+
+// export const addCategoryApi = () => {
+//     return async (dispatch: DispatchType) => {
+//         try{
+//             const 
+//         } catch(err) {
+//             console.log(err)
+//         }
+//     }
+// }

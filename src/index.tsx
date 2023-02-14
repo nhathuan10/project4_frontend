@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ManageLibraryPage from './pages/ManageLibraryPage/ManageLibraryPage';
 import { Provider } from 'react-redux';
 import { store } from './redux/configStore';
+import AllCategories from './pages/ManageLibraryPage/components/AllCategories';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,7 +19,7 @@ root.render(
         <Route path='' element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path='admin' element={<ManageLibraryPage />}>
-
+            <Route index element={<AllCategories />} />
           </Route>
         </Route>
       </Routes>
