@@ -19,7 +19,10 @@ export default function ManageLibraryPage({ }: Props) {
     return (
         <div className='container'>
             <h2 className='m-3 text-center'>All Categories</h2>
-            <form onSubmit={() => addCategory(category)}>
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                addCategory(category)
+            }}>
                 <div className='d-flex align-items-center p-2'>
                     <span className='fw-bold'>Category:</span>
                     <div className='form-group mx-3'>
@@ -32,12 +35,7 @@ export default function ManageLibraryPage({ }: Props) {
                         />
                     </div>
                     <div className='form-group'>
-                        <button
-                            className='btn btn-success'
-                            type='submit'
-                        >
-                            Add Category
-                        </button>
+                        <button className='btn btn-success' type='submit'>Add Category</button>
                     </div>
                 </div>
             </form>

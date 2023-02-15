@@ -8,8 +8,6 @@ type Props = {}
 
 export default function AllCategories({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
-    const { addedCategory } = useSelector((state: RootState) => state.categoryReducer)
-    const { deleteCategoryResponse } = useSelector((state: RootState) => state.categoryReducer)
     const dispatch: DispatchType = useDispatch()
 
     const deleteCategory = (id: number) => {
@@ -31,7 +29,7 @@ export default function AllCategories({ }: Props) {
 
     useEffect(() => {
         dispatch(getCategoriesApi())
-    }, [addedCategory, deleteCategoryResponse])
+    }, [categories])
 
     return (
         <table className="table table-striped">

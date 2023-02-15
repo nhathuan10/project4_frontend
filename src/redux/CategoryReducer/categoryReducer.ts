@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { CategoryModel, CategoryRequest } from '../../models/CategoryModel';
+import { history } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export type CategoryState = {
     categories: CategoryModel[],
-    addedCategory: CategoryModel | null,
+    addedCategory: CategoryModel | null ,
     deleteCategoryResponse: string
 }
 
