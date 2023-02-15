@@ -15,7 +15,7 @@ export default function ManageLibraryPage({ }: Props) {
         const categoryRequest: CategoryRequest = { name: category }
         dispatch(addCategoryApi(categoryRequest))
     }
-//asd
+
     return (
         <div className='container text-center'>
             <h2 className='m-3 text-center'>All Categories</h2>
