@@ -29,7 +29,7 @@ export default function AllCategories({ }: Props) {
 
     useEffect(() => {
         dispatch(getCategoriesApi())
-    }, [categories])
+    })
 
     return (
         <table className="table table-striped">
