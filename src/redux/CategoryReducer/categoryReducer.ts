@@ -5,14 +5,18 @@ import { history } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export type CategoryState = {
-    categories: CategoryModel[],
-    addedCategory: CategoryModel | null ,
+    categories: CategoryModel[]
+    categoryById: CategoryModel | null
+    addedCategory: CategoryModel | null
+    updatedCategory: CategoryModel | null
     deleteCategoryResponse: string
 }
 
 const initialState: CategoryState = {
     categories: [],
+    categoryById: null,
     addedCategory: null,
+    updatedCategory: null,
     deleteCategoryResponse: ''
 }
 
@@ -23,8 +27,14 @@ const categoryReducer = createSlice({
         setCategoriesAction: (state: CategoryState, action: PayloadAction<CategoryModel[]>) => {
             state.categories = action.payload
         },
+        getCategoryByIdAction: (state: CategoryState, action: PayloadAction<CategoryModel>) => {
+            state.categoryById = action.payload
+        },
         addCategoryAction: (state: CategoryState, action: PayloadAction<CategoryModel>) => {
             state.addedCategory = action.payload
+        },
+        updateCategoryAction: (state: CategoryState, action: PayloadAction<CategoryModel>) => {
+            state.updatedCategory = action.payload
         },
         deleteCategoryAction: (state: CategoryState, action: PayloadAction<string>) => {
             state.deleteCategoryResponse = action.payload
@@ -35,7 +45,9 @@ const categoryReducer = createSlice({
 export const {
     setCategoriesAction,
     addCategoryAction,
-    deleteCategoryAction
+    deleteCategoryAction,
+    getCategoryByIdAction,
+    updateCategoryAction
 } = categoryReducer.actions
 
 export default categoryReducer.reducer
@@ -58,6 +70,28 @@ export const addCategoryApi = (categoryRequest: CategoryRequest) => {
         try {
             const result = await axios.post(categoryURL, categoryRequest)
             dispatch(addCategoryAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const updateCategoryApi = (id: number, categoryRequest: CategoryRequest) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await axios.put(categoryURL + `/${id}`, categoryRequest)
+            dispatch(updateCategoryAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const getCategoryByIdApi = (id: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await axios.get(categoryURL + `/${id}`)
+            dispatch(getCategoryByIdAction(result.data))
         } catch (err) {
             console.log(err)
         }

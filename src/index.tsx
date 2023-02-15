@@ -21,6 +21,7 @@ root.render(
           <Route index element={<HomePage />} />
           <Route path='admin' element={<ManageLibraryPage />}>
             <Route index element={<AllCategories />} />
+            <Route path=':id' element={<AllCategories />} />
           </Route>
         </Route>
       </Routes>

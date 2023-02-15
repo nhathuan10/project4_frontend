@@ -28,6 +28,9 @@ export default function ({ }: Props) {
                         <li className='nav-item'>
                             <a className='nav-link' href='/'>Search Books</a>
                         </li>
+                        <li className='nav-item'>
+                            <a className='nav-link' href='/admin'>Admin</a>
+                        </li>
                     </ul>
                     {/* <ul className='navbar-nav ms-auto'>
                         <li className='nav-item'>
