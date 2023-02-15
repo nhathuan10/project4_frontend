@@ -17,7 +17,7 @@ export default function ManageLibraryPage({ }: Props) {
     }
 
     return (
-        <div className='container'>
+        <div className='container text-center'>
             <h2 className='m-3 text-center'>All Categories</h2>
             <form onSubmit={(e) => {
                 e.preventDefault()
