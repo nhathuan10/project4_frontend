@@ -20,7 +20,6 @@ export default function AllCategories({ }: Props) {
 
     const updateCategoryDisplay = (id: number) => {
         dispatch(getCategoryByIdApi(id))
-        setNewCategory('')
     }
 
     const updateCategory = (id: number, updateCategoryRequest: CategoryRequest) => {
@@ -54,6 +53,12 @@ export default function AllCategories({ }: Props) {
     useEffect(() => {
         dispatch(getCategoriesApi())
     })
+
+    useEffect(() => {
+        if(categoryById){
+            setNewCategory(categoryById.name)
+        }
+    }, [categoryById])
 
     return (
         <>
