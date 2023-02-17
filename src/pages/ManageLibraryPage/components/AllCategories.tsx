@@ -33,7 +33,7 @@ export default function AllCategories({ }: Props) {
                 <td>{category.name}</td>
                 <td>
                     <NavLink
-                        to={`/admin/${category.id}`}
+                        to={`/admin/category/${category.id}`}
                         className='btn btn-info me-2'
                         onClick={() => updateCategoryDisplay(category.id)}
                     >

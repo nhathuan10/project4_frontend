@@ -7,7 +7,7 @@ import { addCategoryApi } from '../../redux/CategoryReducer/categoryReducer'
 
 type Props = {}
 
-export default function ManageLibraryPage({ }: Props) {
+export default function ManageCategoryPage({ }: Props) {
     const dispatch: DispatchType = useDispatch()
     const [category, setCategory] = useState<string>('')
 
