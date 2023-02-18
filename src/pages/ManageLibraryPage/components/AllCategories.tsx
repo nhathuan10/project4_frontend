@@ -9,6 +9,7 @@ type Props = {}
 
 export default function AllCategories({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
+    const { categoryState } = useSelector((state: RootState) => state.categoryReducer)
     const { categoryById } = useSelector((state: RootState) => state.categoryReducer)
     const [newCategory, setNewCategory] = useState('')
     const { id } = useParams() as any
@@ -52,10 +53,10 @@ export default function AllCategories({ }: Props) {
 
     useEffect(() => {
         dispatch(getCategoriesApi())
-    })
+    }, [categoryState])
 
     useEffect(() => {
-        if(categoryById){
+        if (categoryById) {
             setNewCategory(categoryById.name)
         }
     }, [categoryById])
@@ -73,7 +74,7 @@ export default function AllCategories({ }: Props) {
                                 type="text"
                                 className='form-control me-2'
                                 id='id'
-                                value={categoryById?.id }
+                                value={categoryById?.id}
                             />
                             <input
                                 type="text"

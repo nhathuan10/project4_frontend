@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { CategoryModel, CategoryRequest } from '../../models/CategoryModel';
-import { history } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export type CategoryState = {
@@ -9,7 +8,8 @@ export type CategoryState = {
     categoryById: CategoryModel | null
     addedCategory: CategoryModel | null
     updatedCategory: CategoryModel | null
-    deleteCategoryResponse: string
+    deleteCategoryResponse: string,
+    categoryState: boolean
 }
 
 const initialState: CategoryState = {
@@ -17,7 +17,8 @@ const initialState: CategoryState = {
     categoryById: null,
     addedCategory: null,
     updatedCategory: null,
-    deleteCategoryResponse: ''
+    deleteCategoryResponse: '',
+    categoryState: false
 }
 
 const categoryReducer = createSlice({
@@ -32,12 +33,15 @@ const categoryReducer = createSlice({
         },
         addCategoryAction: (state: CategoryState, action: PayloadAction<CategoryModel>) => {
             state.addedCategory = action.payload
+            state.categoryState = !state.categoryState
         },
         updateCategoryAction: (state: CategoryState, action: PayloadAction<CategoryModel>) => {
             state.updatedCategory = action.payload
+            state.categoryState = !state.categoryState
         },
         deleteCategoryAction: (state: CategoryState, action: PayloadAction<string>) => {
             state.deleteCategoryResponse = action.payload
+            state.categoryState = !state.categoryState
         }
     }
 });

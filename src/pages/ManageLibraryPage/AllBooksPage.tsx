@@ -1,8 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { BookModel } from '../../models/BookModel'
+import { getBooksApi } from '../../redux/BookReducer/bookReducer'
+import { DispatchType, RootState } from '../../redux/configStore'
 
 type Props = {}
 
 export default function AllBooksPage({ }: Props) {
+    const { books } = useSelector((state: RootState) => state.bookReducer)
+    const { bookState } = useSelector((state: RootState) => state.bookReducer)
+    const dispatch: DispatchType = useDispatch()
+
+    useEffect(() => {
+        dispatch(getBooksApi())
+    }, [bookState])
+
+    useEffect(() => {
+        
+    })
+
+    const renderBooks = () => {
+        return books.map((book: BookModel, index: number) => (
+            <tr key={index}>
+                <th scope="row">{book.id}</th>
+                <td>
+                    <img
+                        src="https://i.pravatar.cc?u=2"
+                        alt="..."
+                        width={150}
+                        height={150}
+                    />
+                </td>
+                <td>{book.title}</td>
+                <td>{book.author}</td>
+                <td>{book.description}</td>
+                <td>{book.copies}</td>
+                <td>{book.copiesAvailable}</td>
+                <td>{book.categoryId}</td>
+            </tr>
+        ))
+    }
+
     return (
         <div className='container'>
             <table className="table table-striped table-hover">
@@ -19,23 +57,7 @@ export default function AllBooksPage({ }: Props) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>
-                            <img
-                                src="https://i.pravatar.cc?u=2"
-                                alt="..."
-                                width={150}
-                                height={150}
-                            />
-                        </td>
-                        <td>Book 1</td>
-                        <td>Author 1</td>
-                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry</td>
-                        <td>1</td>
-                        <td>111111111</td>
-                        <td>Category 1</td>
-                    </tr>
+                    {renderBooks()}
                 </tbody>
             </table>
         </div>
