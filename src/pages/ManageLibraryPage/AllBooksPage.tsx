@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import { BookModel } from '../../models/BookModel'
 import { getBooksApi } from '../../redux/BookReducer/bookReducer'
 import { DispatchType, RootState } from '../../redux/configStore'
@@ -36,13 +37,15 @@ export default function AllBooksPage({ }: Props) {
                 <td>{book.description}</td>
                 <td>{book.copies}</td>
                 <td>{book.copiesAvailable}</td>
-                <td>{book.categoryId}</td>
+                <td>{book.categoryName}</td>
             </tr>
         ))
     }
 
     return (
         <div className='container'>
+            <h2 className='text-center m-3'>All Books</h2>
+            <NavLink to='/admin/book/add-book' className='btn btn-primary mb-2'>Add Book</NavLink>
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>

@@ -11,6 +11,7 @@ import { history } from './utils/config';
 import ManageCategoryPage from './pages/ManageLibraryPage/ManageCategoryPage';
 import AllBooksPage from './pages/ManageLibraryPage/AllBooksPage';
 import BookUpdatePage from './pages/ManageLibraryPage/BookUpdatePage';
+import AddBookPage from './pages/ManageLibraryPage/AddBookPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -26,8 +27,9 @@ root.render(
             <Route path=':id' element={<AllCategories />} />
           </Route>
           <Route path='admin/book'>
-            <Route index element={<AllBooksPage />}></Route>
-            <Route path='update/:id' element={<BookUpdatePage/>}></Route>
+            <Route index element={<AllBooksPage />} />
+            <Route path='add-book' element={<AddBookPage />} />
+            <Route path='update/:id' element={<BookUpdatePage />} />
           </Route>
         </Route>
       </Routes>

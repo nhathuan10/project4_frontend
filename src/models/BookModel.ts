@@ -6,5 +6,5 @@ export type BookModel = {
     copies: number
     copiesAvailable: number
     img: string
-    categoryId: number
+    categoryName: string
 }
