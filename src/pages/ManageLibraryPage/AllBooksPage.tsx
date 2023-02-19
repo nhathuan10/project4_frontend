@@ -16,10 +16,6 @@ export default function AllBooksPage({ }: Props) {
         dispatch(getBooksApi())
     }, [bookState])
 
-    useEffect(() => {
-        
-    })
-
     const renderBooks = () => {
         return books.map((book: BookModel, index: number) => (
             <tr key={index}>

@@ -15,7 +15,7 @@ export default function AllCategories({ }: Props) {
     const { id } = useParams() as any
     const dispatch: DispatchType = useDispatch()
 
-    const deleteCategory = (id: number) => {
+    const deleteCategoryHandler = (id: number) => {
         dispatch(deleteCategoryApi(id))
     }
 
@@ -23,7 +23,7 @@ export default function AllCategories({ }: Props) {
         dispatch(getCategoryByIdApi(id))
     }
 
-    const updateCategory = (id: number, updateCategoryRequest: CategoryRequest) => {
+    const updateCategoryHandler = (id: number, updateCategoryRequest: CategoryRequest) => {
         dispatch(updateCategoryApi(id, updateCategoryRequest))
     }
 
@@ -42,7 +42,7 @@ export default function AllCategories({ }: Props) {
                     </NavLink>
                     <button
                         className='btn btn-danger'
-                        onClick={() => deleteCategory(category.id)}
+                        onClick={() => deleteCategoryHandler(category.id)}
                     >
                         Delete
                     </button>
@@ -89,7 +89,7 @@ export default function AllCategories({ }: Props) {
                             <button
                                 className='btn btn-info'
                                 type='submit'
-                                onClick={() => updateCategory(id, { name: newCategory })}
+                                onClick={() => updateCategoryHandler(id, { name: newCategory })}
                             >
                                 Update Category
                             </button>

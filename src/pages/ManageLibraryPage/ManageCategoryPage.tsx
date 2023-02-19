@@ -11,7 +11,7 @@ export default function ManageCategoryPage({ }: Props) {
     const dispatch: DispatchType = useDispatch()
     const [category, setCategory] = useState<string>('')
 
-    const addCategory = (category: string) => {
+    const addCategoryHandler = (category: string) => {
         const categoryRequest: CategoryRequest = { name: category }
         dispatch(addCategoryApi(categoryRequest))
     }
@@ -21,7 +21,7 @@ export default function ManageCategoryPage({ }: Props) {
             <h2 className='m-3 text-center'>All Categories</h2>
             <form onSubmit={(e) => {
                 e.preventDefault()
-                addCategory(category)
+                addCategoryHandler(category)
             }}>
                 <div className='d-flex align-items-center p-2'>
                     <span className='fw-bold'>Category:</span>

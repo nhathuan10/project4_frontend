@@ -8,3 +8,11 @@ export type BookModel = {
     img: string
     categoryName: string
 }
+
+// export type BookRequest = {
+//     title: string
+//     author: string
+//     description: string
+//     copies: number
+//     img?: string
+// }
