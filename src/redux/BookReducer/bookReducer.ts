@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
-import AddBookRequest from '../../models/AddBookRequest';
-import { BookModel } from '../../models/BookModel';
+import { BookModel, BookRequest } from '../../models/BookModel';
 import { DispatchType } from '../configStore';
 
 export type BookState = {
@@ -47,7 +46,7 @@ export const getBooksApi = () => {
     }
 }
 
-export const addBookApi = (categoryId: number, book: AddBookRequest) => {
+export const addBookApi = (categoryId: number, book: BookRequest) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await axios.post(addBookURL + `/${categoryId}/books`, book)

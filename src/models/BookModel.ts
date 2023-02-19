@@ -9,10 +9,10 @@ export type BookModel = {
     categoryName: string
 }
 
-// export type BookRequest = {
-//     title: string
-//     author: string
-//     description: string
-//     copies: number
-//     img?: string
-// }
+export type BookRequest = {
+    title: string
+    author: string
+    description: string
+    copies: number
+    img?: string
+}

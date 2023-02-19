@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import AddBookRequest from '../../models/AddBookRequest'
+import { BookRequest } from '../../models/BookModel'
 import { CategoryModel } from '../../models/CategoryModel'
 import { addBookApi } from '../../redux/BookReducer/bookReducer'
 import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
@@ -18,8 +18,7 @@ export default function AddBookPage({ }: Props) {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [description, setDescription] = useState('')
-    // const [img, setImg] = useState<any>(null)
-    const [selectedImage, setSelectedImage] = useState<any>(null)
+    const [img, setImg] = useState<any>(null)
     const [copies, setCopies] = useState(0)
 
     const renderCategories = () => {
@@ -47,7 +46,7 @@ export default function AddBookPage({ }: Props) {
         let reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onload = () => {
-            setSelectedImage(reader.result)
+            setImg(reader.result)
         }
         reader.onerror = (error) => {
             console.log('Error', error)
@@ -55,8 +54,7 @@ export default function AddBookPage({ }: Props) {
     }
 
     const addBookHandler = () => {
-        const addBook: AddBookRequest = new AddBookRequest( title, author, description, copies )
-        addBook.img = selectedImage
+        const addBook: BookRequest = { title, author, description, copies, img }
         dispatch(addBookApi(categoryIdSelected, addBook))
     }
 
@@ -113,7 +111,14 @@ export default function AddBookPage({ }: Props) {
                         </div>
                         <h5>Image</h5>
                         <input type="file" onChange={e => base64ConversionForImages(e)} />
-                        {/* <input type="text" onChange={(e) => setSelectedImage(e.target.value)} value={selectedImage}/> */}
+                        <img
+                            src={img}
+                            alt="..."
+                            width={150}
+                            height={150}
+                        />
+                        {/* <input type="file" onChange={(e: any) => setImg(e.target.files[0])} /> */}
+                        {/* <input type="text" onChange={(e) => setImg(e.target.value)} value={img}/> */}
                         <div>
                             <button type='button' className='btn btn-primary mt-3' onClick={addBookHandler}>Add Book</button>
                         </div>

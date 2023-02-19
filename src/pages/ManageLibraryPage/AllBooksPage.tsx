@@ -23,6 +23,7 @@ export default function AllBooksPage({ }: Props) {
                 <td>
                     <img
                         src="https://i.pravatar.cc?u=2"
+                        // src={book.img}
                         alt="..."
                         width={150}
                         height={150}
