@@ -17,11 +17,8 @@ export default function AddBookPage({ }: Props) {
     const [categoryIdSelected, setCategoryIdSelected] = useState<number>(0)
     const [displayWarning, setDisplayWarning] = useState(false)
     const [displaySuccess, setDisplaySuccess] = useState(false)
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [description, setDescription] = useState('')
     const [img, setImg] = useState<any>(null)
-    const [copies, setCopies] = useState(0)
+
     const addBookForm = useFormik<BookRequest>({
         initialValues: {
             title: '',
@@ -34,11 +31,15 @@ export default function AddBookPage({ }: Props) {
             title: yup.string().required('Title can not be blank').min(5, 'Title is too short'),
             author: yup.string().required('Author can not be blank').min(5, 'Author is too short'),
             description: yup.string().required('Description can not be blank').min(10, 'Title is too short'),
-            copies: yup.number().required('Copies can not be blank').positive('Copies must not be negative').integer('Copies must be integer'),
+            copies: yup.number().required('Copies can not be blank').integer('Copies must be integer').positive('Copies must be greater than 0'),
             img: yup.string().required('Image can not be blank'),
         }),
         onSubmit: (values: BookRequest) => {
-
+            if (categoryIdSelected) {
+                dispatch(addBookApi(categoryIdSelected, values))
+            } else {
+                setDisplayWarning(true)
+            }
         }
     })
 
@@ -68,15 +69,11 @@ export default function AddBookPage({ }: Props) {
         reader.readAsDataURL(file)
         reader.onload = () => {
             setImg(reader.result)
+            addBookForm.setFieldValue('img', reader.result)
         }
         reader.onerror = (error) => {
             console.log('Error', error)
         }
-    }
-
-    const addBookHandler = () => {
-        const addBook: BookRequest = { title, author, description, copies, img }
-        dispatch(addBookApi(categoryIdSelected, addBook))
     }
 
     useEffect(() => {
@@ -91,15 +88,10 @@ export default function AddBookPage({ }: Props) {
                     Book Added Successfully
                 </div>
             }
-            {displayWarning &&
-                <div className='alert alert-danger' role='alert'>
-                    All fields must be filled out
-                </div>
-            }
             <div className='card'>
                 <div className='card-header'>Add a new book</div>
                 <div className='card-body'>
-                    <form action="post" onSubmit={addBookForm.handleSubmit}>
+                    <form onSubmit={addBookForm.handleSubmit}>
                         <div className='row'>
                             <div className='col-md-6 mb-3'>
                                 <label className='form-label'>Title</label>
@@ -122,8 +114,12 @@ export default function AddBookPage({ }: Props) {
                                     <ul className="dropdown-menu">
                                         {renderCategories()}
                                     </ul>
+                                    {displayWarning &&
+                                        <p className='text-danger mt-2' role='alert'>
+                                            Category must not be blank
+                                        </p>
+                                    }
                                 </div>
-
                             </div>
                         </div>
                         <div className='col-md-12 mb-3'>
@@ -134,15 +130,16 @@ export default function AddBookPage({ }: Props) {
                         </div>
                         <div className='col-md-3 mb-3'>
                             <label className='form-label'>Copies</label>
-                            <input type="number" className='form-control' name='copies'
+                            <input type="number" className='form-control' name='copies' min='0'
                                 required onChange={addBookForm.handleChange} onBlur={addBookForm.handleBlur} />
                             {addBookForm.errors.copies && <div className='text text-danger'>{addBookForm.errors.copies}</div>}
                         </div>
                         <h5>Image</h5>
-                        <input type="file" onChange={e => base64ConversionForImages(e)} />
-                        <img src={img} alt="..." width={150} height={150} />
+                        <input type="file" name='img' onChange={e => base64ConversionForImages(e)} onBlur={addBookForm.handleBlur} />
+                        {addBookForm.errors.img && <div className='text text-danger'>{addBookForm.errors.img}</div>}
+                        {img && <img src={img} alt="..." width={150} height={150} />}
                         <div>
-                            <button type='button' className='btn btn-primary mt-3' onClick={addBookHandler}>Add Book</button>
+                            <button type='submit' className='btn btn-primary mt-3' >Add Book</button>
                         </div>
                     </form>
                 </div>

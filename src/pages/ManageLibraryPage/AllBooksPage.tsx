@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 import { BookModel } from '../../models/BookModel'
 import { getBooksApi } from '../../redux/BookReducer/bookReducer'
 import { DispatchType, RootState } from '../../redux/configStore'
+import { NavLink } from 'react-router-dom'
 
 type Props = {}
 
@@ -29,6 +29,21 @@ export default function AllBooksPage({ }: Props) {
                 <td>{book.copies}</td>
                 <td>{book.copiesAvailable}</td>
                 <td>{book.categoryName}</td>
+                <td>
+                    <NavLink
+                        to={`/admin/book/update/${book.id}`}
+                        className='btn btn-info me-2'
+                        
+                    >
+                        Update
+                    </NavLink>
+                    <button
+                        className='btn btn-danger'
+                        
+                    >
+                        Delete
+                    </button>
+                </td>
             </tr>
         ))
     }
@@ -48,6 +63,7 @@ export default function AllBooksPage({ }: Props) {
                         <th scope="col">Copies</th>
                         <th scope="col">Copies Available</th>
                         <th scope="col">Category</th>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>

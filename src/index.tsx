@@ -29,7 +29,7 @@ root.render(
           <Route path='admin/book'>
             <Route index element={<AllBooksPage />} />
             <Route path='add-book' element={<AddBookPage />} />
-            <Route path='update/:id' element={<BookUpdatePage />} />
+            <Route path='update/:id' element={<AddBookPage />} />
           </Route>
         </Route>
       </Routes>
