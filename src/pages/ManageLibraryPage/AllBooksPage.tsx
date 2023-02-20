@@ -22,8 +22,7 @@ export default function AllBooksPage({ }: Props) {
                 <th scope="row">{book.id}</th>
                 <td>
                     <img
-                        src="https://i.pravatar.cc?u=2"
-                        // src={book.img}
+                        src={book.img}
                         alt="..."
                         width={150}
                         height={150}
