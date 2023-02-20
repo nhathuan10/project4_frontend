@@ -3,21 +3,25 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BookRequest } from '../../models/BookModel'
 import { CategoryModel } from '../../models/CategoryModel'
-import { addBookApi } from '../../redux/BookReducer/bookReducer'
+import { addBookApi, getBookByIdApi, updateBookApi } from '../../redux/BookReducer/bookReducer'
 import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
 import { RootState, DispatchType } from '../../redux/configStore'
 import * as yup from 'yup'
+import { useParams } from 'react-router-dom'
+import { history } from '../../utils/config'
 
 type Props = {}
 
 export default function AddBookPage({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
+    const { bookState } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
     const [categorySelected, setCategorySelected] = useState('')
     const [categoryIdSelected, setCategoryIdSelected] = useState<number>(0)
     const [displayWarning, setDisplayWarning] = useState(false)
-    const [displaySuccess, setDisplaySuccess] = useState(false)
     const [img, setImg] = useState<any>(null)
+    const { id } = useParams() as any
+    const { book } = useSelector((state: RootState) => state.bookReducer)
 
     const addBookForm = useFormik<BookRequest>({
         initialValues: {
@@ -32,11 +36,16 @@ export default function AddBookPage({ }: Props) {
             author: yup.string().required('Author can not be blank').min(5, 'Author is too short'),
             description: yup.string().required('Description can not be blank').min(10, 'Title is too short'),
             copies: yup.number().required('Copies can not be blank').integer('Copies must be integer').positive('Copies must be greater than 0'),
-            img: yup.string().required('Image can not be blank'),
+            img: yup.string().required('Image need to be updated'),
         }),
         onSubmit: (values: BookRequest) => {
             if (categoryIdSelected) {
-                dispatch(addBookApi(categoryIdSelected, values))
+                if (id) {
+                    dispatch(updateBookApi(categoryIdSelected, id, values))
+                } else {
+                    dispatch(addBookApi(categoryIdSelected, values))
+                }
+                history.push('/admin/book')
             } else {
                 setDisplayWarning(true)
             }
@@ -51,6 +60,7 @@ export default function AddBookPage({ }: Props) {
                     onClick={() => {
                         setCategorySelected(category.name)
                         setCategoryIdSelected(category.id)
+                        setDisplayWarning(false)
                     }}>
                     {category.name}
                 </a>
@@ -81,15 +91,21 @@ export default function AddBookPage({ }: Props) {
         setCategorySelected('Please Select')
     }, [])
 
+    useEffect(() => {
+        if (id) {
+            dispatch(getBookByIdApi(id))
+        }
+        if (book) {
+            setImg(book.img)
+        }
+    }, [bookState])
+
     return (
         <div className='container mt-5 mb-5'>
-            {displaySuccess &&
-                <div className='alert alert-success' role='alert'>
-                    Book Added Successfully
-                </div>
-            }
             <div className='card'>
-                <div className='card-header'>Add a new book</div>
+                <div className='card-header fw-bold'>
+                    {id ? 'Update Book' : 'Add New Book'}
+                </div>
                 <div className='card-body'>
                     <form onSubmit={addBookForm.handleSubmit}>
                         <div className='row'>
@@ -139,7 +155,11 @@ export default function AddBookPage({ }: Props) {
                         {addBookForm.errors.img && <div className='text text-danger'>{addBookForm.errors.img}</div>}
                         {img && <img src={img} alt="..." width={150} height={150} />}
                         <div>
-                            <button type='submit' className='btn btn-primary mt-3' >Add Book</button>
+                            {id ? (
+                                <button type='submit' className='btn btn-primary mt-3' >Update Book</button>
+                            ) : (
+                                <button type='submit' className='btn btn-primary mt-3' >Add Book</button>
+                            )}
                         </div>
                     </form>
                 </div>

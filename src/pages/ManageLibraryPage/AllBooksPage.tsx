@@ -32,17 +32,11 @@ export default function AllBooksPage({ }: Props) {
                 <td>
                     <NavLink
                         to={`/admin/book/update/${book.id}`}
-                        className='btn btn-info me-2'
-                        
+                        className='btn btn-info me-2'                   
                     >
                         Update
                     </NavLink>
-                    <button
-                        className='btn btn-danger'
-                        
-                    >
-                        Delete
-                    </button>
+                    <button className='btn btn-danger'>Delete</button>
                 </td>
             </tr>
         ))
