@@ -1,3 +1,4 @@
+import { useFormik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BookRequest } from '../../models/BookModel'
@@ -5,6 +6,7 @@ import { CategoryModel } from '../../models/CategoryModel'
 import { addBookApi } from '../../redux/BookReducer/bookReducer'
 import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
 import { RootState, DispatchType } from '../../redux/configStore'
+import * as yup from 'yup'
 
 type Props = {}
 
@@ -20,6 +22,25 @@ export default function AddBookPage({ }: Props) {
     const [description, setDescription] = useState('')
     const [img, setImg] = useState<any>(null)
     const [copies, setCopies] = useState(0)
+    const addBookForm = useFormik<BookRequest>({
+        initialValues: {
+            title: '',
+            author: '',
+            description: '',
+            copies: 0,
+            img: ''
+        },
+        validationSchema: yup.object().shape({
+            title: yup.string().required('Title can not be blank').min(5, 'Title is too short'),
+            author: yup.string().required('Author can not be blank').min(5, 'Author is too short'),
+            description: yup.string().required('Description can not be blank').min(10, 'Title is too short'),
+            copies: yup.number().required('Copies can not be blank').positive('Copies must not be negative').integer('Copies must be integer'),
+            img: yup.string().required('Image can not be blank'),
+        }),
+        onSubmit: (values: BookRequest) => {
+
+        }
+    })
 
     const renderCategories = () => {
         return categories.map((category: CategoryModel, index: number) => (
@@ -78,15 +99,19 @@ export default function AddBookPage({ }: Props) {
             <div className='card'>
                 <div className='card-header'>Add a new book</div>
                 <div className='card-body'>
-                    <form action="post">
+                    <form action="post" onSubmit={addBookForm.handleSubmit}>
                         <div className='row'>
                             <div className='col-md-6 mb-3'>
                                 <label className='form-label'>Title</label>
-                                <input type="text" className='form-control' name='title' required onChange={(e) => setTitle(e.target.value)} value={title} />
+                                <input type="text" className='form-control' name='title'
+                                    required onChange={addBookForm.handleChange} onBlur={addBookForm.handleBlur} />
+                                {addBookForm.errors.title && <div className='text text-danger'>{addBookForm.errors.title}</div>}
                             </div>
                             <div className='col-md-3 mb-3'>
                                 <label className='form-label'>Author</label>
-                                <input type="text" className='form-control' name='author' required onChange={(e) => setAuthor(e.target.value)} value={author} />
+                                <input type="text" className='form-control' name='author'
+                                    required onChange={addBookForm.handleChange} onBlur={addBookForm.handleBlur} />
+                                {addBookForm.errors.author && <div className='text text-danger'>{addBookForm.errors.author}</div>}
                             </div>
                             <div className='col-md-3 mb-3'>
                                 <label className='form-label'>Category</label>
@@ -103,22 +128,19 @@ export default function AddBookPage({ }: Props) {
                         </div>
                         <div className='col-md-12 mb-3'>
                             <label className='form-label'>Description</label>
-                            <textarea className='form-control' id='exampleFormControlTextarea1' rows={3} onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
+                            <textarea className='form-control' name='description' rows={3}
+                                onChange={addBookForm.handleChange} onBlur={addBookForm.handleBlur}></textarea>
+                            {addBookForm.errors.description && <div className='text text-danger'>{addBookForm.errors.description}</div>}
                         </div>
                         <div className='col-md-3 mb-3'>
                             <label className='form-label'>Copies</label>
-                            <input type="number" className='form-control' name='copies' required onChange={(e) => setCopies(Number(e.target.value))} value={copies} />
+                            <input type="number" className='form-control' name='copies'
+                                required onChange={addBookForm.handleChange} onBlur={addBookForm.handleBlur} />
+                            {addBookForm.errors.copies && <div className='text text-danger'>{addBookForm.errors.copies}</div>}
                         </div>
                         <h5>Image</h5>
                         <input type="file" onChange={e => base64ConversionForImages(e)} />
-                        <img
-                            src={img}
-                            alt="..."
-                            width={150}
-                            height={150}
-                        />
-                        {/* <input type="file" onChange={(e: any) => setImg(e.target.files[0])} /> */}
-                        {/* <input type="text" onChange={(e) => setImg(e.target.value)} value={img}/> */}
+                        <img src={img} alt="..." width={150} height={150} />
                         <div>
                             <button type='button' className='btn btn-primary mt-3' onClick={addBookHandler}>Add Book</button>
                         </div>

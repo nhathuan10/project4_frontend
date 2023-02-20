@@ -21,12 +21,7 @@ export default function AllBooksPage({ }: Props) {
             <tr key={index}>
                 <th scope="row">{book.id}</th>
                 <td>
-                    <img
-                        src={book.img}
-                        alt="..."
-                        width={150}
-                        height={150}
-                    />
+                    <img src={book.img} alt="..." width={150} height={150} />
                 </td>
                 <td>{book.title}</td>
                 <td>{book.author}</td>
