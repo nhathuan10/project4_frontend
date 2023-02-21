@@ -14,7 +14,6 @@ type Props = {}
 
 export default function AddBookPage({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
-    const { bookState } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
     const [categorySelected, setCategorySelected] = useState('')
     const [categoryIdSelected, setCategoryIdSelected] = useState<number>(0)
@@ -93,8 +92,7 @@ export default function AddBookPage({ }: Props) {
 
     useEffect(() => {
         if (id) {
-            dispatch(getBookByIdApi(id))
-            
+            dispatch(getBookByIdApi(id))        
         }     
     }, [])
 
@@ -102,7 +100,7 @@ export default function AddBookPage({ }: Props) {
         if (book) {
             setImg(book.img)
         }
-    })
+    }, [])
 
     return (
         <div className='container mt-5 mb-5'>
