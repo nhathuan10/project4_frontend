@@ -94,11 +94,15 @@ export default function AddBookPage({ }: Props) {
     useEffect(() => {
         if (id) {
             dispatch(getBookByIdApi(id))
-        }
+            
+        }     
+    }, [])
+
+    useEffect(() => {
         if (book) {
             setImg(book.img)
         }
-    }, [bookState])
+    })
 
     return (
         <div className='container mt-5 mb-5'>
