@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 type Props = {}
 
@@ -23,13 +24,13 @@ export default function ({ }: Props) {
                 <div className='collapse navbar-collapse nav-col d-flex' id='navbarNavDropdown'>
                     <ul className='navbar-nav'>
                         <li className='nav-item'>
-                            <a className='nav-link' href='/'>Home</a>
+                            <NavLink className='nav-link' to='/'>Home</NavLink>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link' href='/'>Search Books</a>
+                            <NavLink className='nav-link' to='/search-books'>Search Books</NavLink>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link' href='/admin/category'>Admin</a>
+                            <NavLink className='nav-link' to='/admin/book'>Admin</NavLink>
                         </li>
                     </ul>
                     {/* <ul className='navbar-nav ms-auto'>

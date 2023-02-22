@@ -33,7 +33,7 @@ export default function AddBookPage({ }: Props) {
         validationSchema: yup.object().shape({
             title: yup.string().required('Title can not be blank').min(5, 'Title is too short'),
             author: yup.string().required('Author can not be blank').min(5, 'Author is too short'),
-            description: yup.string().required('Description can not be blank').min(10, 'Title is too short'),
+            description: yup.string().required('Description can not be blank').min(10, 'Title is too short').max(255, 'Title is too long'),
             copies: yup.number().required('Copies can not be blank').integer('Copies must be integer').positive('Copies must be greater than 0'),
             img: yup.string().required('Image need to be updated'),
         }),
@@ -92,15 +92,15 @@ export default function AddBookPage({ }: Props) {
 
     useEffect(() => {
         if (id) {
-            dispatch(getBookByIdApi(id))        
-        }     
+            dispatch(getBookByIdApi(id))
+        }
     }, [])
 
     useEffect(() => {
-        if (book) {
+        if (book && id) {
             setImg(book.img)
         }
-    }, [])
+    })
 
     return (
         <div className='container mt-5 mb-5'>

@@ -9,6 +9,7 @@ export type BookState = {
     addedBook: BookModel | null
     book: BookModel | null
     updatedBook: BookModel | null
+    deleteBookResponse: string
 }
 
 const initialState: BookState = {
@@ -16,7 +17,8 @@ const initialState: BookState = {
     bookState: false,
     addedBook: null,
     book: null,
-    updatedBook: null
+    updatedBook: null,
+    deleteBookResponse: ''
 }
 
 const bookReducer = createSlice({
@@ -38,6 +40,10 @@ const bookReducer = createSlice({
             state.updatedBook = action.payload
             state.bookState = !state.bookState
         },
+        deleteBookAction: (state: BookState, action: PayloadAction<string>) => {
+            state.deleteBookResponse = action.payload
+            state.bookState = !state.bookState
+        }
     }
 });
 
@@ -45,7 +51,9 @@ export const {
     getBooksAction,
     addBookAction,
     getBookByIdAction,
-    updateBookAction } = bookReducer.actions
+    updateBookAction,
+    deleteBookAction
+} = bookReducer.actions
 
 export default bookReducer.reducer
 
@@ -90,6 +98,17 @@ export const updateBookApi = (categoryId: number, bookId: number, bookRequest: B
         try {
             const result = await axios.put(addBookURL + `/${categoryId}/books/${bookId}`, bookRequest)
             dispatch(updateBookAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const deleteBookApi = (bookId: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await axios.delete(bookURL + `/${bookId}`)
+            dispatch(deleteBookAction(result.data))
         } catch (err) {
             console.log(err)
         }

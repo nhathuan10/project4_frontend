@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BookModel } from '../../models/BookModel'
-import { getBooksApi } from '../../redux/BookReducer/bookReducer'
+import { deleteBookApi, getBooksApi } from '../../redux/BookReducer/bookReducer'
 import { DispatchType, RootState } from '../../redux/configStore'
 import { NavLink } from 'react-router-dom'
 
@@ -15,6 +15,10 @@ export default function AllBooksPage({ }: Props) {
     useEffect(() => {
         dispatch(getBooksApi())
     }, [bookState])
+
+    const deleteBookHandler = (id: number) => {
+        dispatch(deleteBookApi(id))
+    }
 
     const renderBooks = () => {
         return books.map((book: BookModel, index: number) => (
@@ -30,13 +34,8 @@ export default function AllBooksPage({ }: Props) {
                 <td>{book.copiesAvailable}</td>
                 <td>{book.categoryName}</td>
                 <td>
-                    <NavLink
-                        to={`/admin/book/update/${book.id}`}
-                        className='btn btn-info me-2'                   
-                    >
-                        Update
-                    </NavLink>
-                    <button className='btn btn-danger'>Delete</button>
+                    <NavLink to={`/admin/book/update/${book.id}`} className='btn btn-info me-2'>Update</NavLink>
+                    <button className='btn btn-danger' onClick={() => deleteBookHandler(book.id)}>Delete</button>
                 </td>
             </tr>
         ))

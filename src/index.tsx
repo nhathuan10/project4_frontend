@@ -10,8 +10,8 @@ import AllCategories from './pages/ManageLibraryPage/components/AllCategories';
 import { history } from './utils/config';
 import ManageCategoryPage from './pages/ManageLibraryPage/ManageCategoryPage';
 import AllBooksPage from './pages/ManageLibraryPage/AllBooksPage';
-import BookUpdatePage from './pages/ManageLibraryPage/BookUpdatePage';
 import AddBookPage from './pages/ManageLibraryPage/AddBookPage';
+import SearchBooksPage from './pages/SearchBooksPage/SearchBooksPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,6 +22,7 @@ root.render(
       <Routes>
         <Route path='' element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path='search-books' element={<SearchBooksPage />}></Route>
           <Route path='admin/category' element={<ManageCategoryPage />}>
             <Route index element={<AllCategories />} />
             <Route path=':id' element={<AllCategories />} />

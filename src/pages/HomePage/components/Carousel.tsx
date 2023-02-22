@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { BookModel } from '../../../models/BookModel'
+import { getBooksApi } from '../../../redux/BookReducer/bookReducer'
+import { DispatchType, RootState } from '../../../redux/configStore'
 import ReturnBook from './ReturnBook'
 
 type Props = {}
 
 export default function Carousel({ }: Props) {
+    const { books } = useSelector((state: RootState) => state.bookReducer)
+    const dispatch: DispatchType = useDispatch()
+
+    useEffect(() => {
+        dispatch(getBooksApi())
+    }, [])
+
+    const renderTopBooks = (x: number, y: number) => {
+        return books.slice(x, y).map((book: BookModel, index: number) => (
+            <ReturnBook book={book} key={index} />
+        ))
+    }
+
     return (
         <div className='container mt-5' style={{ height: 550 }}>
             <div className='homepage-carousel-title'>
@@ -14,23 +31,12 @@ export default function Carousel({ }: Props) {
                 <div className='carousel-inner'>
                     <div className='carousel-item active'>
                         <div className='row d-flex justify-content-center align-content-center'>
-                            <ReturnBook />
-                            <ReturnBook />
-                            <ReturnBook />
+                            {renderTopBooks(0, 3)}
                         </div>
                     </div>
                     <div className='carousel-item'>
                         <div className='row d-flex justify-content-center align-content-center'>
-                            <ReturnBook />
-                            <ReturnBook />
-                            <ReturnBook />
-                        </div>
-                    </div>
-                    <div className='carousel-item'>
-                        <div className='row d-flex justify-content-center align-content-center'>
-                            <ReturnBook />
-                            <ReturnBook />
-                            <ReturnBook />
+                            {renderTopBooks(3, 6)}
                         </div>
                     </div>
                 </div>
@@ -56,7 +62,9 @@ export default function Carousel({ }: Props) {
             {/* Mobile */}
             <div className='d-lg-none mt-3'>
                 <div className='row d-flex justify-content-center align-items-center'>
-                    <ReturnBook />
+                    {books[0] && (
+                        <ReturnBook book={books[0]} />
+                    )}
                 </div>
             </div>
             <div className='homepage-carousel-title mt-3'>
