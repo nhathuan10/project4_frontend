@@ -8,7 +8,7 @@ import ReturnBook from './ReturnBook'
 type Props = {}
 
 export default function Carousel({ }: Props) {
-    const { books } = useSelector((state: RootState) => state.bookReducer)
+    const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export default function Carousel({ }: Props) {
     }, [])
 
     const renderTopBooks = (x: number, y: number) => {
-        return books.slice(x, y).map((book: BookModel, index: number) => (
+        return bookResponse?.content.slice(x, y).map((book: BookModel, index: number) => (
             <ReturnBook book={book} key={index} />
         ))
     }
@@ -62,8 +62,8 @@ export default function Carousel({ }: Props) {
             {/* Mobile */}
             <div className='d-lg-none mt-3'>
                 <div className='row d-flex justify-content-center align-items-center'>
-                    {books[0] && (
-                        <ReturnBook book={books[0]} />
+                    {bookResponse?.content[0] && (
+                        <ReturnBook book={bookResponse.content[0]} />
                     )}
                 </div>
             </div>

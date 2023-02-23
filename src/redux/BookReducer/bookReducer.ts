@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { BookModel, BookRequest } from '../../models/BookModel';
+import { BookResponse } from '../../models/BookResponse';
 import { DispatchType } from '../configStore';
 
 export type BookState = {
-    books: BookModel[]
+    bookResponse: BookResponse | null
     bookState: boolean
     addedBook: BookModel | null
     book: BookModel | null
@@ -13,7 +14,7 @@ export type BookState = {
 }
 
 const initialState: BookState = {
-    books: [],
+    bookResponse: null,
     bookState: false,
     addedBook: null,
     book: null,
@@ -25,8 +26,8 @@ const bookReducer = createSlice({
     name: 'bookReducer',
     initialState,
     reducers: {
-        getBooksAction: (state: BookState, action: PayloadAction<BookModel[]>) => {
-            state.books = action.payload
+        getBooksAction: (state: BookState, action: PayloadAction<BookResponse>) => {
+            state.bookResponse = action.payload
         },
         addBookAction: (state: BookState, action: PayloadAction<BookModel>) => {
             state.addedBook = action.payload
@@ -60,10 +61,10 @@ export default bookReducer.reducer
 const bookURL = 'http://localhost:8080/api/books'
 const addBookURL = 'http://localhost:8080/api/categories'
 
-export const getBooksApi = () => {
+export const getBooksApi = (pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.get(bookURL)
+            const result = await axios.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
             dispatch(getBooksAction(result.data))
         } catch (err) {
             console.log(err)

@@ -8,12 +8,12 @@ import { NavLink } from 'react-router-dom'
 type Props = {}
 
 export default function AllBooksPage({ }: Props) {
-    const { books } = useSelector((state: RootState) => state.bookReducer)
+    const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
     const { bookState } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
 
     useEffect(() => {
-        dispatch(getBooksApi())
+        dispatch(getBooksApi(0, 3))
     }, [bookState])
 
     const deleteBookHandler = (id: number) => {
@@ -21,7 +21,7 @@ export default function AllBooksPage({ }: Props) {
     }
 
     const renderBooks = () => {
-        return books.map((book: BookModel, index: number) => (
+        return bookResponse?.content.map((book: BookModel, index: number) => (
             <tr key={index}>
                 <th scope="row">{book.id}</th>
                 <td>
