@@ -64,8 +64,13 @@ const addBookURL = 'http://localhost:8080/api/categories'
 export const getBooksApi = (pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
-            dispatch(getBooksAction(result.data))
+            if (pageNo != null && pageSize != null) {
+                const result = await axios.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
+                dispatch(getBooksAction(result.data))
+            } else {
+                const result = await axios.get(bookURL)
+                dispatch(getBooksAction(result.data))
+            }
         } catch (err) {
             console.log(err)
         }

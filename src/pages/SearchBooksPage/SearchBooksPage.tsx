@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Pagination from '../../components/Pagination'
+import { BookModel } from '../../models/BookModel'
+import { CategoryModel } from '../../models/CategoryModel'
+import { getBooksApi } from '../../redux/BookReducer/bookReducer'
+import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
+import { DispatchType, RootState } from '../../redux/configStore'
 import SearchBook from './components/SearchBook'
 
 type Props = {}
 
 export default function SearchBooksPage({ }: Props) {
+    const { categories } = useSelector((state: RootState) => state.categoryReducer)
+    const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
+    const dispatch: DispatchType = useDispatch()
     const [currentPage, setCurrentPage] = useState(1)
-    const [booksPerPage] = useState(5)
+    const booksPerPage = 4
     const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0)
     const [totalPages, setTotalPages] = useState(0)
 
@@ -14,6 +23,30 @@ export default function SearchBooksPage({ }: Props) {
     const indexOfFirstBook: number = indexOfLastBook - booksPerPage
     let lastItem = booksPerPage * currentPage <= totalAmountOfBooks ? booksPerPage * currentPage : totalAmountOfBooks
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
+    useEffect(() => {
+        dispatch(getCategoriesApi())
+    }, [])
+
+    useEffect(() => {
+        dispatch(getBooksApi(currentPage - 1, booksPerPage))
+        window.scroll(0, 0)
+    }, [currentPage])
+
+    useEffect(() => {
+        if (bookResponse) {
+            setTotalAmountOfBooks(bookResponse.totalElements)
+            setTotalPages(bookResponse.totalPages)
+        }
+    }, [currentPage])
+
+    const renderCategories = () => {
+        return categories.map((category: CategoryModel, index: number) => (
+            <li key={index}>
+                <a href="#" className='dropdown-item'>{category.name}</a>
+            </li>
+        ))
+    }
 
     return (
         <div>
@@ -44,37 +77,19 @@ export default function SearchBooksPage({ }: Props) {
                                     {/* {categorySelection} */}
                                 </button>
                                 <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-                                    {/* <li onClick={() => categoryField('All')}>
-                                        <a href="#" className='dropdown-item'>All</a>
-                                    </li>
-                                    <li onClick={() => categoryField('FE')}>
-                                        <a href="#" className='dropdown-item'>Front End</a>
-                                    </li>
-                                    <li onClick={() => categoryField('BE')}>
-                                        <a href="#" className='dropdown-item'>Back End</a>
-                                    </li>
-                                    <li onClick={() => categoryField('Data')}>
-                                        <a href="#" className='dropdown-item'>Data</a>
-                                    </li>
-                                    <li onClick={() => categoryField('Devops')}>
-                                        <a href="#" className='dropdown-item'>DevOps</a>
-                                    </li> */}
+                                    {renderCategories()}
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <SearchBook />
-                    <SearchBook />
-                    <SearchBook />
-                    <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
-                    {/* {totalAmountOfBooks > 0 ?
+                    {totalAmountOfBooks > 0 ?
                         <>
                             <div className='mt-3'>
                                 <h5>Number of results: {totalAmountOfBooks}</h5>
                             </div>
                             <p>{indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:</p>
-                            {books.map(book => (
-                                <SearchBook book={book} key={book.id}></SearchBook>
+                            {bookResponse?.content.map((book: BookModel, index: number) => (
+                                <SearchBook book={book} key={index} />
                             ))}
                         </> :
                         <div className='m-5'>
@@ -84,7 +99,7 @@ export default function SearchBooksPage({ }: Props) {
                     }
                     {totalPages > 1 &&
                         <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
-                    } */}
+                    }
                 </div>
             </div>
         </div>

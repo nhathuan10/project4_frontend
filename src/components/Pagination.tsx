@@ -33,7 +33,7 @@ export default function Pagination({ currentPage, totalPages, paginate }: Props)
     }
 
     return (
-        <nav aria-label="...">
+        <div className='d-flex justify-content-center my-2'>
             <ul className='pagination'>
                 <li className='page-item' onClick={() => paginate(1)}>
                     <button className='page-link'>First Page</button>
@@ -50,6 +50,6 @@ export default function Pagination({ currentPage, totalPages, paginate }: Props)
                     <button className='page-link'>Last Page</button>
                 </li>
             </ul>
-        </nav>
+        </div>
     )
 }
