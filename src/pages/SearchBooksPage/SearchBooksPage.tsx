@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Pagination from '../../components/Pagination'
 import { BookModel } from '../../models/BookModel'
 import { CategoryModel } from '../../models/CategoryModel'
-import { getBooksApi } from '../../redux/BookReducer/bookReducer'
+import { getBooksApi, getBooksByTitleApi } from '../../redux/BookReducer/bookReducer'
 import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
 import { DispatchType, RootState } from '../../redux/configStore'
 import SearchBook from './components/SearchBook'
@@ -13,32 +13,31 @@ type Props = {}
 export default function SearchBooksPage({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
     const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
+    const { booksResponseByTitle } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
-    const [currentPage, setCurrentPage] = useState(1)
+    const { currentPage } = useSelector((state: RootState) => state.bookReducer)
     const booksPerPage = 4
-    const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0)
-    const [totalPages, setTotalPages] = useState(0)
+    const { totalAmountOfBooks } = useSelector((state: RootState) => state.bookReducer)
+    const { totalPages } = useSelector((state: RootState) => state.bookReducer)
+    const [searchTitle, setSearchTitle] = useState('')
 
     const indexOfLastBook: number = currentPage * booksPerPage
     const indexOfFirstBook: number = indexOfLastBook - booksPerPage
     let lastItem = booksPerPage * currentPage <= totalAmountOfBooks ? booksPerPage * currentPage : totalAmountOfBooks
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
     useEffect(() => {
         dispatch(getCategoriesApi())
     }, [])
 
     useEffect(() => {
-        dispatch(getBooksApi(currentPage - 1, booksPerPage))
-        window.scroll(0, 0)
-    }, [currentPage])
-
-    useEffect(() => {
-        if (bookResponse) {
-            setTotalAmountOfBooks(bookResponse.totalElements)
-            setTotalPages(bookResponse.totalPages)
+        if (searchTitle !== '') {
+            dispatch(getBooksByTitleApi(searchTitle))
+        } else {
+            dispatch(getBooksApi())
         }
-    }, [currentPage])
+    }, [searchTitle])
+
+    console.log(bookResponse)
 
     const renderCategories = () => {
         return categories.map((category: CategoryModel, index: number) => (
@@ -58,9 +57,9 @@ export default function SearchBooksPage({ }: Props) {
                                 <input
                                     className='form-control'
                                     type='search'
-                                    placeholder='Search'
+                                    placeholder='Search By Title'
                                     aria-label='Search'
-                                // onChange={e => setSearch(e.target.value)}
+                                    onChange={e => setSearchTitle(e.target.value)}
                                 />
                                 <button
                                     className='btn btn-outline-success ms-2'
@@ -97,9 +96,7 @@ export default function SearchBooksPage({ }: Props) {
                             <a href="#" type='button' className='btn main-color btn-md px-4 me-md-2 fw-bold text-white'>Library Services</a>
                         </div>
                     }
-                    {totalPages > 1 &&
-                        <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
-                    }
+                    {totalPages > 1 && <Pagination />}
                 </div>
             </div>
         </div>

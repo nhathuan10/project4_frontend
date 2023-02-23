@@ -12,27 +12,20 @@ export default function AllBooksPage({ }: Props) {
     const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
     const { bookState } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
-    const [currentPage, setCurrentPage] = useState(1)
+    const { currentPage } = useSelector((state: RootState) => state.bookReducer)
     const booksPerPage = 4
-    const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0)
-    const [totalPages, setTotalPages] = useState(0)
+    const { totalAmountOfBooks } = useSelector((state: RootState) => state.bookReducer)
+    const { totalPages } = useSelector((state: RootState) => state.bookReducer)
 
     const indexOfLastBook: number = currentPage * booksPerPage
     const indexOfFirstBook: number = indexOfLastBook - booksPerPage
     let lastItem = booksPerPage * currentPage <= totalAmountOfBooks ? booksPerPage * currentPage : totalAmountOfBooks
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
     useEffect(() => {
         dispatch(getBooksApi(currentPage - 1, booksPerPage))
         window.scroll(0, 0)
-    }, [bookState, currentPage])
+    }, [bookState])
 
-    useEffect(() => {
-        if (bookResponse) {
-            setTotalAmountOfBooks(bookResponse.totalElements)
-            setTotalPages(bookResponse.totalPages)
-        }
-    }, [currentPage])
 
     const deleteBookHandler = (id: number) => {
         dispatch(deleteBookApi(id))
@@ -88,9 +81,7 @@ export default function AllBooksPage({ }: Props) {
                     </table>
                 </div>
             }
-            {totalPages > 1 &&
-                <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
-            }
+            {totalPages > 1 && <Pagination />}
         </div>
     )
 }

@@ -6,20 +6,28 @@ import { DispatchType } from '../configStore';
 
 export type BookState = {
     bookResponse: BookResponse | null
+    booksResponseByTitle: BookResponse | null
     bookState: boolean
     addedBook: BookModel | null
     book: BookModel | null
     updatedBook: BookModel | null
     deleteBookResponse: string
+    totalAmountOfBooks: number
+    totalPages: number
+    currentPage: number
 }
 
 const initialState: BookState = {
     bookResponse: null,
+    booksResponseByTitle: null,
     bookState: false,
     addedBook: null,
     book: null,
     updatedBook: null,
-    deleteBookResponse: ''
+    deleteBookResponse: '',
+    totalAmountOfBooks: 0,
+    totalPages: 0,
+    currentPage: 1
 }
 
 const bookReducer = createSlice({
@@ -28,6 +36,9 @@ const bookReducer = createSlice({
     reducers: {
         getBooksAction: (state: BookState, action: PayloadAction<BookResponse>) => {
             state.bookResponse = action.payload
+            state.totalAmountOfBooks = action.payload.totalElements
+            state.totalPages = action.payload.totalPages
+            state.currentPage = action.payload.pageNo + 1
         },
         addBookAction: (state: BookState, action: PayloadAction<BookModel>) => {
             state.addedBook = action.payload
@@ -44,6 +55,12 @@ const bookReducer = createSlice({
         deleteBookAction: (state: BookState, action: PayloadAction<string>) => {
             state.deleteBookResponse = action.payload
             state.bookState = !state.bookState
+        },
+        getBooksByTitleAction: (state: BookState, action: PayloadAction<BookResponse>) => {
+            state.booksResponseByTitle = action.payload
+            // state.totalAmountOfBooks = action.payload.totalElements
+            // state.totalPages = action.payload.totalPages
+            // state.currentPage = action.payload.pageNo + 1
         }
     }
 });
@@ -53,7 +70,8 @@ export const {
     addBookAction,
     getBookByIdAction,
     updateBookAction,
-    deleteBookAction
+    deleteBookAction,
+    getBooksByTitleAction
 } = bookReducer.actions
 
 export default bookReducer.reducer
@@ -115,6 +133,17 @@ export const deleteBookApi = (bookId: number) => {
         try {
             const result = await axios.delete(bookURL + `/${bookId}`)
             dispatch(deleteBookAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const getBooksByTitleApi = (title: string, pageNo?: number, pageSize?: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await axios.get(bookURL + `/find-by-title?title=${title}&pageNo=${pageNo}&pageSize=${pageSize}`)
+            dispatch(getBooksAction(result.data))
         } catch (err) {
             console.log(err)
         }
