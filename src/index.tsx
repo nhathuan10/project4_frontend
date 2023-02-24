@@ -12,6 +12,7 @@ import ManageCategoryPage from './pages/ManageLibraryPage/ManageCategoryPage';
 import AllBooksPage from './pages/ManageLibraryPage/AllBooksPage';
 import AddBookPage from './pages/ManageLibraryPage/AddBookPage';
 import SearchBooksPage from './pages/SearchBooksPage/SearchBooksPage';
+import BookCheckoutPage from './pages/BookCheckoutPage/BookCheckoutPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,7 +23,8 @@ root.render(
       <Routes>
         <Route path='' element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path='search-books' element={<SearchBooksPage />}></Route>
+          <Route path='search-books' element={<SearchBooksPage />} />
+          <Route path='checkout/:id' element={<BookCheckoutPage />}/>
           <Route path='admin/category' element={<ManageCategoryPage />}>
             <Route index element={<AllCategories />} />
             <Route path=':id' element={<AllCategories />} />
