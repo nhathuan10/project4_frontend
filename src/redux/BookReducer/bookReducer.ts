@@ -6,7 +6,6 @@ import { DispatchType } from '../configStore';
 
 export type BookState = {
     bookResponse: BookResponse | null
-    // booksResponseByTitle: BookResponse | null
     bookState: boolean
     addedBook: BookModel | null
     book: BookModel | null
@@ -19,7 +18,6 @@ export type BookState = {
 
 const initialState: BookState = {
     bookResponse: null,
-    // booksResponseByTitle: null,
     bookState: false,
     addedBook: null,
     book: null,
@@ -58,9 +56,21 @@ const bookReducer = createSlice({
         },
         getBooksByTitleAction: (state: BookState, action: PayloadAction<BookResponse>) => {
             state.bookResponse = action.payload
-            // state.totalAmountOfBooks = action.payload.totalElements
-            // state.totalPages = action.payload.totalPages
-            // state.currentPage = action.payload.pageNo + 1
+            state.totalAmountOfBooks = action.payload.totalElements
+            state.totalPages = action.payload.totalPages
+            state.currentPage = action.payload.pageNo + 1
+        },
+        getBooksByTitleOnTypeAction: (state: BookState, action: PayloadAction<BookResponse>) => {
+            state.bookResponse = action.payload
+            state.totalAmountOfBooks = action.payload.totalElements
+            state.currentPage = 1
+            state.totalPages = action.payload.totalPages
+        },
+        getBooksByCategoryAction: (state: BookState, action: PayloadAction<BookResponse>) => {
+            state.bookResponse = action.payload
+            state.totalAmountOfBooks = action.payload.totalElements
+            state.totalPages = action.payload.totalPages
+            state.currentPage = action.payload.pageNo + 1
         }
     }
 });
@@ -71,7 +81,9 @@ export const {
     getBookByIdAction,
     updateBookAction,
     deleteBookAction,
-    getBooksByTitleAction
+    getBooksByTitleAction,
+    getBooksByTitleOnTypeAction,
+    getBooksByCategoryAction
 } = bookReducer.actions
 
 export default bookReducer.reducer
@@ -142,9 +154,29 @@ export const deleteBookApi = (bookId: number) => {
 export const getBooksByTitleApi = (title: string, pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            
-            const result = await axios.get(bookURL + `/find-by-title?title=${title}&pageNo=${pageNo}&pageSize=${pageSize}`)
-            dispatch(getBooksByTitleAction(result.data))
+            if (pageNo != null && pageSize != null) {
+                const result = await axios.get(bookURL + `/find-by-title?title=${title}&pageNo=${pageNo}&pageSize=${pageSize}`)
+                dispatch(getBooksByTitleAction(result.data))
+            } else {
+                const result = await axios.get(bookURL + `/find-by-title?title=${title}`)
+                dispatch(getBooksByTitleOnTypeAction(result.data))
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const getBooksByCategoryApi = (categoryId: number, pageNo?: number, pageSize?: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            if (pageNo != null && pageSize != null) {
+                const result = await axios.get(addBookURL + `/${categoryId}/books?pageNo=${pageNo}&pageSize=${pageSize}`)
+                dispatch(getBooksByCategoryAction(result.data))
+            } else {
+                const result = await axios.get(addBookURL + `/${categoryId}/books`)
+                dispatch(getBooksByCategoryAction(result.data))
+            }
         } catch (err) {
             console.log(err)
         }

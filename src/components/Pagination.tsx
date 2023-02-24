@@ -1,11 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getBooksApi } from '../redux/BookReducer/bookReducer'
+import { CategoryModel } from '../models/CategoryModel'
+import { getBooksApi, getBooksByCategoryApi, getBooksByTitleApi } from '../redux/BookReducer/bookReducer'
 import { DispatchType, RootState } from '../redux/configStore'
 
-type Props = {}
+type Props = {
+    searchTitle: string
+    category: CategoryModel | null
+}
 
-export default function Pagination({ }: Props) {
+export default function Pagination({ searchTitle, category }: Props) {
     const { currentPage } = useSelector((state: RootState) => state.bookReducer)
     const { totalPages } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
@@ -36,7 +40,13 @@ export default function Pagination({ }: Props) {
     }
 
     const paginateHandler = (number: number) => {
-        dispatch(getBooksApi(number, 4))
+        if (searchTitle != '') {
+            dispatch(getBooksByTitleApi(searchTitle, number, 4))
+        } else if (category != null) {
+            dispatch(getBooksByCategoryApi(category.id, number, 4))
+        } else {
+            dispatch(getBooksApi(number, 4))
+        }
         window.scroll(0, 0)
     }
 

@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BookModel } from '../../models/BookModel'
-import { deleteBookApi, getBooksApi } from '../../redux/BookReducer/bookReducer'
+import { deleteBookApi, getBooksApi, getBooksByCategoryApi, getBooksByTitleApi } from '../../redux/BookReducer/bookReducer'
 import { DispatchType, RootState } from '../../redux/configStore'
 import { NavLink } from 'react-router-dom'
 import Pagination from '../../components/Pagination'
+import { CategoryModel } from '../../models/CategoryModel'
+import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
+import SearchBar from '../../components/SearchBar'
 
 type Props = {}
 
 export default function AllBooksPage({ }: Props) {
     const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
+    const { categories } = useSelector((state: RootState) => state.categoryReducer)
     const { bookState } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
     const { currentPage } = useSelector((state: RootState) => state.bookReducer)
     const booksPerPage = 4
     const { totalAmountOfBooks } = useSelector((state: RootState) => state.bookReducer)
     const { totalPages } = useSelector((state: RootState) => state.bookReducer)
+    const [searchTitle, setSearchTitle] = useState('')
+    const [categorySelected, setCategorySelected] = useState('Search By Category')
+    const [categoryObj, setCategoryObj] = useState<CategoryModel | null>(null)
+
 
     const indexOfLastBook: number = currentPage * booksPerPage
     const indexOfFirstBook: number = indexOfLastBook - booksPerPage
@@ -30,6 +38,22 @@ export default function AllBooksPage({ }: Props) {
     const deleteBookHandler = (id: number) => {
         dispatch(deleteBookApi(id))
     }
+
+    useEffect(() => {
+        if (searchTitle !== '') {
+            dispatch(getBooksByTitleApi(searchTitle))
+            setCategorySelected('Search By Category')
+            setCategoryObj(null)
+        } else if (searchTitle == '' && categoryObj != null) {
+            dispatch(getBooksByCategoryApi(categoryObj.id))
+        } else {
+            dispatch(getBooksApi())
+        }
+    }, [searchTitle])
+
+    useEffect(() => {
+        dispatch(getCategoriesApi())
+    }, [])
 
     const renderBooks = () => {
         return bookResponse?.content.map((book: BookModel, index: number) => (
@@ -52,14 +76,43 @@ export default function AllBooksPage({ }: Props) {
         ))
     }
 
+    const allBooksHandler = () => {
+        setSearchTitle('')
+        setCategoryObj(null)
+        setCategorySelected('Search By Category')
+        dispatch(getBooksApi())
+    }
+    const searchByCategoryHandler = (category: CategoryModel) => {
+        setCategorySelected(category.name)
+        setCategoryObj(category)
+        setSearchTitle('')
+        dispatch(getBooksByCategoryApi(category.id))
+    }
+
+    const renderCategories = () => {
+        return categories.map((category: CategoryModel, index: number) => (
+            <li key={index}>
+                <a className='dropdown-item' onClick={() => searchByCategoryHandler(category)}>{category.name}</a>
+            </li>
+        ))
+    }
+
     return (
         <div className='container'>
-            <h2 className='text-center m-3'>All Books</h2>
-            <NavLink to='/admin/book/add-book' className='btn btn-primary mb-2'>Add Book</NavLink>
+            <h2 className='text-center m-3'>Books Management</h2>
+            <div className='text-end'>
+                <NavLink to='/admin/book/add-book' className='btn btn-primary'>Add Book</NavLink>
+            </div>
+            <SearchBar
+                categorySelected={categorySelected}
+                allBooksHandler={allBooksHandler}
+                renderCategories={renderCategories}
+                searchTitle={searchTitle}
+                setSearchTitle={setSearchTitle}
+            />
             {totalAmountOfBooks > 0 &&
                 <div className='mt-3'>
                     <h5>Number of results: {totalAmountOfBooks}</h5>
-
                     <p>{indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:</p>
                     <table className="table table-striped table-hover">
                         <thead>
@@ -81,7 +134,7 @@ export default function AllBooksPage({ }: Props) {
                     </table>
                 </div>
             }
-            {totalPages > 1 && <Pagination />}
+            {totalPages > 1 && <Pagination searchTitle={searchTitle} category={categoryObj} />}
         </div>
     )
 }

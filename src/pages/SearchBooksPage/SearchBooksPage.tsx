@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Pagination from '../../components/Pagination'
+import SearchBar from '../../components/SearchBar'
 import { BookModel } from '../../models/BookModel'
 import { CategoryModel } from '../../models/CategoryModel'
-import { getBooksApi, getBooksByTitleApi } from '../../redux/BookReducer/bookReducer'
+import { getBooksApi, getBooksByCategoryApi, getBooksByTitleApi } from '../../redux/BookReducer/bookReducer'
 import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
 import { DispatchType, RootState } from '../../redux/configStore'
 import SearchBook from './components/SearchBook'
@@ -13,13 +14,14 @@ type Props = {}
 export default function SearchBooksPage({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
     const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
-    // const { booksResponseByTitle } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
     const { currentPage } = useSelector((state: RootState) => state.bookReducer)
     const booksPerPage = 4
     const { totalAmountOfBooks } = useSelector((state: RootState) => state.bookReducer)
     const { totalPages } = useSelector((state: RootState) => state.bookReducer)
     const [searchTitle, setSearchTitle] = useState('')
+    const [categorySelected, setCategorySelected] = useState('Search By Category')
+    const [categoryObj, setCategoryObj] = useState<CategoryModel | null>(null)
 
     const indexOfLastBook: number = currentPage * booksPerPage
     const indexOfFirstBook: number = indexOfLastBook - booksPerPage
@@ -31,18 +33,34 @@ export default function SearchBooksPage({ }: Props) {
 
     useEffect(() => {
         if (searchTitle !== '') {
-            dispatch(getBooksByTitleApi(searchTitle, currentPage, 4))
+            dispatch(getBooksByTitleApi(searchTitle))
+            setCategorySelected('Search By Category')
+            setCategoryObj(null)
+        } else if (searchTitle == '' && categoryObj != null) {
+            dispatch(getBooksByCategoryApi(categoryObj.id))
         } else {
             dispatch(getBooksApi())
         }
     }, [searchTitle])
 
-    console.log(bookResponse)
+    const searchByCategoryHandler = (category: CategoryModel) => {
+        setCategorySelected(category.name)
+        setCategoryObj(category)
+        setSearchTitle('')
+        dispatch(getBooksByCategoryApi(category.id))
+    }
+
+    const allBooksHandler = () => {
+        setSearchTitle('')
+        setCategoryObj(null)
+        setCategorySelected('Search By Category')
+        dispatch(getBooksApi())
+    }
 
     const renderCategories = () => {
         return categories.map((category: CategoryModel, index: number) => (
             <li key={index}>
-                <a href="#" className='dropdown-item'>{category.name}</a>
+                <a className='dropdown-item' onClick={() => searchByCategoryHandler(category)}>{category.name}</a>
             </li>
         ))
     }
@@ -51,36 +69,13 @@ export default function SearchBooksPage({ }: Props) {
         <div>
             <div className='container'>
                 <div>
-                    <div className='row mt-5'>
-                        <div className='col-6'>
-                            <div className='d-flex'>
-                                <input
-                                    className='form-control'
-                                    type='search'
-                                    placeholder='Search By Title'
-                                    aria-label='Search'
-                                    onChange={e => setSearchTitle(e.target.value)}
-                                />
-                                <button
-                                    className='btn btn-outline-success ms-2'
-                                // onClick={searchHandleChange}
-                                >
-                                    Search
-                                </button>
-                            </div>
-                        </div>
-                        <div className='col-4'>
-                            <div className='dropdown'>
-                                <button className='btn btn-secondary dropdown-toggle'
-                                    type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
-                                    {/* {categorySelection} */}
-                                </button>
-                                <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-                                    {renderCategories()}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <SearchBar
+                        categorySelected={categorySelected}
+                        allBooksHandler={allBooksHandler}
+                        renderCategories={renderCategories}
+                        searchTitle={searchTitle}
+                        setSearchTitle={setSearchTitle}
+                    />
                     {totalAmountOfBooks > 0 ?
                         <>
                             <div className='mt-3'>
@@ -96,7 +91,7 @@ export default function SearchBooksPage({ }: Props) {
                             <a href="#" type='button' className='btn main-color btn-md px-4 me-md-2 fw-bold text-white'>Library Services</a>
                         </div>
                     }
-                    {totalPages > 1 && <Pagination />}
+                    {totalPages > 1 && <Pagination searchTitle={searchTitle} category={categoryObj} />}
                 </div>
             </div>
         </div>
