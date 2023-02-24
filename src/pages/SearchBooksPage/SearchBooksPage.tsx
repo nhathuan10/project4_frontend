@@ -13,7 +13,7 @@ type Props = {}
 export default function SearchBooksPage({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
     const { bookResponse } = useSelector((state: RootState) => state.bookReducer)
-    const { booksResponseByTitle } = useSelector((state: RootState) => state.bookReducer)
+    // const { booksResponseByTitle } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
     const { currentPage } = useSelector((state: RootState) => state.bookReducer)
     const booksPerPage = 4
@@ -31,7 +31,7 @@ export default function SearchBooksPage({ }: Props) {
 
     useEffect(() => {
         if (searchTitle !== '') {
-            dispatch(getBooksByTitleApi(searchTitle))
+            dispatch(getBooksByTitleApi(searchTitle, currentPage, 4))
         } else {
             dispatch(getBooksApi())
         }

@@ -6,7 +6,7 @@ import { DispatchType } from '../configStore';
 
 export type BookState = {
     bookResponse: BookResponse | null
-    booksResponseByTitle: BookResponse | null
+    // booksResponseByTitle: BookResponse | null
     bookState: boolean
     addedBook: BookModel | null
     book: BookModel | null
@@ -19,7 +19,7 @@ export type BookState = {
 
 const initialState: BookState = {
     bookResponse: null,
-    booksResponseByTitle: null,
+    // booksResponseByTitle: null,
     bookState: false,
     addedBook: null,
     book: null,
@@ -57,7 +57,7 @@ const bookReducer = createSlice({
             state.bookState = !state.bookState
         },
         getBooksByTitleAction: (state: BookState, action: PayloadAction<BookResponse>) => {
-            state.booksResponseByTitle = action.payload
+            state.bookResponse = action.payload
             // state.totalAmountOfBooks = action.payload.totalElements
             // state.totalPages = action.payload.totalPages
             // state.currentPage = action.payload.pageNo + 1
@@ -142,8 +142,9 @@ export const deleteBookApi = (bookId: number) => {
 export const getBooksByTitleApi = (title: string, pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
+            
             const result = await axios.get(bookURL + `/find-by-title?title=${title}&pageNo=${pageNo}&pageSize=${pageSize}`)
-            dispatch(getBooksAction(result.data))
+            dispatch(getBooksByTitleAction(result.data))
         } catch (err) {
             console.log(err)
         }
