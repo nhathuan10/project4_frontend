@@ -30,7 +30,7 @@ export default function BookCheckoutPage({ }: Props) {
                             <h2>{book?.title}</h2>
                             <h5 className='text-primary'>{book?.author}</h5>
                             <p className='lead'>{book?.description}</p>
-                            <StarReview rating={3.5} size={20}/>
+                            <StarReview rating={4.5} size={20}/>
                         </div>
                     </div>
                 </div>

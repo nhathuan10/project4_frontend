@@ -17,7 +17,7 @@ export default function StarReview({ rating, size }: Props) {
                 rating--
             } else if (rating === 0.5) {
                 halfStar++
-                rating = rating - 0.5
+                rating -= 0.5
             } else if (rating == 0) {
                 emptyStar++
             } else {
@@ -31,13 +31,19 @@ export default function StarReview({ rating, size }: Props) {
     return (
         <div>
             {Array.from({ length: fullStar }, (_, index) =>
-                <i key={index} className="fa-solid fa-star" style={{ fontSize: size, color: '#6bff00' }}></i>
+                <i key={index} className="fa-solid fa-star"
+                    style={{ fontSize: size, color: '#6bff00' }}>
+                </i>
             )}
             {Array.from({ length: halfStar }, (_, index) =>
-                <i key={index} className="fa-solid fa-star-half-stroke" style={{ fontSize: size, color: '#6bff00' }}></i>
+                <i key={index} className="fa-solid fa-star-half-stroke"
+                    style={{ fontSize: size, color: '#6bff00' }}>
+                </i>
             )}
-            {Array.from({ length: emptyStar}, (_, index) =>
-                <i key={index} className="fa-regular fa-star" style={{ fontSize: size, color: '#6bff00' }}></i>
+            {Array.from({ length: emptyStar }, (_, index) =>
+                <i key={index} className="fa-regular fa-star"
+                    style={{ fontSize: size, color: '#6bff00' }}>
+                </i>
             )}
         </div>
     )
