@@ -8,7 +8,7 @@ type Props = {
 
 export default function SearchBook({ book }: Props) {
     return (
-        <div className='card mt-3 shadow p-3 mb-3 bg-body rounded'>
+        <div className='card shadow p-3 m-4 rounded' style={{backgroundColor: '#E6E6E6'}}>
             <div className='row g-0'>
                 <div className='col-md-2'>
                     <div className='d-none d-lg-block'>

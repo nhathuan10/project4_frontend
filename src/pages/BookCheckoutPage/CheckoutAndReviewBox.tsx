@@ -9,7 +9,7 @@ type Props = {
 
 export default function CheckoutAndReviewBox({ book, mobile }: Props) {
     return (
-        <div className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5'}>
+        <div className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5'} style={{backgroundColor: '#AAFFFF'}}>
             <div className='card-body container'>
                 <div className='mt-3'>
                     <p>
@@ -37,7 +37,7 @@ export default function CheckoutAndReviewBox({ book, mobile }: Props) {
                         </p>
                     </div>
                 </div>
-                <NavLink to='/' className='btn btn-success btn-lg'>Sign in</NavLink>
+                <NavLink to='/' className='btn btn-success main-color btn-lg'>Sign in</NavLink>
                 <hr />
                 <p className='mt-3'>
                     This number can change until placing order has been complete.

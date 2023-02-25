@@ -6,6 +6,7 @@ import { getBookByIdApi } from '../../redux/BookReducer/bookReducer'
 import StarReview from '../../components/StarReview'
 import CheckoutAndReviewBox from './CheckoutAndReviewBox'
 import { ReviewModel } from '../../models/ReviewModel'
+import LatestReviews from './LatestReviews'
 
 type Props = {}
 
@@ -51,6 +52,7 @@ export default function BookCheckoutPage({ }: Props) {
                     <CheckoutAndReviewBox book={book} mobile={false} />
                 </div>
                 <hr />
+                <LatestReviews mobile={false} />
             </div>
             <div className='container d-lg-none mt-5'>
                 <div className='d-flex justify-content-center align-items-center'>
@@ -68,6 +70,7 @@ export default function BookCheckoutPage({ }: Props) {
                 </div>
                 <CheckoutAndReviewBox book={book} mobile={true} />
                 <hr />
+                <LatestReviews mobile={false} />
             </div>
         </div>
     )

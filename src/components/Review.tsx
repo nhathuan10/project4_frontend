@@ -1,8 +1,13 @@
 import React from 'react'
+import { ReviewModel } from '../models/ReviewModel'
+import StarReview from './StarReview'
 
-type Props = {}
+type Props = {
+    review: ReviewModel
+}
 
-export default function Review({ }: Props) {
+export default function Review({ review }: Props) {
+
     const date = new Date(review.date)
     const longMonth = date.toLocaleDateString('en-us', { month: 'long' })
     const dateDay = date.getDate()
@@ -18,11 +23,11 @@ export default function Review({ }: Props) {
                         {dateRender}
                     </div>
                     <div className='col'>
-                        <StarsReview rating={review.rating} size={16} />
+                        <StarReview rating={review.rating} size={16} />
                     </div>
                 </div>
                 <div className='mt-2'>
-                    <p>{review.reviewDescription}</p>
+                    <p>{review.description}</p>
                 </div>
             </div>
             <hr />
