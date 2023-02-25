@@ -44,7 +44,7 @@ export default function BookCheckoutPage({ }: Props) {
                     <div className='col-4 col-md-4 container'>
                         <div className='ml-2'>
                             <h2>{book?.title}</h2>
-                            <h5 className='text-primary'>{book?.author}</h5>
+                            <h4 className='text-primary fst-italic'>{book?.author}</h4>
                             <p className='lead'>{book?.description}</p>
                             <StarReview rating={totalStars} size={20} />
                         </div>

@@ -8,7 +8,7 @@ type Props = {
 
 export default function SearchBook({ book }: Props) {
     return (
-        <div className='card shadow p-3 m-4 rounded' style={{backgroundColor: '#E6E6E6'}}>
+        <div className='card shadow p-3 m-4 book-item'>
             <div className='row g-0'>
                 <div className='col-md-2'>
                     <div className='d-none d-lg-block'>
@@ -24,10 +24,10 @@ export default function SearchBook({ book }: Props) {
                 </div>
                 <div className='col-md-6'>
                     <div className='card-body'>
-                        <h4>{book.title}</h4>
-                        <h5 className='card-title'>{book.author}</h5>
-                        <p className='card-text'>{book.description}</p>
-                        <p>Category: <span className='fw-bold'>{book.categoryName}</span></p>
+                        <h4>Title: <span className='fw-bold text-main-color'>{book.title}</span></h4>
+                        <h5>Author: <span className='fw-bold text-main-color'>{book.author}</span></h5>
+                        <p>Description: <span className='fst-italic'>{book.description}</span></p>
+                        <p>Category: <span className='fw-bold text-main-color'>{book.categoryName}</span></p>
                     </div>
                 </div>
                 <div className='col-md-4 d-flex justify-content-center align-items-center'>

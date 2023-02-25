@@ -31,12 +31,12 @@ export default function Carousel({ }: Props) {
                 <div className='carousel-inner'>
                     <div className='carousel-item active'>
                         <div className='row d-flex justify-content-center align-content-center'>
-                            {renderTopBooks(0, 3)}
+                            {renderTopBooks(0, 2)}
                         </div>
                     </div>
                     <div className='carousel-item'>
                         <div className='row d-flex justify-content-center align-content-center'>
-                            {renderTopBooks(3, 6)}
+                            {renderTopBooks(2, 5)}
                         </div>
                     </div>
                 </div>

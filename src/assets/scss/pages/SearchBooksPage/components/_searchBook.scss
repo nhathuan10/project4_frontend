@@ -1,0 +1,12 @@
+.book-item {
+    transition: transform 0.5s;
+    background-color: #E6E6E6;
+    border-radius: 10px
+}
+
+.book-item:hover {
+    transform: scale(1.01);
+    filter: sepia(15%);
+    border-color: #ad2749;
+    opacity: 0.85;
+}
