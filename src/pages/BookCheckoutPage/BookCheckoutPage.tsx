@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { DispatchType, RootState } from '../../redux/configStore'
 import { getBookByIdApi } from '../../redux/BookReducer/bookReducer'
 import StarReview from '../../components/StarReview'
+import CheckoutAndReviewBox from './CheckoutAndReviewBox'
 
 type Props = {}
 
@@ -30,9 +31,10 @@ export default function BookCheckoutPage({ }: Props) {
                             <h2>{book?.title}</h2>
                             <h5 className='text-primary'>{book?.author}</h5>
                             <p className='lead'>{book?.description}</p>
-                            <StarReview rating={4.5} size={20}/>
+                            <StarReview rating={4.5} size={20} />
                         </div>
                     </div>
+                    <CheckoutAndReviewBox book={book} mobile={false} />
                 </div>
                 <hr />
             </div>
@@ -47,9 +49,10 @@ export default function BookCheckoutPage({ }: Props) {
                         <h2>{book?.title}</h2>
                         <h5 className='text-primary'>{book?.author}</h5>
                         <p className='lead'>{book?.description}</p>
-                        <StarReview rating={2} size={20}/>
+                        <StarReview rating={2} size={20} />
                     </div>
                 </div>
+                <CheckoutAndReviewBox book={book} mobile={true} />
                 <hr />
             </div>
         </div>
