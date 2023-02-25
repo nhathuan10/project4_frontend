@@ -1,3 +1,5 @@
+import { ReviewModel } from "./ReviewModel"
+
 export type BookModel = {
     id: number
     title: string
@@ -7,6 +9,7 @@ export type BookModel = {
     copiesAvailable: number
     img: string
     categoryName: string
+    reviews: ReviewModel[]
 }
 
 export type BookRequest = {

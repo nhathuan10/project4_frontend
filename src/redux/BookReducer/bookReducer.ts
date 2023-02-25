@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { BookModel, BookRequest } from '../../models/BookModel';
 import { BookResponse } from '../../models/BookResponse';
+import { ReviewModel } from '../../models/ReviewModel';
 import { DispatchType } from '../configStore';
 
 export type BookState = {
@@ -14,6 +15,7 @@ export type BookState = {
     totalAmountOfBooks: number
     totalPages: number
     currentPage: number
+    reviews: ReviewModel[]
 }
 
 const initialState: BookState = {
@@ -25,7 +27,8 @@ const initialState: BookState = {
     deleteBookResponse: '',
     totalAmountOfBooks: 0,
     totalPages: 0,
-    currentPage: 1
+    currentPage: 1,
+    reviews: []
 }
 
 const bookReducer = createSlice({
@@ -45,6 +48,7 @@ const bookReducer = createSlice({
         getBookByIdAction: (state: BookState, action: PayloadAction<BookModel>) => {
             state.book = action.payload
             state.bookState = !state.bookState
+            state.reviews = action.payload.reviews
         },
         updateBookAction: (state: BookState, action: PayloadAction<BookModel>) => {
             state.updatedBook = action.payload

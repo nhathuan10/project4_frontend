@@ -1,21 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { DispatchType, RootState } from '../../redux/configStore'
 import { getBookByIdApi } from '../../redux/BookReducer/bookReducer'
 import StarReview from '../../components/StarReview'
 import CheckoutAndReviewBox from './CheckoutAndReviewBox'
+import { ReviewModel } from '../../models/ReviewModel'
 
 type Props = {}
 
 export default function BookCheckoutPage({ }: Props) {
-    const book = useSelector((state: RootState) => state.bookReducer.book)
+    const { book } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
     const { id } = useParams() as any
+    const [totalStars, setTotalStars] = useState(0)
+    const { reviews } = useSelector((state: RootState) => state.bookReducer)
 
     useEffect(() => {
         dispatch(getBookByIdApi(id))
     }, [])
+
+    useEffect(() => {
+        let weightedStarReviews = 0
+        if (reviews) {
+            for (const item of reviews) {
+                weightedStarReviews += item.rating
+            }
+            const round = (Math.round((weightedStarReviews / reviews.length) * 2) / 2).toFixed(1)
+            setTotalStars(Number(round))
+        }
+    })
 
     return (
         <div>
@@ -31,7 +45,7 @@ export default function BookCheckoutPage({ }: Props) {
                             <h2>{book?.title}</h2>
                             <h5 className='text-primary'>{book?.author}</h5>
                             <p className='lead'>{book?.description}</p>
-                            <StarReview rating={4.5} size={20} />
+                            <StarReview rating={totalStars} size={20} />
                         </div>
                     </div>
                     <CheckoutAndReviewBox book={book} mobile={false} />
