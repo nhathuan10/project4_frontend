@@ -96,13 +96,27 @@ const bookURL = 'http://localhost:8080/api/books'
 const addBookURL = 'http://localhost:8080/api/categories'
 
 export const getBooksApi = (pageNo?: number, pageSize?: number) => {
+    const auth = {
+        username: 'user',
+        password: '23352132-8915-43c0-bee1-90893d90c8e7'
+    }
+    const requestOptions = {
+        // method: 'GET',
+        headers: { Authorization: 'Basic', 'Content-Type': 'application/json' },
+        body: JSON.stringify(auth)
+    };
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {
                 const result = await axios.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
                 dispatch(getBooksAction(result.data))
             } else {
-                const result = await axios.get(bookURL)
+                const result = await axios.get(bookURL, {
+                    auth: {
+                        username: 'user',
+                        password: '23352132-8915-43c0-bee1-90893d90c8e7'
+                    }
+                })
                 dispatch(getBooksAction(result.data))
             }
         } catch (err) {
