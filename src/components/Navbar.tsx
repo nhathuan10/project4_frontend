@@ -1,9 +1,33 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { RootState } from '../redux/configStore'
 
 type Props = {}
 
 export default function ({ }: Props) {
+    const { userLogin } = useSelector((state: RootState) => state.userReducer)
+
+    const renderLoginUI = () => {
+        if (userLogin) {
+            return (
+                <ul className='navbar-nav ms-auto'>
+                    <li className='nav-item'>
+                        <NavLink className='btn btn-primary me-1' to='/'>{userLogin.userEmail}</NavLink>
+                    </li>
+                </ul>
+            )
+        } else {
+            return (
+                <ul className='navbar-nav ms-auto'>
+                    <li className='nav-item'>
+                        <NavLink className='btn btn-primary me-1' to='/login'>Sign In</NavLink>
+                    </li>
+                </ul>
+            )
+        }
+    }
+
     return (
         <nav className='navbar navbar-expand-lg navbar-dark main-color'>
             <div className='container'>
@@ -33,15 +57,7 @@ export default function ({ }: Props) {
                             <NavLink className='nav-link' to='/admin/book'>Admin</NavLink>
                         </li>
                     </ul>
-                    {/* <ul className='navbar-nav ms-auto'>
-                        <li className='nav-item'>
-                            <a type='button' className='btn btn-outline-light' href='*'>Sign in</a>
-                        </li>
-                        <li>
-                            <button className='btn b btn-outline-light'>Logout</button>
-                        </li>
-
-                    </ul> */}
+                    {renderLoginUI()}
                 </div>
             </div>
         </nav>
