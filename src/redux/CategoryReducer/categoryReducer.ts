@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios';
 import { CategoryModel, CategoryRequest } from '../../models/CategoryModel';
+import { http } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export type CategoryState = {
@@ -61,7 +61,7 @@ const categoryURL = 'http://localhost:8080/api/categories'
 export const getCategoriesApi = () => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.get(categoryURL)
+            const result = await http.get(categoryURL)
             dispatch(setCategoriesAction(result.data))
         } catch (err) {
             console.log(err)
@@ -72,7 +72,7 @@ export const getCategoriesApi = () => {
 export const addCategoryApi = (categoryRequest: CategoryRequest) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.post(categoryURL, categoryRequest)
+            const result = await http.post(categoryURL, categoryRequest)
             dispatch(addCategoryAction(result.data))
         } catch (err) {
             console.log(err)
@@ -83,7 +83,7 @@ export const addCategoryApi = (categoryRequest: CategoryRequest) => {
 export const updateCategoryApi = (id: number, categoryRequest: CategoryRequest) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.put(categoryURL + `/${id}`, categoryRequest)
+            const result = await http.put(categoryURL + `/${id}`, categoryRequest)
             dispatch(updateCategoryAction(result.data))
         } catch (err) {
             console.log(err)
@@ -94,7 +94,7 @@ export const updateCategoryApi = (id: number, categoryRequest: CategoryRequest) 
 export const getCategoryByIdApi = (id: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.get(categoryURL + `/${id}`)
+            const result = await http.get(categoryURL + `/${id}`)
             dispatch(getCategoryByIdAction(result.data))
         } catch (err) {
             console.log(err)
@@ -105,7 +105,7 @@ export const getCategoryByIdApi = (id: number) => {
 export const deleteCategoryApi = (id: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.delete(categoryURL + `/${id}`)
+            const result = await http.delete(categoryURL + `/${id}`)
             dispatch(deleteCategoryAction(result.data))
         } catch (err) {
             console.log(err)

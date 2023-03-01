@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios';
 import { BookModel, BookRequest } from '../../models/BookModel';
 import { BookResponse } from '../../models/BookResponse';
 import { ReviewModel } from '../../models/ReviewModel';
+import { http } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export type BookState = {
@@ -92,31 +92,17 @@ export const {
 
 export default bookReducer.reducer
 
-const bookURL = 'http://localhost:8080/api/books'
-const addBookURL = 'http://localhost:8080/api/categories'
+const bookURL = '/api/books'
+const addBookURL = '/api/categories'
 
 export const getBooksApi = (pageNo?: number, pageSize?: number) => {
-    const auth = {
-        username: 'user',
-        password: '23352132-8915-43c0-bee1-90893d90c8e7'
-    }
-    const requestOptions = {
-        // method: 'GET',
-        headers: { Authorization: 'Basic', 'Content-Type': 'application/json' },
-        body: JSON.stringify(auth)
-    };
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {
-                const result = await axios.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
+                const result = await http.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
                 dispatch(getBooksAction(result.data))
             } else {
-                const result = await axios.get(bookURL, {
-                    auth: {
-                        username: 'user',
-                        password: '23352132-8915-43c0-bee1-90893d90c8e7'
-                    }
-                })
+                const result = await http.get(bookURL)
                 dispatch(getBooksAction(result.data))
             }
         } catch (err) {
@@ -128,7 +114,7 @@ export const getBooksApi = (pageNo?: number, pageSize?: number) => {
 export const addBookApi = (categoryId: number, book: BookRequest) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.post(addBookURL + `/${categoryId}/books`, book)
+            const result = await http.post(addBookURL + `/${categoryId}/books`, book)
             dispatch(addBookAction(result.data))
         } catch (err) {
             console.log(err)
@@ -139,7 +125,7 @@ export const addBookApi = (categoryId: number, book: BookRequest) => {
 export const getBookByIdApi = (id: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.get(bookURL + `/${id}`)
+            const result = await http.get(bookURL + `/${id}`)
             dispatch(getBookByIdAction(result.data))
         } catch (err) {
             console.log(err)
@@ -150,9 +136,9 @@ export const getBookByIdApi = (id: number) => {
 export const updateBookApi = (categoryId: number, bookId: number, bookRequest: BookRequest) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.put(addBookURL + `/${categoryId}/books/${bookId}`, bookRequest)
+            const result = await http.put(addBookURL + `/${categoryId}/books/${bookId}`, bookRequest)
             dispatch(updateBookAction(result.data))
-        } catch (err) {
+        } catch (err){
             console.log(err)
         }
     }
@@ -161,7 +147,7 @@ export const updateBookApi = (categoryId: number, bookId: number, bookRequest: B
 export const deleteBookApi = (bookId: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.delete(bookURL + `/${bookId}`)
+            const result = await http.delete(bookURL + `/${bookId}`)
             dispatch(deleteBookAction(result.data))
         } catch (err) {
             console.log(err)
@@ -173,10 +159,10 @@ export const getBooksByTitleApi = (title: string, pageNo?: number, pageSize?: nu
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {
-                const result = await axios.get(bookURL + `/find-by-title?title=${title}&pageNo=${pageNo}&pageSize=${pageSize}`)
+                const result = await http.get(bookURL + `/find-by-title?title=${title}&pageNo=${pageNo}&pageSize=${pageSize}`)
                 dispatch(getBooksByTitleAction(result.data))
             } else {
-                const result = await axios.get(bookURL + `/find-by-title?title=${title}`)
+                const result = await http.get(bookURL + `/find-by-title?title=${title}`)
                 dispatch(getBooksByTitleOnTypeAction(result.data))
             }
         } catch (err) {
@@ -189,10 +175,10 @@ export const getBooksByCategoryApi = (categoryId: number, pageNo?: number, pageS
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {
-                const result = await axios.get(addBookURL + `/${categoryId}/books?pageNo=${pageNo}&pageSize=${pageSize}`)
+                const result = await http.get(addBookURL + `/${categoryId}/books?pageNo=${pageNo}&pageSize=${pageSize}`)
                 dispatch(getBooksByCategoryAction(result.data))
             } else {
-                const result = await axios.get(addBookURL + `/${categoryId}/books`)
+                const result = await http.get(addBookURL + `/${categoryId}/books`)
                 dispatch(getBooksByCategoryAction(result.data))
             }
         } catch (err) {
