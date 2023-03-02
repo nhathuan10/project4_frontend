@@ -1,0 +1,24 @@
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #CCCCFF;
+    height: 680px;
+
+    .login-form {
+        background-image: url('../../../img/PublicImages/image-4.jpg');
+        background-size: repeat;
+        height: 25em !important;
+        opacity: 0.9;
+        height: 450px;
+        width: 50%;
+        margin: 20px;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        box-shadow: 10px 10px;
+    }
+}

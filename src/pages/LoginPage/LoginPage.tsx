@@ -18,7 +18,7 @@ export default function LoginPage({ }: Props) {
             password: ''
         },
         validationSchema: yup.object().shape({
-            usernameOrEmail: yup.string().required('Email can not be blank').email('Invalid email'),
+            usernameOrEmail: yup.string().required('Username or Email can not be blank'),
             password: yup.string().required('Password can not be blank').max(10, 'Password must be less than 10 characters').min(3, 'Password must be greater than 3 characters')
         }),
         onSubmit: (values: UserLoginRequest) => {
@@ -27,34 +27,35 @@ export default function LoginPage({ }: Props) {
     })
 
     return (
-        <form className='container' onSubmit={formLogin.handleSubmit}>
-            <div className='d-flex justify-content-center align-items-center'>
-                <div className='w-50 m-3'>
-                    <h3 className='text-center'>Login</h3>
-                    <div className='form-group'>
-                        <p>Email</p>
-                        <input type="text" className='form-control' id='usernameOrEmail'
-                            onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
-                        />
-                        {formLogin.errors.usernameOrEmail &&
-                            <div className='text text-danger'>{formLogin.errors.usernameOrEmail}</div>
-                        }
-                    </div>
-                    <div className='form-group mt-2'>
-                        <p>Password</p>
-                        <input type="password" className='form-control' id='password'
-                            onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
-                        />
-                        {formLogin.errors.password &&
-                            <div className='text text-danger'>{formLogin.errors.password}</div>
-                        }
-                    </div>
-                    {isInvalidAccount && <p className='text-danger fst-italic my-2'>Invalid email or password!</p>}
-                    <div className='form-group mt-3'>
-                        <button className='btn btn-success' type='submit'>Login</button>
+        <div>
+            <form onSubmit={formLogin.handleSubmit}>
+                <div className='login-form-container'>
+                    <div className='login-form'>
+                        <div className='form-group w-75'>
+                            <p className='fw-bold'>Username or Email</p>
+                            <input type="text" className='form-control' id='usernameOrEmail'
+                                onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
+                            />
+                            {formLogin.errors.usernameOrEmail &&
+                                <div className='text-warning fw-bold'>{formLogin.errors.usernameOrEmail}</div>
+                            }
+                        </div>
+                        <div className='form-group w-75 mt-3'>
+                            <p className='fw-bold'>Password</p>
+                            <input type="password" className='form-control' id='password'
+                                onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
+                            />
+                            {formLogin.errors.password &&
+                                <div className='text-warning fw-bold'>{formLogin.errors.password}</div>
+                            }
+                        </div>
+                        {isInvalidAccount && <p className='text-danger fst-italic my-2 fw-bold'>Invalid email or password!</p>}
+                        <div className='form-group mt-4 w-75 text-center'>
+                            <button className='btn btn-primary main-color w-100' type='submit'>Login</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     )
 }

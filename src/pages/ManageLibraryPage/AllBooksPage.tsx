@@ -34,6 +34,10 @@ export default function AllBooksPage({ }: Props) {
         window.scroll(0, 0)
     }, [bookState])
 
+    useEffect(() => {
+        dispatch(getBooksApi(undefined, undefined, 'desc'))
+    }, [bookState])
+
 
     const deleteBookHandler = (id: number) => {
         dispatch(deleteBookApi(id))
@@ -47,7 +51,7 @@ export default function AllBooksPage({ }: Props) {
         } else if (searchTitle == '' && categoryObj != null) {
             dispatch(getBooksByCategoryApi(categoryObj.id))
         } else {
-            dispatch(getBooksApi())
+            dispatch(getBooksApi(undefined, undefined, 'desc'))
         }
     }, [searchTitle])
 
@@ -80,7 +84,7 @@ export default function AllBooksPage({ }: Props) {
         setSearchTitle('')
         setCategoryObj(null)
         setCategorySelected('Search By Category')
-        dispatch(getBooksApi())
+        dispatch(getBooksApi(undefined, undefined, 'desc'))
     }
     const searchByCategoryHandler = (category: CategoryModel) => {
         setCategorySelected(category.name)

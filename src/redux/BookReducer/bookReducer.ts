@@ -95,11 +95,14 @@ export default bookReducer.reducer
 const bookURL = '/api/books'
 const addBookURL = '/api/categories'
 
-export const getBooksApi = (pageNo?: number, pageSize?: number) => {
+export const getBooksApi = (pageNo?: number, pageSize?: number, sortDir?: string) => {
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {
                 const result = await http.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
+                dispatch(getBooksAction(result.data))
+            } else if (sortDir != null) {
+                const result = await http.get(bookURL + `?sortDir=${sortDir}`)
                 dispatch(getBooksAction(result.data))
             } else {
                 const result = await http.get(bookURL)
@@ -138,7 +141,7 @@ export const updateBookApi = (categoryId: number, bookId: number, bookRequest: B
         try {
             const result = await http.put(addBookURL + `/${categoryId}/books/${bookId}`, bookRequest)
             dispatch(updateBookAction(result.data))
-        } catch (err){
+        } catch (err) {
             console.log(err)
         }
     }

@@ -1,5 +1,5 @@
 import { createBrowserHistory } from "@remix-run/router";
-import axios from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 
 export const DOMAIN = 'http://localhost:8080'
 
@@ -89,6 +89,17 @@ export const http = axios.create({
     timeout: 30000
 })
 
+//Config all sending request
+http.interceptors.request.use((config) => {
+    config.headers = {
+        ...config.headers,
+        Authorization: 'Bearer ' + settings.getStore(ACCESS_TOKEN)
+    } as AxiosRequestHeaders
+    return config
+}, err => {
+    return Promise.reject(err)
+})
+
 // config all response
 http.interceptors.response.use((response) => {
     return response;
@@ -96,8 +107,8 @@ http.interceptors.response.use((response) => {
     if (error.response?.status === 400 || error.response?.status === 404) {
         history.push('/search-books')
     }
-    // if (error.response?.status === 401 || error.response?.status === 403) {
-    //     history.push('/search-books')
-    // }
+    if (error.response?.status === 401 || error.response?.status === 403) {
+        history.push('/')
+    }
     return Promise.reject(error);
 });

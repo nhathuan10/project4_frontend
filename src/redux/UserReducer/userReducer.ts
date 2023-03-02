@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { UserLoginRequest, UserLoginResponse } from '../../models/UserLoginModel';
 import { ACCESS_TOKEN, history, http, settings, USER_LOGIN } from '../../utils/config';
 import { DispatchType } from '../configStore';
@@ -24,6 +24,7 @@ const userReducer = createSlice({
             settings.setCookieJson(USER_LOGIN, action.payload, 30)
             settings.setStorage(ACCESS_TOKEN, action.payload.accessToken)
             settings.setCookie(ACCESS_TOKEN, action.payload.accessToken, 30)
+            state.isInvalidAccount = false
             history.push('/search-books')
         },
         invalidLoginAction: (state: UserState) => {
@@ -44,7 +45,7 @@ const authURL = '/api/auth/login'
 export const loginAsyncApi = (userLoginRequest: UserLoginRequest) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await http.post(authURL, userLoginRequest)
+            const result = await axios.post('http://localhost:8080' + authURL, userLoginRequest)
             dispatch(loginAsyncAction(result.data))
         } catch (err: any) {
             if(err.response.status === 500){
