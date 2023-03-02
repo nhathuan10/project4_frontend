@@ -13,7 +13,7 @@ export default function ({ }: Props) {
             return (
                 <ul className='navbar-nav ms-auto'>
                     <li className='nav-item'>
-                        <NavLink className='btn btn-primary me-1' to='/'>{userLogin.userEmail}</NavLink>
+                        <NavLink className='nav-link me-1' to='/'>{userLogin.userEmail}</NavLink>
                     </li>
                 </ul>
             )
@@ -21,7 +21,7 @@ export default function ({ }: Props) {
             return (
                 <ul className='navbar-nav ms-auto'>
                     <li className='nav-item'>
-                        <NavLink className='btn btn-primary me-1' to='/login'>Sign In</NavLink>
+                        <NavLink className='nav-link me-1' to='/login'>Sign In</NavLink>
                     </li>
                 </ul>
             )

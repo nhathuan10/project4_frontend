@@ -1,14 +1,17 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { DispatchType } from '../../redux/configStore'
-import { useDispatch } from 'react-redux'
+import { DispatchType, RootState } from '../../redux/configStore'
+import { useDispatch, useSelector } from 'react-redux'
 import { UserLoginRequest } from '../../models/UserLoginModel'
+import { loginAsyncApi } from '../../redux/UserReducer/userReducer'
 
 type Props = {}
 
 export default function LoginPage({ }: Props) {
+    const { isInvalidAccount } = useSelector((state: RootState) => state.userReducer)
     const dispatch: DispatchType = useDispatch()
+
     const formLogin = useFormik<UserLoginRequest>({
         initialValues: {
             usernameOrEmail: '',
@@ -19,8 +22,7 @@ export default function LoginPage({ }: Props) {
             password: yup.string().required('Password can not be blank').max(10, 'Password must be less than 10 characters').min(3, 'Password must be greater than 3 characters')
         }),
         onSubmit: (values: UserLoginRequest) => {
-            // dispatch(loginAsyncApi(values))
-            console.log(values)
+            dispatch(loginAsyncApi(values))
         }
     })
 
@@ -47,7 +49,8 @@ export default function LoginPage({ }: Props) {
                             <div className='text text-danger'>{formLogin.errors.password}</div>
                         }
                     </div>
-                    <div className='form-group mt-2'>
+                    {isInvalidAccount && <p className='text-danger fst-italic my-2'>Invalid email or password!</p>}
+                    <div className='form-group mt-3'>
                         <button className='btn btn-success' type='submit'>Login</button>
                     </div>
                 </div>

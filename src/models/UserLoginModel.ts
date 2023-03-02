@@ -9,5 +9,5 @@ export type UserLoginResponse = {
     accessToken: string
     userEmail: string
     tokenType: string
-    roles: RoleModel
+    roles: RoleModel[]
 }
