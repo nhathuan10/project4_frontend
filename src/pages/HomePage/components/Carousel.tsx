@@ -14,11 +14,21 @@ export default function Carousel({ }: Props) {
     useEffect(() => {
         dispatch(getBooksApi())
     }, [])
+    console.log(bookResponse)
 
     const renderTopBooks = (x: number, y: number) => {
-        return bookResponse?.content.slice(x, y).map((book: BookModel, index: number) => (
-            <ReturnBook book={book} key={index} />
-        ))
+        if (bookResponse) {
+            return bookResponse?.content.slice(x, y).map((book: BookModel, index: number) => (
+                <ReturnBook book={book} key={index} />
+            ))
+        } else {
+            return (
+                <>
+                    <ReturnBook bookImg={`book_${x}`} />
+                    <ReturnBook bookImg={`book_${y}`} />
+                </>
+            )
+        }
     }
 
     return (
@@ -36,7 +46,7 @@ export default function Carousel({ }: Props) {
                     </div>
                     <div className='carousel-item'>
                         <div className='row d-flex justify-content-center align-content-center'>
-                            {renderTopBooks(2, 5)}
+                            {renderTopBooks(2, 4)}
                         </div>
                     </div>
                 </div>

@@ -107,8 +107,8 @@ http.interceptors.response.use((response) => {
     if (error.response?.status === 400 || error.response?.status === 404) {
         history.push('/search-books')
     }
-    if (error.response?.status === 401 || error.response?.status === 403) {
-        history.push('/')
+    if (error.response?.status === 401 || error.response?.status === 403 || error.response?.status === 500) {
+        history.push('/login')
     }
     return Promise.reject(error);
 });

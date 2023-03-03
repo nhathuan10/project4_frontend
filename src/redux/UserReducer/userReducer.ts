@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { UserLoginRequest, UserLoginResponse } from '../../models/UserLoginModel';
-import { ACCESS_TOKEN, history, http, settings, USER_LOGIN } from '../../utils/config';
+import { ACCESS_TOKEN, history, settings, USER_LOGIN } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export interface UserState {
@@ -25,7 +25,7 @@ const userReducer = createSlice({
             settings.setStorage(ACCESS_TOKEN, action.payload.accessToken)
             settings.setCookie(ACCESS_TOKEN, action.payload.accessToken, 30)
             state.isInvalidAccount = false
-            history.push('/search-books')
+            history.push('/')
         },
         invalidLoginAction: (state: UserState) => {
             state.isInvalidAccount = true

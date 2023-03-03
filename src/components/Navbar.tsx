@@ -81,9 +81,11 @@ export default function ({ }: Props) {
                         <li className='nav-item'>
                             <NavLink className='nav-link' to='/'>Home</NavLink>
                         </li>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/search-books'>Search Books</NavLink>
-                        </li>
+                        {userLogin && (
+                            <li className='nav-item'>
+                                <NavLink className='nav-link' to='/search-books'>Search Books</NavLink>
+                            </li>
+                        )}
                         {renderAdminUI()}
                     </ul>
                     {renderLoginUI()}

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { BookModel, BookRequest } from '../../models/BookModel';
 import { BookResponse } from '../../models/BookResponse';
 import { ReviewModel } from '../../models/ReviewModel';
-import { http } from '../../utils/config';
+import { http, DOMAIN } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export type BookState = {

@@ -9,7 +9,7 @@ type Props = {
 
 export default function CheckoutAndReviewBox({ book, mobile }: Props) {
     return (
-        <div className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5'} style={{backgroundColor: '#AAFFFF'}}>
+        <div className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5'} style={{ backgroundColor: '#AAFFFF' }}>
             <div className='card-body container'>
                 <div className='mt-3'>
                     <p>
@@ -18,13 +18,8 @@ export default function CheckoutAndReviewBox({ book, mobile }: Props) {
                     </p>
                     <hr />
                     {book && book.copiesAvailable && book.copiesAvailable > 0 ?
-                        <h4 className='text-success'>
-                            Available
-                        </h4>
-                        :
-                        <h4 className='text-danger'>
-                            Wait List
-                        </h4>
+                        <h4 className='text-success'>Available</h4> :
+                        <h4 className='text-danger'>Wait List</h4>
                     }
                     <div className='row'>
                         <p className='col-6 lead'>
