@@ -1,19 +1,69 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
 import { BookModel } from '../../models/BookModel'
+import { checkoutBookApi, currentLoansCountApi, isBookCheckoutByUserApi } from '../../redux/CheckoutReducer/checkoutReducer'
+import { DispatchType, RootState } from '../../redux/configStore'
 
 type Props = {
-    book: BookModel | null
     mobile: boolean
 }
 
-export default function CheckoutAndReviewBox({ book, mobile }: Props) {
+export default function CheckoutAndReviewBox({ mobile }: Props) {
+    const { currentLoansCount } = useSelector((state: RootState) => state.checkoutReducer)
+    const { book } = useSelector((state: RootState) => state.bookReducer)
+    const { checkOuts } = useSelector((state: RootState) => state.checkoutReducer)
+    const { isBookCheckoutByUser } = useSelector((state: RootState) => state.checkoutReducer)
+    const { userLogin } = useSelector((state: RootState) => state.userReducer)
+    const dispatch: DispatchType = useDispatch()
+
+    useEffect(() => {
+        dispatch(currentLoansCountApi())
+    }, [checkOuts])
+
+    useEffect(() => {
+        dispatch(isBookCheckoutByUserApi(book?.id))
+    }, [book])
+
+    const checkoutBook = () => {
+        dispatch(checkoutBookApi(book?.id))
+    }
+
+    console.log(checkOuts)
+    console.log(isBookCheckoutByUser)
+
+    const buttonRender = () => {
+        if (userLogin) {
+            if (!isBookCheckoutByUser && currentLoansCount < 5) {
+                return (
+                    <button
+                        className='btn btn-success btn-lg'
+                        onClick={checkoutBook}
+                    >
+                        Checkout
+                    </button>
+                )
+            } else if (isBookCheckoutByUser) {
+                return (
+                    <p><b>Book checked out. Enjoy!</b></p>
+                )
+            } else if (!isBookCheckoutByUser) {
+                return (
+                    <p className='text-danger'>Too many books checked out</p>
+                )
+            }
+        }
+    }
+
     return (
-        <div className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5'} style={{ backgroundColor: '#AAFFFF' }}>
+        <div
+            className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5'}
+            style={{ backgroundColor: '#AAFFFF' }}
+        >
             <div className='card-body container'>
                 <div className='mt-3'>
                     <p>
-                        <b>0/5 </b>
+                        <b>{currentLoansCount}/5 </b>
                         books checked out
                     </p>
                     <hr />
@@ -32,7 +82,7 @@ export default function CheckoutAndReviewBox({ book, mobile }: Props) {
                         </p>
                     </div>
                 </div>
-                <NavLink to='/' className='btn btn-success main-color btn-lg'>Sign in</NavLink>
+                {buttonRender()}
                 <hr />
                 <p className='mt-3'>
                     This number can change until placing order has been complete.

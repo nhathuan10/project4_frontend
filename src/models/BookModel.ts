@@ -1,3 +1,4 @@
+import { CheckoutModel } from "./CheckoutModel"
 import { ReviewModel } from "./ReviewModel"
 
 export type BookModel = {
@@ -10,6 +11,7 @@ export type BookModel = {
     img: string
     categoryName: string
     reviews: ReviewModel[]
+    checkouts: CheckoutModel[]
 }
 
 export type BookRequest = {

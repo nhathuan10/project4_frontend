@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { RootState } from '../redux/configStore'
-import { ACCESS_TOKEN, settings, USER_LOGIN } from '../utils/config'
+import { ACCESS_TOKEN, history, settings, USER_LOGIN } from '../utils/config'
 
 type Props = {}
 
@@ -14,7 +14,8 @@ export default function ({ }: Props) {
         settings.eraseCookie(USER_LOGIN)
         settings.clearStorage(ACCESS_TOKEN)
         settings.clearStorage(USER_LOGIN)
-        window.location.reload()
+        history.push('/')
+        window.location.reload() 
     }
 
     const renderLoginUI = () => {

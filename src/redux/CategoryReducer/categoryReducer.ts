@@ -56,7 +56,7 @@ export const {
 
 export default categoryReducer.reducer
 
-const categoryURL = 'http://localhost:8080/api/categories'
+const categoryURL = '/api/categories'
 
 export const getCategoriesApi = () => {
     return async (dispatch: DispatchType) => {

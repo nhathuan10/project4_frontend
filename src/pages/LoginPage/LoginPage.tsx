@@ -32,21 +32,21 @@ export default function LoginPage({ }: Props) {
                 <div className='login-form-container'>
                     <div className='login-form'>
                         <div className='form-group w-75'>
-                            <p className='fw-bold'>Username or Email</p>
+                            <h5 className='fw-bold text-dark'>Username or Email</h5>
                             <input type="text" className='form-control' id='usernameOrEmail'
                                 onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
                             />
                             {formLogin.errors.usernameOrEmail &&
-                                <div className='text-warning fw-bold'>{formLogin.errors.usernameOrEmail}</div>
+                                <div className='text-secondary fw-bold'>{formLogin.errors.usernameOrEmail}</div>
                             }
                         </div>
                         <div className='form-group w-75 mt-3'>
-                            <p className='fw-bold'>Password</p>
+                            <h5 className='fw-bold text-dark'>Password</h5>
                             <input type="password" className='form-control' id='password'
                                 onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
                             />
                             {formLogin.errors.password &&
-                                <div className='text-warning fw-bold'>{formLogin.errors.password}</div>
+                                <div className='text-secondary fw-bold'>{formLogin.errors.password}</div>
                             }
                         </div>
                         {isInvalidAccount && <p className='text-danger fst-italic my-2 fw-bold'>Invalid email or password!</p>}

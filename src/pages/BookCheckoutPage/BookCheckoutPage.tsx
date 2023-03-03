@@ -5,7 +5,6 @@ import { DispatchType, RootState } from '../../redux/configStore'
 import { getBookByIdApi } from '../../redux/BookReducer/bookReducer'
 import StarReview from '../../components/StarReview'
 import CheckoutAndReviewBox from './CheckoutAndReviewBox'
-import { ReviewModel } from '../../models/ReviewModel'
 import LatestReviews from './LatestReviews'
 
 type Props = {}
@@ -19,7 +18,7 @@ export default function BookCheckoutPage({ }: Props) {
 
     useEffect(() => {
         dispatch(getBookByIdApi(id))
-    }, [])
+    }, [id])
 
     useEffect(() => {
         let weightedStarReviews = 0
@@ -49,7 +48,7 @@ export default function BookCheckoutPage({ }: Props) {
                             <StarReview rating={totalStars} size={25} />
                         </div>
                     </div>
-                    <CheckoutAndReviewBox book={book} mobile={false} />
+                    <CheckoutAndReviewBox mobile={false} />
                 </div>
                 <hr />
                 <LatestReviews mobile={false} />
@@ -68,7 +67,7 @@ export default function BookCheckoutPage({ }: Props) {
                         <StarReview rating={2} size={20} />
                     </div>
                 </div>
-                <CheckoutAndReviewBox book={book} mobile={true} />
+                <CheckoutAndReviewBox mobile={true} />
                 <hr />
                 <LatestReviews mobile={false} />
             </div>
