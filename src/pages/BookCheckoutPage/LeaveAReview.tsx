@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import StarReview from '../../components/StarReview'
-import { DispatchType } from '../../redux/configStore'
+import { ReviewRequest } from '../../models/ReviewModel'
+import { DispatchType, RootState } from '../../redux/configStore'
+import { leaveReviewtApi } from '../../redux/ReviewReducer/reviewReducer'
 
 type Props = {}
 
 export default function LeaveAReview({ }: Props) {
+    const { book } = useSelector((state: RootState) => state.bookReducer)
     const dispatch: DispatchType = useDispatch()
     const [starInput, setStarInput] = useState(0)
     const [displayInput, setDisplayInput] = useState(false)
@@ -17,13 +20,14 @@ export default function LeaveAReview({ }: Props) {
     }
 
     const submitReview = () => {
-
+        const review: ReviewRequest = { rating: starInput, description: reviewDescription }
+        dispatch(leaveReviewtApi(review, book?.id))
     }
 
     return (
         <div className='dropdown' style={{ cursor: 'pointer' }}>
             <h5 className='dropdown-toggle' id='dropdownMenuButton1' data-bs-toggle='dropdown'>
-                Leave a review?
+                Leave a review ?
             </h5>
             <ul id='submitReviewRating' className='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
                 <li><button onClick={() => starValue(0)} className='dropdown-item'>0 star</button></li>
@@ -53,7 +57,7 @@ export default function LeaveAReview({ }: Props) {
                         </textarea>
                     </div>
                     <div>
-                        <button type='button' onClick={() => { }} className='btn main-color btn-dark mt-1'>Submit Review</button>
+                        <button type='button' onClick={submitReview} className='btn main-color btn-dark mt-1'>Submit Review</button>
                     </div>
                 </form>
             }

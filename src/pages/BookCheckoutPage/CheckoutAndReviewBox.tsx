@@ -16,6 +16,7 @@ export default function CheckoutAndReviewBox({ mobile }: Props) {
     const { isBookCheckoutByUser } = useSelector((state: RootState) => state.checkoutReducer)
     const { userLogin } = useSelector((state: RootState) => state.userReducer)
     const { isReviewLeft } = useSelector((state: RootState) => state.reviewReducer)
+    const { reviewResponse } = useSelector((state: RootState) => state.reviewReducer)
 
     const dispatch: DispatchType = useDispatch()
 
@@ -29,7 +30,7 @@ export default function CheckoutAndReviewBox({ mobile }: Props) {
 
     useEffect(() => {
         dispatch(isReviewLeftApi(book?.id))
-    }, [book])
+    }, [book, reviewResponse])
 
     const checkoutBook = () => {
         dispatch(checkoutBookApi(book?.id))
@@ -61,8 +62,8 @@ export default function CheckoutAndReviewBox({ mobile }: Props) {
     }
 
     const reviewRender = () => {
-        if(userLogin){
-            if(isReviewLeft){
+        if (userLogin) {
+            if (isReviewLeft) {
                 return (
                     <p><b>Thank you for your review</b></p>
                 )

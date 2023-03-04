@@ -16,7 +16,7 @@ export default function Review({ review }: Props) {
 
     return (
         <div>
-            <div className='com-sm-8 col-md-8'>
+            <div className='col-sm-8 col-md-8'>
                 <h5>{review.userEmail}</h5>
                 <div className='row'>
                     <div className='col'>
@@ -27,7 +27,7 @@ export default function Review({ review }: Props) {
                     </div>
                 </div>
                 <div className='mt-2'>
-                    <p>{review.description}</p>
+                    <p className='fst-italic text-dark'>{review.description}</p>
                 </div>
             </div>
             <hr />

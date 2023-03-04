@@ -15,7 +15,7 @@ export default function ({ }: Props) {
         settings.clearStorage(ACCESS_TOKEN)
         settings.clearStorage(USER_LOGIN)
         history.push('/')
-        window.location.reload() 
+        window.location.reload()
     }
 
     const renderLoginUI = () => {
@@ -83,9 +83,14 @@ export default function ({ }: Props) {
                             <NavLink className='nav-link' to='/'>Home</NavLink>
                         </li>
                         {userLogin && (
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='/search-books'>Search Books</NavLink>
-                            </li>
+                            <>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' to='/search-books'>Search Books</NavLink>
+                                </li>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' to='/shelf'>Shelf</NavLink>
+                                </li>
+                            </>
                         )}
                         {renderAdminUI()}
                     </ul>

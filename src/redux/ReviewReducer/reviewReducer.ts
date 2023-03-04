@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ReviewModel, ReviewRequest } from '../../models/ReviewModel';
 import { http } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export type ReviewState = {
     isReviewLeft: boolean | null
+    reviewResponse: ReviewModel | null
 }
 
 const initialState: ReviewState = {
-    isReviewLeft: null
+    isReviewLeft: null,
+    reviewResponse: null
 }
 
 const reviewReducer = createSlice({
@@ -17,11 +20,15 @@ const reviewReducer = createSlice({
         isReviewLeftAction: (state: ReviewState, action: PayloadAction<boolean>) => {
             state.isReviewLeft = action.payload
         },
+        leaveReviewAction: (state: ReviewState, action: PayloadAction<ReviewModel>) => {
+            state.reviewResponse = action.payload
+        },
     }
 });
 
 export const {
-    isReviewLeftAction
+    isReviewLeftAction,
+    leaveReviewAction
 } = reviewReducer.actions
 
 export default reviewReducer.reducer
@@ -31,6 +38,17 @@ export const isReviewLeftApi = (bookId?: number) => {
         try {
             const result = await http.get(`/api/books/${bookId}/reviews/checkIfReviewCreated`)
             dispatch(isReviewLeftAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const leaveReviewtApi = (reviewRequest: ReviewRequest, bookId?: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await http.post(`/api/books/${bookId}/reviews`, reviewRequest)
+            dispatch(leaveReviewAction(result.data))
         } catch (err) {
             console.log(err)
         }

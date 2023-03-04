@@ -20,11 +20,17 @@ export default function LatestReviews({ mobile }: Props) {
             <div className='col-sm-10 col-md-10'>
                 {reviews.length > 0 ?
                     <>
-                        {reviews.slice(0, 3).map(review => (
+                        {reviews.slice(0, 2).map(review => (
                             <Review review={review} key={review.id}></Review>
                         ))}
                         <div className='my-2'>
-                            <Link to={`/reviewlist/${book?.id}`} type='button' className='btn btn-secondary main-color btn-md text-white'>Reach All Reviews</Link>
+                            <Link
+                                to={`/review-list`}
+                                type='button'
+                                className='btn btn-secondary main-color btn-md text-white'
+                            >
+                                Reach All Comments
+                            </Link>
                         </div>
                     </> :
                     <div className='m-3'>
