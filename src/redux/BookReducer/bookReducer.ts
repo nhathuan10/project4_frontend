@@ -125,7 +125,7 @@ export const addBookApi = (categoryId: number, book: BookRequest) => {
     }
 }
 
-export const getBookByIdApi = (id: number) => {
+export const getBookByIdApi = (id?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.get(bookURL + `/${id}`)

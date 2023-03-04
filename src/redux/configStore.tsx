@@ -3,13 +3,15 @@ import bookReducer from "./BookReducer/bookReducer";
 import categoryReducer from "./CategoryReducer/categoryReducer";
 import userReducer from "./UserReducer/userReducer";
 import checkoutReducer from "./CheckoutReducer/checkoutReducer";
+import reviewReducer from "./ReviewReducer/reviewReducer";
 
 export const store = configureStore({
     reducer: {
         categoryReducer,
         bookReducer,
         userReducer,
-        checkoutReducer
+        checkoutReducer,
+        reviewReducer
     }
 })
 

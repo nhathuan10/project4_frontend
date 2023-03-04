@@ -32,17 +32,17 @@ export default function StarReview({ rating, size }: Props) {
         <div>
             {Array.from({ length: fullStar }, (_, index) =>
                 <i key={index} className="fa-solid fa-star"
-                    style={{ fontSize: size, color: '#6bff00' }}>
+                    style={{ fontSize: size, color: '#4F2FFF' }}>
                 </i>
             )}
             {Array.from({ length: halfStar }, (_, index) =>
                 <i key={index} className="fa-solid fa-star-half-stroke"
-                    style={{ fontSize: size, color: '#6bff00' }}>
+                    style={{ fontSize: size, color: '#4F2FFF' }}>
                 </i>
             )}
             {Array.from({ length: emptyStar }, (_, index) =>
                 <i key={index} className="fa-regular fa-star"
-                    style={{ fontSize: size, color: '#6bff00' }}>
+                    style={{ fontSize: size, color: '#4F2FFF' }}>
                 </i>
             )}
         </div>

@@ -14,11 +14,12 @@ export default function BookCheckoutPage({ }: Props) {
     const dispatch: DispatchType = useDispatch()
     const { id } = useParams() as any
     const [totalStars, setTotalStars] = useState(0)
+    const { checkOuts } = useSelector((state: RootState) => state.checkoutReducer)
     const { reviews } = useSelector((state: RootState) => state.bookReducer)
 
     useEffect(() => {
         dispatch(getBookByIdApi(id))
-    }, [id])
+    }, [id, checkOuts])
 
     useEffect(() => {
         let weightedStarReviews = 0

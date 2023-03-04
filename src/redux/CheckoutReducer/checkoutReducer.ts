@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { BookModel } from '../../models/BookModel';
 import { CheckoutModel } from '../../models/CheckoutModel';
 import { http } from '../../utils/config';
 import { DispatchType } from '../configStore';
@@ -12,15 +13,15 @@ export type CheckoutState = {
 const initialState: CheckoutState = {
     currentLoansCount: 0,
     isBookCheckoutByUser: null,
-    checkOuts: []
+    checkOuts: [],
 }
 
 const checkoutReducer = createSlice({
     name: 'checkoutReducer',
     initialState,
     reducers: {
-        checkoutBookAction: (state: CheckoutState, action: PayloadAction<CheckoutModel[]>) => {
-            state.checkOuts = action.payload
+        checkoutBookAction: (state: CheckoutState, action: PayloadAction<BookModel>) => {
+            state.checkOuts = action.payload.checkouts
         },
         currentLoansCountAction: (state: CheckoutState, action: PayloadAction<number>) => {
             state.currentLoansCount = action.payload
@@ -45,7 +46,7 @@ export const checkoutBookApi = (bookId?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.put(`api/books/${bookId}/checkouts`, null)
-            dispatch(checkoutBookAction(result.data.checkouts))
+            dispatch(checkoutBookAction(result.data))
         } catch (err) {
             console.log(err)
         }
