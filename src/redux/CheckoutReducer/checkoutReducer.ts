@@ -63,7 +63,7 @@ const currentLoansURL = '/api/checkouts/currentLoans'
 export const checkoutBookApi = (bookId?: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await http.put(`api/books/${bookId}/checkouts`, null)
+            const result = await http.put(`api/books/${bookId}/checkouts`)
             dispatch(checkoutBookAction(result.data))
         } catch (err) {
             console.log(err)

@@ -4,6 +4,7 @@ import categoryReducer from "./CategoryReducer/categoryReducer";
 import userReducer from "./UserReducer/userReducer";
 import checkoutReducer from "./CheckoutReducer/checkoutReducer";
 import reviewReducer from "./ReviewReducer/reviewReducer";
+import historyReducer from "./HistoryReducer/historyReducer";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
         bookReducer,
         userReducer,
         checkoutReducer,
-        reviewReducer
+        reviewReducer,
+        historyReducer
     }
 })
 

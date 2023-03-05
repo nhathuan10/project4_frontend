@@ -45,7 +45,7 @@ export default function CheckoutAndReviewBox({ mobile }: Props) {
                             className='btn btn-success'
                             onClick={checkoutBook}
                         >
-                            Checkout
+                            Borrow
                         </button>
                     </div>
                 )
