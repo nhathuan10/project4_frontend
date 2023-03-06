@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { BookModel, BookRequest } from '../../models/BookModel';
+import { BookModel } from '../../models/BookModel';
 import { BookResponse } from '../../models/BookResponse';
 import { ReviewModel } from '../../models/ReviewModel';
 import { http, DOMAIN } from '../../utils/config';
@@ -16,7 +16,7 @@ export type BookState = {
     totalAmountOfBooks: number
     totalPages: number
     currentPage: number
-    reviews: ReviewModel[]
+    reviews: ReviewModel[] | undefined
 }
 
 const initialState: BookState = {
@@ -29,7 +29,7 @@ const initialState: BookState = {
     totalAmountOfBooks: 0,
     totalPages: 0,
     currentPage: 1,
-    reviews: []
+    reviews: [] 
 }
 
 const bookReducer = createSlice({
@@ -96,14 +96,11 @@ export default bookReducer.reducer
 const bookURL = '/api/books'
 const addBookURL = '/api/categories'
 
-export const getBooksApi = (pageNo?: number, pageSize?: number, sortDir?: string) => {
+export const getBooksApi = (pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {
                 const result = await http.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
-                dispatch(getBooksAction(result.data))
-            } else if (sortDir != null) {
-                const result = await http.get(bookURL + `?sortDir=${sortDir}`)
                 dispatch(getBooksAction(result.data))
             } else {
                 const result = await axios.get(DOMAIN +  bookURL)
@@ -115,7 +112,7 @@ export const getBooksApi = (pageNo?: number, pageSize?: number, sortDir?: string
     }
 }
 
-export const addBookApi = (categoryId: number, book: BookRequest) => {
+export const addBookApi = (categoryId: number, book: BookModel) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.post(addBookURL + `/${categoryId}/books`, book)
@@ -137,7 +134,7 @@ export const getBookByIdApi = (id?: number) => {
     }
 }
 
-export const updateBookApi = (categoryId: number, bookId: number, bookRequest: BookRequest) => {
+export const updateBookApi = (categoryId: number, bookId: number, bookRequest: BookModel) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.put(addBookURL + `/${categoryId}/books/${bookId}`, bookRequest)
@@ -148,7 +145,7 @@ export const updateBookApi = (categoryId: number, bookId: number, bookRequest: B
     }
 }
 
-export const deleteBookApi = (bookId: number) => {
+export const deleteBookApi = (bookId?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.delete(bookURL + `/${bookId}`)
@@ -175,7 +172,7 @@ export const getBooksByTitleApi = (title: string, pageNo?: number, pageSize?: nu
     }
 }
 
-export const getBooksByCategoryApi = (categoryId: number, pageNo?: number, pageSize?: number) => {
+export const getBooksByCategoryApi = (categoryId?: number, pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {

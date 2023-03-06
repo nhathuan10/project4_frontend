@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { BookRequest } from '../../models/BookModel'
+import { BookModel } from '../../models/BookModel'
 import { CategoryModel } from '../../models/CategoryModel'
 import { addBookApi, getBookByIdApi, updateBookApi } from '../../redux/BookReducer/bookReducer'
 import { getCategoriesApi } from '../../redux/CategoryReducer/categoryReducer'
@@ -15,14 +15,14 @@ type Props = {}
 export default function AddBookPage({ }: Props) {
     const { categories } = useSelector((state: RootState) => state.categoryReducer)
     const dispatch: DispatchType = useDispatch()
-    const [categorySelected, setCategorySelected] = useState('')
-    const [categoryIdSelected, setCategoryIdSelected] = useState<number>(0)
+    const [categorySelected, setCategorySelected] = useState<string | undefined>('')
+    const [categoryIdSelected, setCategoryIdSelected] = useState<number | undefined>(0)
     const [displayWarning, setDisplayWarning] = useState(false)
     const [img, setImg] = useState<any>(null)
     const { id } = useParams() as any
     const { book } = useSelector((state: RootState) => state.bookReducer)
 
-    const addBookForm = useFormik<BookRequest>({
+    const addBookForm = useFormik<BookModel>({
         initialValues: {
             title: '',
             author: '',
@@ -37,7 +37,7 @@ export default function AddBookPage({ }: Props) {
             copies: yup.number().required('Copies can not be blank').integer('Copies must be integer').positive('Copies must be greater than 0'),
             img: yup.string().required('Image need to be updated'),
         }),
-        onSubmit: (values: BookRequest) => {
+        onSubmit: (values: BookModel) => {
             if (categoryIdSelected) {
                 if (id) {
                     dispatch(updateBookApi(categoryIdSelected, id, values))
@@ -52,16 +52,16 @@ export default function AddBookPage({ }: Props) {
     })
 
     const renderCategories = () => {
-        return categories.map((category: CategoryModel, index: number) => (
+        return categories.map((category?: CategoryModel, index?: number) => (
             <li key={index}>
                 <a
                     className="dropdown-item"
                     onClick={() => {
-                        setCategorySelected(category.name)
-                        setCategoryIdSelected(category.id)
+                        setCategorySelected(category?.name)
+                        setCategoryIdSelected(category?.id)
                         setDisplayWarning(false)
                     }}>
-                    {category.name}
+                    {category?.name}
                 </a>
             </li>
         ))
@@ -94,13 +94,13 @@ export default function AddBookPage({ }: Props) {
         if (id) {
             dispatch(getBookByIdApi(id))
         }
-    }, [])
+    }, [book])
 
     useEffect(() => {
         if (book && id) {
             setImg(book.img)
         }
-    }, [])
+    }, [book])
 
     return (
         <div className='container mt-5 mb-5'>

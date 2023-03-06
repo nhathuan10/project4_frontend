@@ -9,7 +9,6 @@ type Props = {
 }
 
 export default function LatestReviews({ mobile }: Props) {
-    const { book } = useSelector((state: RootState) => state.bookReducer)
     const { reviews } = useSelector((state: RootState) => state.bookReducer)
 
     return (
@@ -18,9 +17,9 @@ export default function LatestReviews({ mobile }: Props) {
                 <h2>Latest Reviews: </h2>
             </div>
             <div className='col-sm-10 col-md-10'>
-                {reviews.length > 0 ?
+                {reviews && reviews.length > 0 ?
                     <>
-                        {reviews.slice(0, 2).map(review => (
+                        {reviews?.slice(0, 2).map(review => (
                             <Review review={review} key={review.id}></Review>
                         ))}
                         <div className='my-2'>

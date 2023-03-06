@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
-import { CategoryModel, CategoryRequest } from '../../models/CategoryModel'
+import { CategoryModel } from '../../models/CategoryModel'
 import { deleteCategoryApi, getCategoriesApi, getCategoryByIdApi, updateCategoryApi } from '../../redux/CategoryReducer/categoryReducer'
 import { DispatchType, RootState } from '../../redux/configStore'
 
@@ -15,15 +15,15 @@ export default function AllCategories({ }: Props) {
     const { id } = useParams() as any
     const dispatch: DispatchType = useDispatch()
 
-    const deleteCategoryHandler = (id: number) => {
+    const deleteCategoryHandler = (id?: number) => {
         dispatch(deleteCategoryApi(id))
     }
 
-    const updateCategoryDisplay = (id: number) => {
+    const updateCategoryDisplay = (id?: number) => {
         dispatch(getCategoryByIdApi(id))
     }
 
-    const updateCategoryHandler = (id: number, updateCategoryRequest: CategoryRequest) => {
+    const updateCategoryHandler = (id: number, updateCategoryRequest: CategoryModel) => {
         dispatch(updateCategoryApi(id, updateCategoryRequest))
     }
 

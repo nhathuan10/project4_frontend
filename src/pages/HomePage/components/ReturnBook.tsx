@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { BookModel } from '../../../models/BookModel'
 
 type Props = {
@@ -17,7 +18,6 @@ export default function ReturnBook({ book, bookImg }: Props) {
                     height='240' />
                 <h6 className='mt-2'>{book?.title}</h6>
                 <p>{book?.author}</p>
-                <a className='btn btn-secondary main-color text-white'>Reserve</a>
             </div>
         </div>
     )

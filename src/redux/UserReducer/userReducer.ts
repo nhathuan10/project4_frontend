@@ -1,17 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { UserLoginRequest, UserLoginResponse } from '../../models/UserLoginModel';
-import { ACCESS_TOKEN, history, settings, USER_LOGIN } from '../../utils/config';
+import { UserRegisterModel } from '../../models/UserRegisterModel';
+import { ACCESS_TOKEN, DOMAIN, history, settings, USER_LOGIN } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
 export interface UserState {
     userLogin: UserLoginResponse
     isInvalidAccount: boolean
+    userSignup: UserRegisterModel | null
 }
 
 const initialState: UserState = {
     userLogin: settings.getStorageJson(USER_LOGIN) ? settings.getStorageJson(USER_LOGIN) : null,
-    isInvalidAccount: false
+    isInvalidAccount: false,
+    userSignup: null,
 }
 
 const userReducer = createSlice({
@@ -27,6 +30,10 @@ const userReducer = createSlice({
             state.isInvalidAccount = false
             history.push('/')
         },
+        signupAsyncAction: (state: UserState, action: PayloadAction<UserRegisterModel>) => {
+            state.userSignup = action.payload
+
+        },
         invalidLoginAction: (state: UserState) => {
             state.isInvalidAccount = true
         },
@@ -35,22 +42,35 @@ const userReducer = createSlice({
 
 export const {
     loginAsyncAction,
-    invalidLoginAction
+    invalidLoginAction,
+    signupAsyncAction
 } = userReducer.actions
 
 export default userReducer.reducer
 
-const authURL = '/api/auth/login'
+const loginURL = '/api/auth/login'
+const signupURL = '/api/auth/signup'
 
 export const loginAsyncApi = (userLoginRequest: UserLoginRequest) => {
     return async (dispatch: DispatchType) => {
         try {
-            const result = await axios.post('http://localhost:8080' + authURL, userLoginRequest)
+            const result = await axios.post(DOMAIN + loginURL, userLoginRequest)
             dispatch(loginAsyncAction(result.data))
         } catch (err: any) {
-            if(err.response.status === 500){
+            if (err.response.status === 500) {
                 dispatch(invalidLoginAction())
             }
+            console.log(err)
+        }
+    }
+}
+
+export const signupAsyncApi = (userSignupRequest: UserRegisterModel) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await axios.post(DOMAIN + signupURL, userSignupRequest)
+            dispatch(signupAsyncAction(result.data))
+        } catch (err: any) {
             console.log(err)
         }
     }

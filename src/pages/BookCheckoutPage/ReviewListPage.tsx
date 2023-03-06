@@ -10,9 +10,9 @@ export default function ReviewListPage({ }: Props) {
 
     return (
         <div className='container mt-5'>
-            <h3 className='text-primary fw-bold my-3'>Comments: ({reviews.length})</h3>
+            <h3 className='text-primary fw-bold my-3'>Comments: ({reviews?.length})</h3>
             <div className='row'>
-                {reviews.map(review => (
+                {reviews?.map(review => (
                     <Review review={review} key={review.id} />
                 ))}
             </div>

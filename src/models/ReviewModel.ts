@@ -1,13 +1,13 @@
 export type ReviewModel = {
-    id: number
-    userEmail: string
-    date: string
+    id?: number
+    userEmail?: string
+    date: string 
     rating: number 
-    bookId: string
+    bookId?: string
     description: string
 }
 
-export type ReviewRequest = {
-    rating: number
-    description: string
-}
+// export type ReviewRequest = {
+//     rating: number
+//     description: string
+// }

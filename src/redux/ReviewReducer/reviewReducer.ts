@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ReviewModel, ReviewRequest } from '../../models/ReviewModel';
+import { ReviewModel } from '../../models/ReviewModel';
 import { http } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
@@ -44,7 +44,7 @@ export const isReviewLeftApi = (bookId?: number) => {
     }
 }
 
-export const leaveReviewtApi = (reviewRequest: ReviewRequest, bookId?: number) => {
+export const leaveReviewtApi = (reviewRequest: ReviewModel, bookId?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.post(`/api/books/${bookId}/reviews`, reviewRequest)

@@ -20,7 +20,7 @@ export default function Heros({ }: Props) {
                                 Whether it is to learn a new skill or grow within one,
                                 we will be able href provide the top content for you!
                             </p>
-                            <Link to="#" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
+                            <Link to="/register" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
                         </div>
                     </div>
                 </div>

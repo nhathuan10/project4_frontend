@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import StarReview from '../../components/StarReview'
-import { ReviewRequest } from '../../models/ReviewModel'
+import { ReviewModel } from '../../models/ReviewModel'
 import { DispatchType, RootState } from '../../redux/configStore'
 import { leaveReviewtApi } from '../../redux/ReviewReducer/reviewReducer'
 
@@ -20,7 +20,7 @@ export default function LeaveAReview({ }: Props) {
     }
 
     const submitReview = () => {
-        const review: ReviewRequest = { rating: starInput, description: reviewDescription }
+        const review: ReviewModel = { rating: starInput, description: reviewDescription, date: '' }
         dispatch(leaveReviewtApi(review, book?.id))
     }
 

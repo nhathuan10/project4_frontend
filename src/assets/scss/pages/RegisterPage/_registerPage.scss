@@ -1,0 +1,22 @@
+.signup-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #CCCCFF;
+    height: 700px;
+
+    .signup-form {
+        background-color: rgb(245, 230, 212);
+        opacity: 0.75;
+        width: 50%;
+        margin: 20px;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        box-shadow: 10px 10px 10px;
+    }
+}

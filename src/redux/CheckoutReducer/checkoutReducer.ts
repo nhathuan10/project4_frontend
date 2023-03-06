@@ -8,7 +8,7 @@ import { DispatchType } from '../configStore';
 export type CheckoutState = {
     currentLoansCount: number
     isBookCheckoutByUser: boolean | null
-    checkOuts: CheckoutModel[]
+    checkOuts: CheckoutModel[] | undefined
     shelfCurrentLoans: ShelfCurrentLoanModel[]
     returnOrRenewResponse: boolean
 }

@@ -3,7 +3,7 @@ import { ReviewModel } from '../models/ReviewModel'
 import StarReview from './StarReview'
 
 type Props = {
-    review: ReviewModel
+    review: ReviewModel 
 }
 
 export default function Review({ review }: Props) {

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CategoryModel, CategoryRequest } from '../../models/CategoryModel';
+import { CategoryModel } from '../../models/CategoryModel';
 import { http } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
@@ -69,7 +69,7 @@ export const getCategoriesApi = () => {
     }
 }
 
-export const addCategoryApi = (categoryRequest: CategoryRequest) => {
+export const addCategoryApi = (categoryRequest: CategoryModel) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.post(categoryURL, categoryRequest)
@@ -80,7 +80,7 @@ export const addCategoryApi = (categoryRequest: CategoryRequest) => {
     }
 }
 
-export const updateCategoryApi = (id: number, categoryRequest: CategoryRequest) => {
+export const updateCategoryApi = (id: number, categoryRequest: CategoryModel) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.put(categoryURL + `/${id}`, categoryRequest)
@@ -91,7 +91,7 @@ export const updateCategoryApi = (id: number, categoryRequest: CategoryRequest) 
     }
 }
 
-export const getCategoryByIdApi = (id: number) => {
+export const getCategoryByIdApi = (id?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.get(categoryURL + `/${id}`)
@@ -102,7 +102,7 @@ export const getCategoryByIdApi = (id: number) => {
     }
 }
 
-export const deleteCategoryApi = (id: number) => {
+export const deleteCategoryApi = (id?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.delete(categoryURL + `/${id}`)

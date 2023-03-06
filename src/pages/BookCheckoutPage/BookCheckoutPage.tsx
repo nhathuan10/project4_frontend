@@ -20,7 +20,7 @@ export default function BookCheckoutPage({ }: Props) {
 
     useEffect(() => {
         dispatch(getBookByIdApi(id))
-    }, [id, checkOuts, reviewResponse])
+    }, [ checkOuts, reviewResponse])
 
     useEffect(() => {
         let weightedStarReviews = 0

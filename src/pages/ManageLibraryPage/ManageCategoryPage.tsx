@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { CategoryRequest } from '../../models/CategoryModel'
 import { DispatchType } from '../../redux/configStore'
 import { useDispatch } from 'react-redux'
 import { addCategoryApi } from '../../redux/CategoryReducer/categoryReducer'
+import { CategoryModel } from '../../models/CategoryModel'
 
 type Props = {}
 
@@ -12,7 +12,7 @@ export default function ManageCategoryPage({ }: Props) {
     const [category, setCategory] = useState<string>('')
 
     const addCategoryHandler = (category: string) => {
-        const categoryRequest: CategoryRequest = { name: category }
+        const categoryRequest: CategoryModel = { name: category }
         dispatch(addCategoryApi(categoryRequest))
     }
 
