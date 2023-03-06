@@ -5,6 +5,7 @@ import userReducer from "./UserReducer/userReducer";
 import checkoutReducer from "./CheckoutReducer/checkoutReducer";
 import reviewReducer from "./ReviewReducer/reviewReducer";
 import historyReducer from "./HistoryReducer/historyReducer";
+import messageReducer from "./MessageReducer/messageReducer";
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
         userReducer,
         checkoutReducer,
         reviewReducer,
-        historyReducer
+        historyReducer,
+        messageReducer
     }
 })
 

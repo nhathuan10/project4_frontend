@@ -53,7 +53,7 @@ export default function ({ }: Props) {
             if (isAdminRole) {
                 return (
                     <li className='nav-item'>
-                        <NavLink className='nav-link' to='/admin/book'>Admin</NavLink>
+                        <NavLink className='nav-link fw-bold' to='/admin/book'>Admin</NavLink>
                     </li>
                 )
             }
@@ -89,6 +89,9 @@ export default function ({ }: Props) {
                                 </li>
                                 <li className='nav-item'>
                                     <NavLink className='nav-link' to='/shelf'>Shelf</NavLink>
+                                </li>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' to='/messages'>Message</NavLink>
                                 </li>
                             </>
                         )}
