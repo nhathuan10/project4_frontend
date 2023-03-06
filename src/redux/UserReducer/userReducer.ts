@@ -32,7 +32,7 @@ const userReducer = createSlice({
         },
         signupAsyncAction: (state: UserState, action: PayloadAction<UserRegisterModel>) => {
             state.userSignup = action.payload
-
+            state.isInvalidAccount = false
         },
         invalidLoginAction: (state: UserState) => {
             state.isInvalidAccount = true
@@ -71,6 +71,9 @@ export const signupAsyncApi = (userSignupRequest: UserRegisterModel) => {
             const result = await axios.post(DOMAIN + signupURL, userSignupRequest)
             dispatch(signupAsyncAction(result.data))
         } catch (err: any) {
+            if (err.response.status === 400) {
+                dispatch(invalidLoginAction())
+            }
             console.log(err)
         }
     }

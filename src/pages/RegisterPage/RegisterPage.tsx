@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { UserRegisterModel } from '../../models/UserRegisterModel'
-import { DispatchType } from '../../redux/configStore'
-import { useDispatch } from 'react-redux'
+import { DispatchType, RootState } from '../../redux/configStore'
+import { useDispatch, useSelector } from 'react-redux'
 import { signupAsyncApi } from '../../redux/UserReducer/userReducer'
 
 type Props = {}
 
 export default function RegisterPage({ }: Props) {
     const dispatch: DispatchType = useDispatch()
-    const [displayWarning, setDisplayWarning] = useState(false)
-    const [displaySuccess, setDisplaySuccess] = useState(false)
+    const { isInvalidAccount } = useSelector((state: RootState) => state.userReducer)
 
     const formSignUp = useFormik<UserRegisterModel>({
         initialValues: {
@@ -28,7 +27,6 @@ export default function RegisterPage({ }: Props) {
         }),
         onSubmit: (values: UserRegisterModel) => {
             dispatch(signupAsyncApi(values))
-            setDisplaySuccess(true)
         }
     })
 
@@ -36,49 +34,54 @@ export default function RegisterPage({ }: Props) {
         <form onSubmit={formSignUp.handleSubmit}>
             <div className='signup-form-container'>
                 <div className='signup-form'>
-                    <div className='form-group w-75 my-3'>
-                        {displaySuccess &&
+                    <div className='form-group w-75 my-2'>
+                        {isInvalidAccount &&
+                            <div className='alert alert-danger fw-bold' role='alert'>
+                                User Account has already existed
+                            </div>
+                        }
+                        {!isInvalidAccount &&
                             <div className='alert alert-success fw-bold' role='alert'>
                                 User Registered successfully
                             </div>
                         }
-                        <h5 className='fw-bold text-dark'>Name</h5>
+                        <h5 className='fw-bold text-light'>Name</h5>
                         <input type="text" className='form-control' id='name'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.name &&
-                            <div className='text-danger fst-italic'>{formSignUp.errors.name}</div>
+                            <div className='text-warning fst-italic'>{formSignUp.errors.name}</div>
                         }
                     </div>
-                    <div className='form-group w-75'>
-                        <h5 className='fw-bold text-dark'>Username</h5>
+                    <div className='form-group w-75 my-2'>
+                        <h5 className='fw-bold text-light'>Username</h5>
                         <input type="text" className='form-control' id='username'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.username &&
-                            <div className='text-danger fst-italic'>{formSignUp.errors.username}</div>
+                            <div className='text-warning fst-italic'>{formSignUp.errors.username}</div>
                         }
                     </div>
-                    <div className='form-group w-75'>
-                        <h5 className='fw-bold text-dark'>Email</h5>
+                    <div className='form-group w-75 my-2'>
+                        <h5 className='fw-bold text-light'>Email</h5>
                         <input type="text" className='form-control' id='email'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.email &&
-                            <div className='text-danger fst-italic'>{formSignUp.errors.email}</div>
+                            <div className='text-warning fst-italic'>{formSignUp.errors.email}</div>
                         }
                     </div>
-                    <div className='form-group w-75 mt-3'>
-                        <h5 className='fw-bold text-dark'>Password</h5>
+                    <div className='form-group w-75 my-2'>
+                        <h5 className='fw-bold text-light'>Password</h5>
                         <input type="password" className='form-control' id='password'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.password &&
-                            <div className='text-danger fst-italic'>{formSignUp.errors.password}</div>
+                            <div className='text-warning fst-italic'>{formSignUp.errors.password}</div>
                         }
                     </div>
                     <div className='form-group mt-4 w-75 text-center'>
-                        <button className='btn btn-primary main-color w-100' type='submit'>Register</button>
+                        <button className='btn btn-primary w-100' type='submit'>Register</button>
                     </div>
                 </div>
             </div>
