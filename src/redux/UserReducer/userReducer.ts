@@ -9,12 +9,14 @@ export interface UserState {
     userLogin: UserLoginResponse
     isInvalidAccount: boolean
     userSignup: UserRegisterModel | null
+    isInvalidAccountSignup: boolean | null
 }
 
 const initialState: UserState = {
     userLogin: settings.getStorageJson(USER_LOGIN) ? settings.getStorageJson(USER_LOGIN) : null,
     isInvalidAccount: false,
     userSignup: null,
+    isInvalidAccountSignup: null
 }
 
 const userReducer = createSlice({
@@ -32,10 +34,13 @@ const userReducer = createSlice({
         },
         signupAsyncAction: (state: UserState, action: PayloadAction<UserRegisterModel>) => {
             state.userSignup = action.payload
-            state.isInvalidAccount = false
+            state.isInvalidAccountSignup = false
         },
         invalidLoginAction: (state: UserState) => {
             state.isInvalidAccount = true
+        },
+        invalidSingupAction: (state: UserState) => {
+            state.isInvalidAccountSignup = true
         },
     }
 });
@@ -43,7 +48,8 @@ const userReducer = createSlice({
 export const {
     loginAsyncAction,
     invalidLoginAction,
-    signupAsyncAction
+    signupAsyncAction,
+    invalidSingupAction
 } = userReducer.actions
 
 export default userReducer.reducer
@@ -72,7 +78,7 @@ export const signupAsyncApi = (userSignupRequest: UserRegisterModel) => {
             dispatch(signupAsyncAction(result.data))
         } catch (err: any) {
             if (err.response.status === 400) {
-                dispatch(invalidLoginAction())
+                dispatch(invalidSingupAction())
             }
             console.log(err)
         }

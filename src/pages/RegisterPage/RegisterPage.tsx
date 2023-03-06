@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { UserRegisterModel } from '../../models/UserRegisterModel'
@@ -10,7 +10,7 @@ type Props = {}
 
 export default function RegisterPage({ }: Props) {
     const dispatch: DispatchType = useDispatch()
-    const { isInvalidAccount } = useSelector((state: RootState) => state.userReducer)
+    const { isInvalidAccountSignup } = useSelector((state: RootState) => state.userReducer)
 
     const formSignUp = useFormik<UserRegisterModel>({
         initialValues: {
@@ -29,18 +29,19 @@ export default function RegisterPage({ }: Props) {
             dispatch(signupAsyncApi(values))
         }
     })
+    console.log(isInvalidAccountSignup)
 
     return (
         <form onSubmit={formSignUp.handleSubmit}>
             <div className='signup-form-container'>
                 <div className='signup-form'>
                     <div className='form-group w-75 my-2'>
-                        {isInvalidAccount &&
+                        {isInvalidAccountSignup &&
                             <div className='alert alert-danger fw-bold' role='alert'>
                                 User Account has already existed
                             </div>
                         }
-                        {!isInvalidAccount &&
+                        {!isInvalidAccountSignup && isInvalidAccountSignup != null &&
                             <div className='alert alert-success fw-bold' role='alert'>
                                 User Registered successfully
                             </div>
