@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import axios from 'axios';
 import { BookModel, BookRequest } from '../../models/BookModel';
 import { BookResponse } from '../../models/BookResponse';
 import { ReviewModel } from '../../models/ReviewModel';
@@ -105,7 +106,7 @@ export const getBooksApi = (pageNo?: number, pageSize?: number, sortDir?: string
                 const result = await http.get(bookURL + `?sortDir=${sortDir}`)
                 dispatch(getBooksAction(result.data))
             } else {
-                const result = await http.get(bookURL)
+                const result = await axios.get(DOMAIN +  bookURL)
                 dispatch(getBooksAction(result.data))
             }
         } catch (err) {

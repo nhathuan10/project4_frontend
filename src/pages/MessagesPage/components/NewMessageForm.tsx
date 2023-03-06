@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { MessageModel } from '../../../models/MessageModel'
-import { DispatchType, RootState } from '../../../redux/configStore'
+import { DispatchType } from '../../../redux/configStore'
 import { submitQuestionApi } from '../../../redux/MessageReducer/messageReducer'
 
 type Props = {}
@@ -14,7 +14,7 @@ export default function NewMessageForm({ }: Props) {
     const [displaySuccess, setDisplaySuccess] = useState(false)
 
     const submitNewQuestion = () => {
-        if (title != '' && question != '') {
+        if (title !== '' && question !== '') {
             const newMessage: MessageModel = { title, question }
             dispatch(submitQuestionApi(newMessage))
             setTitle('')

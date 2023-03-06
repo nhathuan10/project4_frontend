@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { RootState } from '../redux/configStore'
@@ -41,6 +41,30 @@ export default function ({ }: Props) {
         }
     }
 
+    const renderUserUI = () => {
+        if (userLogin) {
+            let isUserRole = false
+            for (let role of userLogin?.roles) {
+                if (role.name === 'ROLE_USER') {
+                    isUserRole = true
+                    break
+                }
+            }
+            if (isUserRole) {
+                return (
+                    <>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='/search-books'>Books</NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='/shelf'>Shelf</NavLink>
+                        </li>
+                    </>
+                )
+            }
+        }
+    }
+
     const renderAdminUI = () => {
         if (userLogin) {
             let isAdminRole = false
@@ -52,9 +76,17 @@ export default function ({ }: Props) {
             }
             if (isAdminRole) {
                 return (
-                    <li className='nav-item'>
-                        <NavLink className='nav-link fw-bold' to='/admin/book'>Admin</NavLink>
-                    </li>
+                    <>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='/admin/category'>Category Management</NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='/admin/book'>Book Management</NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='/admin/message'>Message Management</NavLink>
+                        </li>
+                    </>
                 )
             }
         }
@@ -82,19 +114,7 @@ export default function ({ }: Props) {
                         <li className='nav-item'>
                             <NavLink className='nav-link' to='/'>Home</NavLink>
                         </li>
-                        {userLogin && (
-                            <>
-                                <li className='nav-item'>
-                                    <NavLink className='nav-link' to='/search-books'>Search Books</NavLink>
-                                </li>
-                                <li className='nav-item'>
-                                    <NavLink className='nav-link' to='/shelf'>Shelf</NavLink>
-                                </li>
-                                <li className='nav-item'>
-                                    <NavLink className='nav-link' to='/messages'>Message</NavLink>
-                                </li>
-                            </>
-                        )}
+                        {renderUserUI()}
                         {renderAdminUI()}
                     </ul>
                     {renderLoginUI()}

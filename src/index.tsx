@@ -6,7 +6,7 @@ import Layout from './layout/Layout';
 import HomePage from './pages/HomePage/HomePage';
 import { Provider } from 'react-redux';
 import { store } from './redux/configStore';
-import AllCategories from './pages/ManageLibraryPage/components/AllCategories';
+import AllCategories from './pages/ManageLibraryPage/AllCategories';
 import { history } from './utils/config';
 import ManageCategoryPage from './pages/ManageLibraryPage/ManageCategoryPage';
 import AllBooksPage from './pages/ManageLibraryPage/AllBooksPage';
@@ -17,6 +17,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import ReviewListPage from './pages/BookCheckoutPage/ReviewListPage';
 import ShelfPage from './pages/ShelfPage/ShelfPage';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
+import AdminMessagesPage from './pages/ManageLibraryPage/AdminMessagesPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -38,6 +39,7 @@ root.render(
             <Route path='add-book' element={<AddBookPage />} />
             <Route path='update/:id' element={<AddBookPage />} />
           </Route>
+          <Route path='admin/message' element={<AdminMessagesPage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='review-list' element={<ReviewListPage />} />
           <Route path='shelf' element={<ShelfPage />} />

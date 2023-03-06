@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
-import { CategoryModel, CategoryRequest } from '../../../models/CategoryModel'
-import { deleteCategoryApi, getCategoriesApi, getCategoryByIdApi, updateCategoryApi } from '../../../redux/CategoryReducer/categoryReducer'
-import { DispatchType, RootState } from '../../../redux/configStore'
+import { CategoryModel, CategoryRequest } from '../../models/CategoryModel'
+import { deleteCategoryApi, getCategoriesApi, getCategoryByIdApi, updateCategoryApi } from '../../redux/CategoryReducer/categoryReducer'
+import { DispatchType, RootState } from '../../redux/configStore'
 
 type Props = {}
 

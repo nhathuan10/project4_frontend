@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { CategoryModel, CategoryRequest } from '../../models/CategoryModel'
+import { CategoryRequest } from '../../models/CategoryModel'
 import { DispatchType } from '../../redux/configStore'
 import { useDispatch } from 'react-redux'
 import { addCategoryApi } from '../../redux/CategoryReducer/categoryReducer'

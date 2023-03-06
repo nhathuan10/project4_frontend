@@ -7,12 +7,16 @@ export type MessageState = {
     newMessage: MessageModel | null
     newMessageResponse: boolean | null
     messages: MessageModel[]
+    messagesByClosed: MessageModel[]
+    messageResponse: MessageModel | null
 }
 
 const initialState: MessageState = {
     newMessage: null,
     newMessageResponse: null,
-    messages: []
+    messages: [],
+    messagesByClosed: [],
+    messageResponse: null
 }
 
 const messageReducer = createSlice({
@@ -26,12 +30,21 @@ const messageReducer = createSlice({
         getMessagesAction: (state: MessageState, action: PayloadAction<MessageModel[]>) => {
             state.messages = action.payload
         },
+        getMessagesByClosedAction: (state: MessageState, action: PayloadAction<MessageModel[]>) => {
+            state.messagesByClosed = action.payload
+        },
+        submitResponseAction: (state: MessageState, action: PayloadAction<MessageModel>) => {
+            state.messageResponse = action.payload
+            state.newMessageResponse = !state.newMessageResponse
+        },
     }
 });
 
 export const {
     submitQuestionAction,
     getMessagesAction,
+    getMessagesByClosedAction,
+    submitResponseAction
 } = messageReducer.actions
 
 export default messageReducer.reducer
@@ -52,6 +65,28 @@ export const getMessagesApi = () => {
         try {
             const result = await http.get('/api/messages/findByUser')
             dispatch(getMessagesAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const getMessagesByClosedApi = () => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await http.get('/api/messages/findByClosed')
+            dispatch(getMessagesByClosedAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const submitResponseApi = (response: MessageModel, id?: number,) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await http.put(`/api/messages/${id}`, response)
+            dispatch(submitResponseAction(result.data))
         } catch (err) {
             console.log(err)
         }

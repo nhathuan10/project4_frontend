@@ -100,7 +100,7 @@ export default function AddBookPage({ }: Props) {
         if (book && id) {
             setImg(book.img)
         }
-    })
+    }, [])
 
     return (
         <div className='container mt-5 mb-5'>

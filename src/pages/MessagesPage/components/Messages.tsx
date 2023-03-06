@@ -12,8 +12,7 @@ export default function Messages({ }: Props) {
 
     useEffect(() => {
         dispatch(getMessagesApi())
-    }, [])
-    console.log(messages)
+    }, [newMessageResponse])
 
     return (
         <div className='mt-2'>
@@ -34,7 +33,7 @@ export default function Messages({ }: Props) {
                                             <h6>{message.adminEmail} (admin)</h6>
                                             <p>{message.response}</p>
                                         </> :
-                                        <p><i>Pending response from administration</i></p>
+                                        <p className='text-danger'><i>Pending response from administration</i></p>
                                     }
                                 </div>
                             </div>

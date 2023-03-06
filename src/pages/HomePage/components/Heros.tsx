@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 type Props = {}
 
@@ -15,13 +16,11 @@ export default function Heros({ }: Props) {
                         <div className='ml-2'>
                             <h1>What have you been reading ?</h1>
                             <p className='lead'>
-                                The library team would love href know what you have been reading
-                                Whether it is href learn a new skill or grow within one,
-                                we will be able href provide the hrefp content for you!
+                                The library team would love href know what you have been reading.
+                                Whether it is to learn a new skill or grow within one,
+                                we will be able href provide the top content for you!
                             </p>
-                            {/* <a href='search' type='button' className='btn main-color btn-lg text-white'>Explore hrefp books</a> : */}
-                            <a href="#" className='btn btn-secondary main-color btn-lg text-white'>Sign up</a>
-
+                            <Link to="#" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
                         </div>
                     </div>
                 </div>
@@ -32,8 +31,8 @@ export default function Heros({ }: Props) {
                             <p className='lead'>
                                 Try href check in daily as collection is always changing!
                                 We work noshrefp href provide the most accurate book selection possible
-                                for our Love href Read students! We are diligent ablout our book selection and
-                                our books are always going href be our hrefp priority.
+                                for our students! We are diligent ablout our book selection and
+                                our books are always going to be our top priority.
                             </p>
                         </div>
                     </div>
@@ -52,10 +51,9 @@ export default function Heros({ }: Props) {
                             <p className='lead'>
                                 The library team would love href know what you have been reading
                                 Whether it is href learn a new skill or grow within one,
-                                we will be able href provide the hrefp content for you!
+                                we will be able href provide the top content for you!
                             </p>
-                            {/* <a href='search' type='button' className='btn main-color btn-lg text-white'>Explore hrefp books</a> : */}
-                            <a href="/login" className='btn btn-lg text-white'>Sign up</a>
+                            <Link to="/login" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
                         </div>
                     </div>
                     <div className='mt-2'>
@@ -65,8 +63,8 @@ export default function Heros({ }: Props) {
                             <p className='lead'>
                                 Try href check in daily as collection is always changing!
                                 We work noshrefp href provide the most accurate book selection possible
-                                for our Love href Read students! We are diligent ablout our book selection and
-                                our books are always going href be our hrefp priority.
+                                for our students! We are diligent ablout our book selection and
+                                our books are always going to be our top priority.
                             </p>
                         </div>
                     </div>

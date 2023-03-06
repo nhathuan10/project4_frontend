@@ -37,7 +37,7 @@ export default function LoginPage({ }: Props) {
                                 onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
                             />
                             {formLogin.errors.usernameOrEmail &&
-                                <div className='text-secondary fw-bold'>{formLogin.errors.usernameOrEmail}</div>
+                                <div className='text-warning fw-bold'>{formLogin.errors.usernameOrEmail}</div>
                             }
                         </div>
                         <div className='form-group w-75 mt-3'>
@@ -46,7 +46,7 @@ export default function LoginPage({ }: Props) {
                                 onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
                             />
                             {formLogin.errors.password &&
-                                <div className='text-secondary fw-bold'>{formLogin.errors.password}</div>
+                                <div className='text-warning fw-bold'>{formLogin.errors.password}</div>
                             }
                         </div>
                         {isInvalidAccount && <p className='text-danger fst-italic my-2 fw-bold'>Invalid email or password!</p>}
