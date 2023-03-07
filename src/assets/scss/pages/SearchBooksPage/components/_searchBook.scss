@@ -6,7 +6,6 @@
 
 .book-item:hover {
     transform: scale(1.01);
-    // filter: sepia(15%);
     filter: saturate(2);
     border-color: #3d096e;
     border-width: 1px;
