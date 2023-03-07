@@ -16,9 +16,9 @@ export default function Heros({ }: Props) {
                         <div className='ml-2'>
                             <h1>What have you been reading ?</h1>
                             <p className='lead'>
-                                The library team would love href know what you have been reading.
+                                The library team would love to know what you have been reading.
                                 Whether it is to learn a new skill or grow within one,
-                                we will be able href provide the top content for you!
+                                we will be able to provide the top content for you!
                             </p>
                             <Link to="/register" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
                         </div>
@@ -29,9 +29,9 @@ export default function Heros({ }: Props) {
                         <div className='ml-2'>
                             <h1>Our collection is always changing!</h1>
                             <p className='lead'>
-                                Try href check in daily as collection is always changing!
-                                We work noshrefp href provide the most accurate book selection possible
-                                for our students! We are diligent ablout our book selection and
+                                Try to check in daily as collection is always changing!
+                                We work nonstop to provide the most accurate book selection possible
+                                for our students! We are diligent ablout our books selection and
                                 our books are always going to be our top priority.
                             </p>
                         </div>
@@ -49,9 +49,9 @@ export default function Heros({ }: Props) {
                         <div className='mt-2'>
                             <h1>What have you been reading ?</h1>
                             <p className='lead'>
-                                The library team would love href know what you have been reading
+                                The library team would love to know what you have been reading
                                 Whether it is href learn a new skill or grow within one,
-                                we will be able href provide the top content for you!
+                                we will be able to provide the top content for you!
                             </p>
                             <Link to="/login" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
                         </div>
@@ -61,9 +61,9 @@ export default function Heros({ }: Props) {
                         <div className='mt-2'>
                             <h1>Our collection is always changing!</h1>
                             <p className='lead'>
-                                Try href check in daily as collection is always changing!
-                                We work noshrefp href provide the most accurate book selection possible
-                                for our students! We are diligent ablout our book selection and
+                                Try to check in daily as collection is always changing!
+                                We work nonstrop to provide the most accurate book selection possible
+                                for our students! We are diligent about our books selection and
                                 our books are always going to be our top priority.
                             </p>
                         </div>
