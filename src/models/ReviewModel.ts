@@ -6,8 +6,3 @@ export type ReviewModel = {
     bookId?: string
     description: string
 }
-
-// export type ReviewRequest = {
-//     rating: number
-//     description: string
-// }
