@@ -29,21 +29,15 @@ export default function RegisterPage({ }: Props) {
             dispatch(signupAsyncApi(values))
         }
     })
-    console.log(isInvalidAccountSignup)
 
     return (
-        <form onSubmit={formSignUp.handleSubmit}>
+        <form onSubmit={formSignUp.handleSubmit} className='register-container'>
             <div className='signup-form-container'>
                 <div className='signup-form'>
                     <div className='form-group w-75 my-2'>
                         {isInvalidAccountSignup &&
                             <div className='alert alert-danger fw-bold' role='alert'>
                                 User Account has already existed
-                            </div>
-                        }
-                        {!isInvalidAccountSignup && isInvalidAccountSignup != null &&
-                            <div className='alert alert-success fw-bold' role='alert'>
-                                User Registered successfully
                             </div>
                         }
                         <h5 className='fw-bold text-light'>Name</h5>

@@ -27,45 +27,44 @@ export default function LoginPage({ }: Props) {
     })
 
     return (
-        <div>
-            <form onSubmit={formLogin.handleSubmit}>
-                <div className='login-form-container'>
-                    <div className='login-form'>
-                        {isInvalidAccount &&
-                            <div className='fst-italic mt-3 alert alert-danger w-75' role='alert'>
-                                Invalid email or password!
-                            </div>
+        <form onSubmit={formLogin.handleSubmit} className='login-container'>
+            <div className='login-form-container'>
+                <div className='login-form'>
+                    <i className='login-icon fa-solid fa-user'></i>
+                    {isInvalidAccount &&
+                        <div className='fst-italic mt-3 alert alert-danger w-75' role='alert'>
+                            Invalid email or password!
+                        </div>
+                    }
+                    <div className='form-group w-75'>
+                        <h5 className='fw-bold text-light'>Username or Email</h5>
+                        <input type="text" className='form-control' id='usernameOrEmail'
+                            onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
+                        />
+                        {formLogin.errors.usernameOrEmail &&
+                            <p className='text-warning fw-bold'>{formLogin.errors.usernameOrEmail}</p>
                         }
-                        <div className='form-group w-75'>
-                            <h5 className='fw-bold text-light'>Username or Email</h5>
-                            <input type="text" className='form-control' id='usernameOrEmail'
-                                onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
-                            />
-                            {formLogin.errors.usernameOrEmail &&
-                                <p className='text-warning fw-bold'>{formLogin.errors.usernameOrEmail}</p>
-                            }
-                        </div>
-                        <div className='form-group w-75 mt-3'>
-                            <h5 className='fw-bold text-light'>Password</h5>
-                            <input type="password" className='form-control' id='password'
-                                onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
-                            />
-                            {formLogin.errors.password &&
-                                <div className='text-warning fw-bold'>{formLogin.errors.password}</div>
-                            }
-                        </div>
-                        <div className='form-group mt-4 w-75 text-center'>
-                            <button
-                                className='btn text-dark w-100 fw-bold'
-                                style={{ backgroundColor: '#AAFFFF', opacity: 0.8 }}
-                                type='submit'
-                            >
-                                Login
-                            </button>
-                        </div>
+                    </div>
+                    <div className='form-group w-75 mt-3'>
+                        <h5 className='fw-bold text-light'>Password</h5>
+                        <input type="password" className='form-control' id='password'
+                            onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
+                        />
+                        {formLogin.errors.password &&
+                            <div className='text-warning fw-bold'>{formLogin.errors.password}</div>
+                        }
+                    </div>
+                    <div className='form-group mt-4 w-75 text-center'>
+                        <button
+                            className='btn text-dark w-100 fw-bold'
+                            style={{ backgroundColor: '#AAFFFF', opacity: 0.8 }}
+                            type='submit'
+                        >
+                            Login
+                        </button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     )
 }

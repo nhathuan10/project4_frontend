@@ -1,23 +1,26 @@
-.signup-form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #CCCCFF;
-    height: 700px;
-
-    .signup-form {
-        background: rgb(2, 0, 36);
-        background: linear-gradient(90deg, rgba(2, 0, 36, 1) 11%, rgba(68, 9, 121, 0.727328431372549) 50%, rgba(109, 129, 149, 1) 85%, rgba(0, 212, 255, 1) 100%);
-        opacity: 0.75;
-        width: 50%;
-        margin: 20px;
-        padding: 50px;
+.register-container {
+    background-image: linear-gradient(to bottom right, rgb(8, 165, 157), rgb(161, 161, 20), rgba(224, 48, 35, 0.904));
+    .signup-form-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        border-radius: 20px;
-        box-shadow: 10px 10px 10px;
+        background-color: rgba(103, 98, 187, 0.5);
+        height: 700px;
+
+        .signup-form {
+            background: rgb(2, 0, 36);
+            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 11%, rgba(68, 9, 121, 0.727328431372549) 50%, rgba(109, 129, 149, 1) 85%, rgba(0, 212, 255, 1) 100%);
+            opacity: 0.75;
+            width: 50%;
+            margin: 20px;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: 10px 10px 10px;
+        }
     }
 }

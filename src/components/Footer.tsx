@@ -3,16 +3,36 @@ import React from 'react'
 type Props = {}
 
 export default function Footer({ }: Props) {
+    const footerStyle = {
+        color: '#CCCCFF',
+        fontSize: 20,
+        margin: 6
+    }
+
     return (
         <div className='main-color'>
             <footer className='container d-flex flex-wrap justify-content-between align-items-center py-5 main-color'>
-                <p className='col-md-4 mb-0 text-white'>Example Library App, Inc</p>
+                <p className='col-md-4 mb-0 text-white'>Huan Library</p>
                 <ul className='nav navbar-dark col-md-4 justify-content-end'>
                     <li className='nav-item'>
-                        <a href="#" className='nav-link px-2 text-white'>Home</a>
+                        <a href="https://www.facebook.com/">
+                            <i className="fa-brands fa-facebook" style={footerStyle}></i>
+                        </a>
                     </li>
-                    <li className='nav-item'>
-                        <a href="#" className='nav-link px-2 text-white'>Search Books</a>
+                    <li>
+                        <a href="https://www.google.com/">
+                            <i className="fa-brands fa-google" style={footerStyle} />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/">
+                            <i className="fa-brands fa-instagram" style={footerStyle} />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/">
+                            <i className="fa-brands fa-twitter" style={footerStyle}></i>
+                        </a>
                     </li>
                 </ul>
             </footer>

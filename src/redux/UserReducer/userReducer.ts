@@ -35,6 +35,7 @@ const userReducer = createSlice({
         signupAsyncAction: (state: UserState, action: PayloadAction<UserRegisterModel>) => {
             state.userSignup = action.payload
             state.isInvalidAccountSignup = false
+            history.push('/login')
         },
         invalidLoginAction: (state: UserState) => {
             state.isInvalidAccount = true

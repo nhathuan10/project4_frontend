@@ -97,7 +97,7 @@ export default function AllCategories({ }: Props) {
                     </div>
                 </form>
             )}
-            <table className="table table-striped w-75">
+            <table className="table table-striped table-hover w-75">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

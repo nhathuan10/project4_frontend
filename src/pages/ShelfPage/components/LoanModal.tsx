@@ -21,7 +21,7 @@ export default function LoanModal({ mobile, shelfCurrentLoan }: Props) {
     }
 
     return (
-        <div className='modal fade' id={mobile ? `mobilemodal${shelfCurrentLoan.book.id}` : `modal${shelfCurrentLoan.book.id}`}
+        <div className='modal fade mt-5' id={mobile ? `mobilemodal${shelfCurrentLoan.book.id}` : `modal${shelfCurrentLoan.book.id}`}
             data-bs-backdrop='static' data-bs-keyboard='false' aria-labelledby='staticBackdropLabel'
             aria-hidden='true' key={shelfCurrentLoan.book.id}
         >
