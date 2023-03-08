@@ -36,7 +36,11 @@ export default function ({ }: Props) {
                     <li className='nav-item'>
                         <NavLink className='nav-link me-1' to='/login'>Sign In</NavLink>
                     </li>
+                    <li className='nav-item'>
+                        <NavLink className='nav-link me-1' to='/register'>Register</NavLink>
+                    </li>
                 </ul>
+                
             )
         }
     }
@@ -85,6 +89,9 @@ export default function ({ }: Props) {
                         </li>
                         <li className='nav-item'>
                             <NavLink className='nav-link' to='/admin/message'>Message Management</NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='/admin/loan'>Loan Management</NavLink>
                         </li>
                     </>
                 )

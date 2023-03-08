@@ -20,7 +20,6 @@ export default function Heros({ }: Props) {
                                 Whether it is to learn a new skill or grow within one,
                                 we will be able to provide the top content for you!
                             </p>
-                            <Link to="/register" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
                         </div>
                     </div>
                 </div>
@@ -53,7 +52,6 @@ export default function Heros({ }: Props) {
                                 Whether it is href learn a new skill or grow within one,
                                 we will be able to provide the top content for you!
                             </p>
-                            <Link to="/login" className='btn btn-secondary main-color btn-lg text-white'>Register</Link>
                         </div>
                     </div>
                     <div className='mt-2'>

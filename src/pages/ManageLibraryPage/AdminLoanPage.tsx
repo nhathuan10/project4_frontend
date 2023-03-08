@@ -1,26 +1,30 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { DispatchType, RootState } from '../../../redux/configStore'
-import { getAllHistoriesByUserApi } from '../../../redux/HistoryReducer/historyReducer'
+import { DispatchType, RootState } from '../../redux/configStore'
+import { getAllHistoriesApi, verifyBookReturnedApi } from '../../redux/HistoryReducer/historyReducer'
 
 type Props = {}
 
-export default function HistoryPage({ }: Props) {
-    const { historiesByUser } = useSelector((state: RootState) => state.historyReducer)
-    const { returnOrRenewResponse } = useSelector((state: RootState) => state.checkoutReducer)
+export default function AdminLoanPage({ }: Props) {
+    const { histories } = useSelector((state: RootState) => state.historyReducer)
+    const { verifyResponse } = useSelector((state: RootState) => state.historyReducer)
     const dispatch: DispatchType = useDispatch()
 
     useEffect(() => {
-        dispatch(getAllHistoriesByUserApi())
-    }, [returnOrRenewResponse])
+        dispatch(getAllHistoriesApi())
+    }, [verifyResponse])
+
+    const verifyBookReturned = (id: number) => {
+        dispatch(verifyBookReturnedApi(id))
+    }
 
     return (
-        <div className='mt-2'>
-            {historiesByUser.length > 0 ?
+        <div className='mt-2 container'>
+            {histories.length > 0 ?
                 <>
-                    <h5>Recent History:</h5>
-                    {historiesByUser.map(history => (
+                    <h3 className='mt-3'>All Book Returned History :</h3>
+                    {histories.map(history => (
                         <div key={history.id}>
                             <div className='card mt-3 shadow p-3 mb-3 bg-body rounded'>
                                 <div className='row g-0'>
@@ -29,7 +33,7 @@ export default function HistoryPage({ }: Props) {
                                             {history.img ?
                                                 <img src={history.img} width='130' height='200' alt='Book' />
                                                 :
-                                                <img src={require('../../../assets/img/BooksImages/book_0.png')}
+                                                <img src={require('../../assets/img/BooksImages/book_0.png')}
                                                     width='130' height='200' alt='Default' />
                                             }
                                         </div>
@@ -37,23 +41,24 @@ export default function HistoryPage({ }: Props) {
                                             {history.img ?
                                                 <img src={history.img} width='130' height='200' alt='Book' />
                                                 :
-                                                <img src={require('../../../assets/img/BooksImages/book_0.png')}
+                                                <img src={require('../../assets/img/BooksImages/book_0.png')}
                                                     width='130' height='200' alt='Default' />
                                             }
                                         </div>
                                     </div>
                                     <div className='col'>
                                         <div className='card-body'>
-                                            <h5 className='card-title'> {history.author} </h5>
-                                            <h4>{history.title}</h4>
+                                            <h5 className='card-title'>Author: {history.author} </h5>
+                                            <h4>Title: {history.title}</h4>
+                                            <h6>Customer Email: {history.userEmail}</h6>
                                             <p className='card-text'>{history.description}</p>
                                             <hr />
                                             <p className='card-text'> Checked out on: {history.checkoutDate}</p>
                                             <p className='card-text'> Returned on: {history.returnedDate}</p>
                                             {history.verified ? (
-                                                <p className='text-success fst-italic'>Book has been returned successfully !</p>
+                                                <p className='text-success fst-italic'>Book has been verified</p>
                                             ) : (
-                                                <p className='text-danger fst-italic'>Waiting for verification !</p>
+                                                <button className='btn btn-danger' onClick={() => verifyBookReturned(history.id)}>Unverified Book Returned</button>
                                             )}
                                         </div>
                                     </div>

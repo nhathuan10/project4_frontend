@@ -100,7 +100,7 @@ export const getBooksApi = (pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             if (pageNo != null && pageSize != null) {
-                const result = await http.get(bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
+                const result = await axios.get(DOMAIN + bookURL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
                 dispatch(getBooksAction(result.data))
             } else {
                 const result = await axios.get(DOMAIN +  bookURL)

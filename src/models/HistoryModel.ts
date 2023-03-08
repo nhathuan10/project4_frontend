@@ -7,4 +7,5 @@ export type HistoryModel = {
     author: string
     description: string
     img: string
+    verified?: boolean
 }
