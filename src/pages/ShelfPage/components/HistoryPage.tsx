@@ -50,11 +50,7 @@ export default function HistoryPage({ }: Props) {
                                             <hr />
                                             <p className='card-text'> Checked out on: {history.checkoutDate}</p>
                                             <p className='card-text'> Returned on: {history.returnedDate}</p>
-                                            {history.verified ? (
-                                                <p className='text-success fst-italic'>Book has been returned successfully !</p>
-                                            ) : (
-                                                <p className='text-danger fst-italic'>Waiting for verification !</p>
-                                            )}
+                                            <p className='text-danger fst-italic'>Waiting for verification !</p>
                                         </div>
                                     </div>
                                 </div>

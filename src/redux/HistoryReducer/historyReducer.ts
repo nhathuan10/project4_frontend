@@ -7,12 +7,14 @@ export type HistoryState = {
     historiesByUser: HistoryModel[]
     histories: HistoryModel[]
     verifyResponse: boolean
+    isBookReturned: boolean | null
 }
 
 const initialState: HistoryState = {
     historiesByUser: [],
     histories: [],
-    verifyResponse: false
+    verifyResponse: false,
+    isBookReturned: null,
 }
 
 const historyReducer = createSlice({
@@ -28,13 +30,17 @@ const historyReducer = createSlice({
         verifyBookReturnedAction: (state: HistoryState) => {
             state.verifyResponse = !state.verifyResponse
         },
+        checkIfBookReturnedAction: (state: HistoryState, action: PayloadAction<boolean>) => {
+            state.isBookReturned = action.payload
+        },
     }
 });
 
 export const {
     getAllHistoriesByUserAction,
     getAllHistoriesAction,
-    verifyBookReturnedAction
+    verifyBookReturnedAction,
+    checkIfBookReturnedAction,
 } = historyReducer.actions
 
 export default historyReducer.reducer
@@ -66,6 +72,17 @@ export const verifyBookReturnedApi = (historyId: number) => {
         try {
             const result = await http.put(`/api/histories/${historyId}/verifyBookReturned`)
             dispatch(verifyBookReturnedAction())
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const checkIfBookReturnedApi = (bookId: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await http.get(`/api/histories?bookId=${bookId}`)
+            dispatch(checkIfBookReturnedAction(result.data))
         } catch (err) {
             console.log(err)
         }

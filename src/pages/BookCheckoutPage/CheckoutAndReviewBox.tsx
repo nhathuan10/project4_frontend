@@ -82,10 +82,16 @@ export default function CheckoutAndReviewBox({ mobile }: Props) {
         >
             <div className='card-body container'>
                 <div className='mt-3 text-center'>
-                    <p>
-                        <b>{currentLoansCount}/5 </b>
-                        books checked out
-                    </p>
+                    {currentLoansCount == 0 || currentLoansCount == 1 ?
+                        <p>
+                            <b>{currentLoansCount}/5 </b>
+                            book borrowed
+                        </p> :
+                        <p>
+                            <b>{currentLoansCount}/5 </b>
+                            books borrowed
+                        </p>
+                    }
                     <hr />
                     {book && book.copiesAvailable && book.copiesAvailable > 0
                         ?

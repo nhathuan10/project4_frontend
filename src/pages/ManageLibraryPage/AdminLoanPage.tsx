@@ -55,11 +55,7 @@ export default function AdminLoanPage({ }: Props) {
                                             <hr />
                                             <p className='card-text'> Checked out on: {history.checkoutDate}</p>
                                             <p className='card-text'> Returned on: {history.returnedDate}</p>
-                                            {history.verified ? (
-                                                <p className='text-success fst-italic'>Book has been verified</p>
-                                            ) : (
-                                                <button className='btn btn-danger' onClick={() => verifyBookReturned(history.id)}>Unverified Book Returned</button>
-                                            )}
+                                            <button className='btn btn-danger' onClick={() => verifyBookReturned(history.id)}>Confirm Book Returned</button>
                                         </div>
                                     </div>
                                 </div>

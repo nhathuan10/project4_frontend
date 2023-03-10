@@ -48,12 +48,12 @@ export default function Loans({ }: Props) {
                                                     <p className='text-danger'>Past due by {shelfCurrentLoan.daysLeft} days</p>
                                                 }
                                                 <div className='list-group mt-3'>
-                                                    {/* <button className='list-group-item list-group-item-action'
+                                                    <button className='list-group-item list-group-item-action'
                                                         aria-current='true' data-bs-toggle='modal' data-bs-target={`#modal${shelfCurrentLoan.book.id}`}
                                                     >
                                                         Manage Loan
-                                                    </button> */}
-                                                    <p className='text-danger'>Waiting for Verification</p>
+                                                    </button>
+                                                    {/* <p className='text-danger'>Waiting for Verification</p> */}
                                                     <Link to='search' className='list-group-item list-group-item-action'>Search more books?</Link>
                                                 </div>
                                             </div>
