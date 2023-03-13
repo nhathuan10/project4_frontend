@@ -126,7 +126,7 @@ export default function AddBookPage({ }: Props) {
                             <div className='col-md-3 mb-3'>
                                 <label className='form-label'>Category</label>
                                 <div className="dropdown">
-                                    <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a className="btn btn-secondary mb-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         {categorySelected}
                                     </a>
                                     <ul className="dropdown-menu">

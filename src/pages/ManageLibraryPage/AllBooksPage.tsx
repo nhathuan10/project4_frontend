@@ -77,7 +77,7 @@ export default function AllBooksPage({ }: Props) {
         setSearchTitle('')
         setCategoryObj(null)
         setCategorySelected('Search By Category')
-        // dispatch(getBooksApi(undefined, undefined, 'desc'))
+        dispatch(getBooksApi())
     }
     const searchByCategoryHandler = (category: CategoryModel) => {
         setCategorySelected(category.name)

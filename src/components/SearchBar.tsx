@@ -30,8 +30,8 @@ export default function SearchBar({ searchTitle, setSearchTitle, allBooksHandler
                 </div>
             </div>
             <div className='col-3'>
-                <div className='dropdown'>
-                    <button className='btn btn-secondary dropdown-toggle'
+                <div className='drop-down'>
+                    <button className='btn btn-secondary secondary mb-2'
                         type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                         {categorySelected}
                     </button>
