@@ -7,9 +7,7 @@ export default function ExploreTopBook({ }: Props) {
     return (
         <div className='p-5 mb-4 header d-flex justify-content-center align-items-center'>
             <div className='container-fluid text-white text-center'>
-                <div>
-                    <h1 className='display-3 fw-bold'>Find your next adventure</h1>
-                </div>
+                <h1 className='heading-primary'>Find your next adventure</h1>
             </div>
         </div>
     )

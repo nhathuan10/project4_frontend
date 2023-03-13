@@ -1,13 +1,29 @@
 .book-item {
     transition: transform 0.5s;
     background-color: #E6E6E6;
-    border-radius: 10px
+    border-radius: 10px;
+    animation: searchBookMove 0.4s ease-in;
 }
 
 .book-item:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
     filter: saturate(2);
     border-color: #3d096e;
     border-width: 1px;
     opacity: 0.85;
+}
+
+@keyframes searchBookMove {
+    0% {
+        opacity: 0;
+        transform: translateX(150px) translateY(100px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(75px) translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
 }

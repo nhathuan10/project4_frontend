@@ -31,7 +31,7 @@ export default function SearchBook({ book }: Props) {
                     </div>
                 </div>
                 <div className='col-md-4 d-flex justify-content-center align-items-center'>
-                    <NavLink to={`/checkout/${book.id}`} className='btn btn-md btn-secondary main-color text-white'>View Details</NavLink>
+                    <NavLink to={`/checkout/${book.id}`} className='btn btn-secondary main-color text-white'>View Details</NavLink>
                 </div>
             </div>
         </div>
