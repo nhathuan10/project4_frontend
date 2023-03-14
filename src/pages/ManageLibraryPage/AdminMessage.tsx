@@ -15,7 +15,7 @@ export default function AdminMessage({ message }: Props) {
 
     const submitResponseHandler = () => {
         const responseMessage: MessageModel = { title: message.title, question: message.question, response }
-        if (response !== null) {
+        if (response !== '') {
             dispatch(submitResponseApi(responseMessage, message.id))
             setDisplayWarning(false)
         } else {
@@ -26,12 +26,12 @@ export default function AdminMessage({ message }: Props) {
     return (
         <div key={message.id}>
             <div className='card mt-2 shadow p-3 bg-body rounded'>
-                <h5>Question {message.id}: {message.title}</h5>
+                <h4 className='text-primary'>Question {message.id}: {message.title}</h4>
                 <h6>{message.userEmail}</h6>
                 <p>{message.question}</p>
                 <hr />
                 <div>
-                    <h5>Response: </h5>
+                    <h5 className='text-info'>Response: </h5>
                     <form action="PUT">
                         {displayWarning &&
                             <div className="alert alert-danger" role='alert'>
