@@ -16,11 +16,11 @@ export default function AdminMessagesPage({ }: Props) {
 
     useEffect(() => {
         dispatch(getAllMessagesApi(messagesStatus))
-    }, [newMessageResponse])
+    }, [newMessageResponse, messagesStatus])
 
-    useEffect(() => {
-        setMessagesStatus('allMessages')
-    }, [])
+    // useEffect(() => {
+    //     setMessagesStatus('allMessages')
+    // }, [])
 
     const renderMessages = () => {
         if (messagesStatus === 'allMessages' && allMessages.length > 0) {
@@ -43,7 +43,7 @@ export default function AdminMessagesPage({ }: Props) {
             <h5>Pending Q/A: </h5>
             <form className='my-3' onSubmit={(e) => e.preventDefault()}>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="messagesStatus" id="allMessages"
+                    <input className="form-check-input" type="radio" name="messagesStatus" id="allMessages" 
                         value='allMessages' onChange={e => setMessagesStatus(e.target.value)} />
                     <label className="form-check-label text-dark" htmlFor="allMessages">All Messages</label>
                 </div>

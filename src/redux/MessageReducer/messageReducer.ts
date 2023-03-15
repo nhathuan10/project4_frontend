@@ -41,7 +41,6 @@ const messageReducer = createSlice({
         },
         getAllMessagesAction: (state: MessageState, action: PayloadAction<MessageModel[]>) => {
             state.allMessages = action.payload
-            state.newMessageResponse = !state.newMessageResponse
         },
     }
 });
@@ -81,10 +80,10 @@ export const getMessagesApi = () => {
 export const getAllMessagesApi = (status: string) => {
     return async (dispatch: DispatchType) => {
         try {
-            if (status === 'allMessages') {
+            if (status == 'allMessages') {
                 const result = await http.get('api/messages')
                 dispatch(getAllMessagesAction(result.data))
-            } else {
+            } else if (status == 'pendingMessages'){
                 const result = await http.get('/api/messages/findByClosed')
                 dispatch(getMessagesByClosedAction(result.data))
             }
@@ -105,7 +104,7 @@ export const getMessagesByClosedApi = () => {
     }
 }
 
-export const submitResponseApi = (response: MessageModel, id?: number,) => {
+export const submitResponseApi = (response: MessageModel, id?: number) => {
     return async (dispatch: DispatchType) => {
         try {
             const result = await http.put(`/api/messages/${id}`, response)
