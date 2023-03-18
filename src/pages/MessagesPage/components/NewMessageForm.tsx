@@ -30,7 +30,7 @@ export default function NewMessageForm({ }: Props) {
     return (
         <div className='card mt-3'>
             <div className='card-header text-info fw-bold'>
-                Ask question 
+                Ask question
             </div>
             <div className='card-body'>
                 <form method='POST'>
@@ -50,7 +50,8 @@ export default function NewMessageForm({ }: Props) {
                     </div>
                     <div className='mb-3'>
                         <label className='form-label'>Question</label>
-                        <textarea className='form-control' id='exampleFormControlTextarea1' rows={3} onChange={e => setQuestion(e.target.value)} value={question}></textarea>
+                        <textarea className='form-control' id='exampleFormControlTextarea1' rows={3}
+                            onChange={e => setQuestion(e.target.value)} value={question}></textarea>
                     </div>
                     <div>
                         <button onClick={submitNewQuestion} type='button' className='btn btn-outline-info mt-3'>Submit Question</button>

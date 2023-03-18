@@ -4,7 +4,7 @@ import Message from '../../components/Message'
 import Pagination2 from '../../components/Pagination2'
 import { MessageModel } from '../../models/MessageModel'
 import { DispatchType, RootState } from '../../redux/configStore'
-import { getAllMessagesApi, getMessagesByClosedApi } from '../../redux/MessageReducer/messageReducer'
+import { getAllMessagesApi } from '../../redux/MessageReducer/messageReducer'
 import AdminMessage from './AdminMessage'
 
 type Props = {}
@@ -19,15 +19,15 @@ export default function AdminMessagesPage({ }: Props) {
     const [totalAmountOfMessages, setTotalAmountOfMessages] = useState<any>(0)
     const [messagesPerPage] = useState(5)
 
-    const indexOfLastBook: number = currentPage * messagesPerPage
-    const indexOfFirstBook: number = indexOfLastBook - messagesPerPage
+    const indexOfLastMessage: number = currentPage * messagesPerPage
+    const indexOfFirstMessage: number = indexOfLastMessage - messagesPerPage
     let lastItem = messagesPerPage * currentPage <= totalAmountOfMessages ? messagesPerPage * currentPage : totalAmountOfMessages
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
     const dispatch: DispatchType = useDispatch()
 
     useEffect(() => {
-        dispatch(getAllMessagesApi(messagesStatus, currentPage, 4))
+        dispatch(getAllMessagesApi(messagesStatus, currentPage - 1, 4))
     }, [newMessageResponse, messagesStatus, currentPage])
 
     useEffect(() => {
@@ -50,16 +50,17 @@ export default function AdminMessagesPage({ }: Props) {
             return <h5>No question available</h5>
         }
     }
+    console.log(allMessages)
 
     return (
         <div className='container mt-3'>
             <h5>Pending Q/A: </h5>
-            {totalAmountOfMessages > 0 &&
+            {totalAmountOfMessages > 0 && messagesStatus === 'allMessages' &&
                 <>
                     <div className='mt-3'>
                         <h5>Number of results: {totalAmountOfMessages}</h5>
                     </div>
-                    <p>{indexOfFirstBook + 1} to {lastItem} of {totalAmountOfMessages} items:</p>
+                    <p>{indexOfFirstMessage + 1} to {lastItem} of {totalAmountOfMessages} items:</p>
 
                 </>
             }
@@ -76,7 +77,7 @@ export default function AdminMessagesPage({ }: Props) {
                 </div>
             </form>
             {renderMessages()}
-            {totalPages > 1 && messagesStatus == 'allMessages' &&
+            {totalPages > 1 && messagesStatus === 'allMessages' &&
                 <Pagination2 currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
             }
         </div>

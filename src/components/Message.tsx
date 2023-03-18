@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { MessageModel } from '../models/MessageModel'
-import { RootState } from '../redux/configStore'
+import { DispatchType, RootState } from '../redux/configStore'
+import { deleteResponseApi } from '../redux/MessageReducer/messageReducer'
 
 type Props = {
     message: MessageModel
@@ -9,6 +10,11 @@ type Props = {
 
 export default function Message({ message }: Props) {
     const { userLogin } = useSelector((state: RootState) => state.userReducer)
+    const dispatch: DispatchType = useDispatch()
+
+    const deleteMessageHandler = () => {
+        dispatch(deleteResponseApi(message?.id))
+    }
 
     const renderDeleteButton = () => {
         if (userLogin) {
@@ -20,7 +26,11 @@ export default function Message({ message }: Props) {
                 }
             }
             if (isUserRole) {
-                return <button className='btn btn-danger'>Delete</button>
+                return (
+                    <div className='text-end'>
+                        <button className='btn btn-danger' onClick={deleteMessageHandler}>Delete</button>
+                    </div>
+                )
             }
         }
     }

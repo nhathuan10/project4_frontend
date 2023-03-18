@@ -43,6 +43,9 @@ const messageReducer = createSlice({
         getAllMessagesAction: (state: MessageState, action: PayloadAction<MessageResponse>) => {
             state.allMessages = action.payload
         },
+        deleteResponseAction: (state: MessageState) => {
+            state.newMessageResponse = !state.newMessageResponse
+        },
     }
 });
 
@@ -52,6 +55,7 @@ export const {
     getMessagesByClosedAction,
     submitResponseAction,
     getAllMessagesAction,
+    deleteResponseAction
 } = messageReducer.actions
 
 export default messageReducer.reducer
@@ -110,6 +114,17 @@ export const submitResponseApi = (response: MessageModel, id?: number) => {
         try {
             const result = await http.put(`/api/messages/${id}`, response)
             dispatch(submitResponseAction(result.data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const deleteResponseApi = (id?: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await http.delete(`/api/messages/${id}`)
+            dispatch(deleteResponseAction())
         } catch (err) {
             console.log(err)
         }

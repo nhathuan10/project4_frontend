@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Pagination from '../../components/Pagination'
 import SearchBar from '../../components/SearchBar'
 import { BookModel } from '../../models/BookModel'
@@ -88,7 +89,7 @@ export default function SearchBooksPage({ }: Props) {
                         </> :
                         <div className='m-5'>
                             <h3>Can't find what you are looking for ?</h3>
-                            <a href="#" type='button' className='btn main-color btn-md px-4 me-md-2 fw-bold text-white'>Library Services</a>
+                            <Link to="/messages" type='button' className='btn main-color btn-md px-4 me-md-2 fw-bold text-white'>Library Services</Link>
                         </div>
                     }
                     {totalPages > 1 && <Pagination searchTitle={searchTitle} category={categoryObj} />}
