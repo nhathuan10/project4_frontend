@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../components/Message'
+import Pagination2 from '../../components/Pagination2'
 import { MessageModel } from '../../models/MessageModel'
 import { DispatchType, RootState } from '../../redux/configStore'
 import { getAllMessagesApi, getMessagesByClosedApi } from '../../redux/MessageReducer/messageReducer'
@@ -14,6 +15,7 @@ export default function AdminMessagesPage({ }: Props) {
     const [messagesStatus, setMessagesStatus] = useState('')
     const { allMessages } = useSelector((state: RootState) => state.messageReducer)
     const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState<any>(0)
     const [totalAmountOfMessages, setTotalAmountOfMessages] = useState<any>(0)
     const [messagesPerPage] = useState(5)
 
@@ -26,14 +28,15 @@ export default function AdminMessagesPage({ }: Props) {
 
     useEffect(() => {
         dispatch(getAllMessagesApi(messagesStatus, currentPage, 4))
-    }, [newMessageResponse, messagesStatus])
+    }, [newMessageResponse, messagesStatus, currentPage])
 
     useEffect(() => {
-        setTotalAmountOfMessages(allMessages?.totalElements) 
+        setTotalAmountOfMessages(allMessages?.totalElements)
+        setTotalPages(allMessages?.totalPages)
     }, [currentPage])
 
     const renderMessages = () => {
-        if (messagesStatus === 'allMessages' ) {
+        if (messagesStatus === 'allMessages' && totalAmountOfMessages > 0) {
             return allMessages?.content.map((message: MessageModel, index: number) => (
                 <Message message={message} key={index} />
             ))
@@ -47,7 +50,6 @@ export default function AdminMessagesPage({ }: Props) {
             return <h5>No question available</h5>
         }
     }
-    // && allMessages?.content?.length > 0
 
     return (
         <div className='container mt-3'>
@@ -74,6 +76,9 @@ export default function AdminMessagesPage({ }: Props) {
                 </div>
             </form>
             {renderMessages()}
+            {totalPages > 1 && messagesStatus == 'allMessages' &&
+                <Pagination2 currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
+            }
         </div>
     )
 }

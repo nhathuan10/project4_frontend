@@ -40,7 +40,7 @@ export default function ({ }: Props) {
                         <NavLink className='nav-link me-1' to='/register'>Register</NavLink>
                     </li>
                 </ul>
-                
+
             )
         }
     }
@@ -63,6 +63,9 @@ export default function ({ }: Props) {
                         <li className='nav-item'>
                             <NavLink className='nav-link' to='/shelf'>Shelf</NavLink>
                         </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='/messages'>Service</NavLink>
+                        </li>
                     </>
                 )
             }
@@ -82,16 +85,26 @@ export default function ({ }: Props) {
                 return (
                     <>
                         <li className='nav-item'>
-                            <NavLink className='nav-link' to='/admin/category'>Category Management</NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/admin/book'>Book Management</NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/admin/message'>Message Management</NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/admin/loan'>Loan Management</NavLink>
+                            <div className="dropdown-center">
+                                <button className="btn btn-warning m-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Management
+                                </button>
+                                <ul className="dropdown-menu">
+                                    <li className='nav-item'>
+                                        <NavLink className='nav-link text-dark fw-bold' to='/admin/category'>Category</NavLink>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <NavLink className='nav-link text-dark fw-bold' to='/admin/book'>Book</NavLink>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <NavLink className='nav-link text-dark fw-bold' to='/admin/message'>Message</NavLink>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <NavLink className='nav-link text-dark fw-bold' to='/admin/loan'>Loan</NavLink>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </li>
                     </>
                 )

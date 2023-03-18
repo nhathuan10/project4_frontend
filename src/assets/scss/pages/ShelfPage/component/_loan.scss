@@ -1,0 +1,18 @@
+.shelf-book-picture {
+    animation: moveLeft2 .5s ease-in;
+}
+
+@keyframes moveLeft2 {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(50px) ;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
