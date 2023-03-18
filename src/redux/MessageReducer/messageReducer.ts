@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { MessageModel } from '../../models/MessageModel';
+import { MessageResponse } from '../../models/MessageResponse';
 import { http } from '../../utils/config';
 import { DispatchType } from '../configStore';
 
@@ -9,7 +10,7 @@ export type MessageState = {
     messages: MessageModel[]
     messagesByClosed: MessageModel[]
     messageResponse: MessageModel | null
-    allMessages: MessageModel[]
+    allMessages: MessageResponse | null
 }
 
 const initialState: MessageState = {
@@ -18,7 +19,7 @@ const initialState: MessageState = {
     messages: [],
     messagesByClosed: [],
     messageResponse: null,
-    allMessages: []
+    allMessages: null
 }
 
 const messageReducer = createSlice({
@@ -39,7 +40,7 @@ const messageReducer = createSlice({
             state.messageResponse = action.payload
             state.newMessageResponse = !state.newMessageResponse
         },
-        getAllMessagesAction: (state: MessageState, action: PayloadAction<MessageModel[]>) => {
+        getAllMessagesAction: (state: MessageState, action: PayloadAction<MessageResponse>) => {
             state.allMessages = action.payload
         },
     }
@@ -77,13 +78,13 @@ export const getMessagesApi = () => {
     }
 }
 
-export const getAllMessagesApi = (status: string) => {
+export const getAllMessagesApi = (status: string, pageNo?: number, pageSize?: number) => {
     return async (dispatch: DispatchType) => {
         try {
-            if (status == 'allMessages') {
-                const result = await http.get('api/messages')
+            if (status == 'allMessages' && pageNo != null && pageSize != null) {
+                const result = await http.get('api/messages' + `?pageNo=${pageNo}&pageSize=${pageSize}`)
                 dispatch(getAllMessagesAction(result.data))
-            } else if (status == 'pendingMessages'){
+            } else if (status == 'pendingMessages') {
                 const result = await http.get('/api/messages/findByClosed')
                 dispatch(getMessagesByClosedAction(result.data))
             }
