@@ -113,7 +113,7 @@ export default function ({ }: Props) {
     }
 
     return (
-        <nav className='navbar navbar-expand-lg navbar-dark main-color'>
+        <nav className='navbar navbar-expand-lg navbar-dark sticky-top main-color'>
             <div className='container'>
                 <span className='navbar-brand logo'>
                     <i className="fa fa-book-open book-icon"></i>
