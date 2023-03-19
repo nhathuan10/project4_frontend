@@ -1,7 +1,12 @@
-.book-detail-picture {
-    animation: moveLeft .5s ease-in;
+.book-detail-container {
+    animation: moveLeft .8s ease-out;
+
+    .book-detail-picture {
+        box-shadow: 6px 6px 10px 4px rgba(99, 93, 150, 0.747);
+        border-radius: 15px;
+    }
 }
 
 .book-detail-description {
-    animation: moveTop .5s ease-out;
+    animation: moveTop .8s ease-in;
 }

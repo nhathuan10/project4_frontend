@@ -11,24 +11,31 @@
         font-size: 70px;
         font-weight: 600;
         animation: moveLeft 1s ease-out;
+        color: rgb(241, 216, 216);
+        text-shadow: 3px 3px 5px #551818;
+        text-transform: uppercase;
+        font-style: italic;
     }
 }
 
 @keyframes moveLeft {
     0% {
         opacity: 0;
-        transform: translateX(-100px);
+        transform: translateX(-100px) scale(1);
     }
+
     25% {
-        transform: rotate(35deg);
+        transform: rotate(35deg) scale(1.2);
     }
+
     50% {
         opacity: 0.5;
-        transform: translateX(50px) rotate(-15deg);
+        transform: translateX(50px) rotate(-15deg) scale(0.8);
     }
+
     100% {
         opacity: 1;
-        transform: translateX(0) rotate(0deg);
+        transform: translateX(0) rotate(0deg) scale(1);
     }
 }
 
@@ -37,10 +44,12 @@
         opacity: 0;
         transform: translateX(100px);
     }
+
     50% {
         opacity: 0.5;
         transform: translateX(-50px);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);

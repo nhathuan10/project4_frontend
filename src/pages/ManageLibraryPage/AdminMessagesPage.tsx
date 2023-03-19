@@ -17,7 +17,7 @@ export default function AdminMessagesPage({ }: Props) {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState<any>(0)
     const [totalAmountOfMessages, setTotalAmountOfMessages] = useState<any>(0)
-    const [messagesPerPage] = useState(5)
+    const [messagesPerPage] = useState(4)
 
     const indexOfLastMessage: number = currentPage * messagesPerPage
     const indexOfFirstMessage: number = indexOfLastMessage - messagesPerPage
@@ -33,7 +33,7 @@ export default function AdminMessagesPage({ }: Props) {
     useEffect(() => {
         setTotalAmountOfMessages(allMessages?.totalElements)
         setTotalPages(allMessages?.totalPages)
-    }, [currentPage])
+    }, [currentPage, allMessages])
 
     const renderMessages = () => {
         if (messagesStatus === 'allMessages' && totalAmountOfMessages > 0) {
@@ -50,11 +50,10 @@ export default function AdminMessagesPage({ }: Props) {
             return <h5>No question available</h5>
         }
     }
-    console.log(allMessages)
 
     return (
         <div className='container mt-3'>
-            <h5>Pending Q/A: </h5>
+            <h3>Pending Q/A: </h3>
             {totalAmountOfMessages > 0 && messagesStatus === 'allMessages' &&
                 <>
                     <div className='mt-3'>

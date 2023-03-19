@@ -37,9 +37,9 @@ export default function BookCheckoutPage({ }: Props) {
         <div>
             <div className='container d-none d-lg-block'>
                 <div className='row mt-5'>
-                    <div className='col-sm-2 col-md-2 book-detail-picture'>
+                    <div className='col-sm-2 col-md-2 book-detail-container'>
                         {book?.img &&
-                            <img src={book?.img} width='220' height='350' alt='Book' />
+                            <img src={book?.img} className='book-detail-picture' width='220' height='350' alt='Book' />
                         }
                     </div>
                     <div className='col-4 col-md-4 container book-detail-description'>

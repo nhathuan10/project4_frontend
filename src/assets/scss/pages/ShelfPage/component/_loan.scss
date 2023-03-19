@@ -1,5 +1,10 @@
-.shelf-book-picture {
-    animation: moveLeft2 .5s ease-in;
+.shelf-book-container {
+    animation: moveLeft2 .6s ease-out;
+
+    .shelf-book-picture {
+        box-shadow: 5px 5px 8px 3px rgb(113, 120, 122);
+        border-radius: 15px;
+    }
 }
 
 @keyframes moveLeft2 {
@@ -7,10 +12,12 @@
         opacity: 0;
         transform: translateX(-100px);
     }
+
     50% {
         opacity: 0.5;
-        transform: translateX(50px) ;
+        transform: translateX(50px);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);

@@ -26,10 +26,10 @@ export default function Loans({ }: Props) {
                         {shelfCurrentLoans.map(shelfCurrentLoan => (
                             <div key={shelfCurrentLoan.book.id}>
                                 <div className='row mt-3 mb-3'>
-                                    <div className='col-4 col-md-4 container shelf-book-picture'>
+                                    <div className='col-4 col-md-4 container shelf-book-container'>
                                         {shelfCurrentLoan.book.img ?
-                                            <img src={shelfCurrentLoan.book.img} width='240' height='360' alt="Book" /> :
-                                            <img src={require('../../../assets/img/BooksImages/book_0.png')} width='226' height='349' alt="Book" />
+                                            <img src={shelfCurrentLoan.book.img} className='shelf-book-picture' width='240' height='360' alt="Book" /> :
+                                            <img src={require('../../../assets/img/BooksImages/book_0.png')} className='shelf-book-picture' width='240' height='360' alt="Book" />
                                         }
                                     </div>
                                     <div className='card col-3 col-md-3 container d-flex'>
@@ -70,7 +70,7 @@ export default function Loans({ }: Props) {
                     </> :
                     <>
                         <h3 className='mt-3'>Currently no loans</h3>
-                        <Link className='btn btn-primary' to='search'>Search for a new book</Link>
+                        <Link className='btn btn-primary' to='/search-books'>Search for a new book</Link>
                     </>
                 }
             </div>
@@ -83,7 +83,7 @@ export default function Loans({ }: Props) {
                             <div key={shelfCurrentLoan.book.id}>
                                 <div className='d-flex justify-content-center align-items-center'>
                                     {shelfCurrentLoan.book.img ?
-                                        <img src={shelfCurrentLoan.book.img} width='240' height='360' alt="Book" /> :
+                                        <img src={shelfCurrentLoan.book.img} className='shelf-book-picture' width='240' height='360' alt="Book" /> :
                                         <img src={require('../../../assets/img/BooksImages/book_0.png')} width='226' height='349' alt="Book" />
                                     }
                                 </div>

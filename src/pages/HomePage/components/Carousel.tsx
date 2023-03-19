@@ -76,7 +76,7 @@ export default function Carousel({ }: Props) {
                         <ReturnBook book={bookResponse.content[0]} />
                     )}
                 </div>
-            </div>        
+            </div>
         </div >
     )
 }
