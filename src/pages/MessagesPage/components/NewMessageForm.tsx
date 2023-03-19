@@ -51,7 +51,7 @@ export default function NewMessageForm({ }: Props) {
                     <div className='mb-3'>
                         <label className='form-label'>Question</label>
                         <textarea className='form-control' id='exampleFormControlTextarea1' rows={3}
-                            onChange={e => setQuestion(e.target.value)} value={question}></textarea>
+                            onChange={e => setQuestion(e.target.value)} value={question} maxLength={255}></textarea>
                     </div>
                     <div>
                         <button onClick={submitNewQuestion} type='button' className='btn btn-outline-info mt-3'>Submit Question</button>
