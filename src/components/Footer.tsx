@@ -10,7 +10,7 @@ export default function Footer({ }: Props) {
     }
 
     return (
-        <div className='main-color sticky-bottom'>
+        <div className='main-color'>
             <footer className='container d-flex flex-wrap justify-content-between align-items-center py-4 main-color'>
                 <p className='col-md-4 mb-0 text-white'>Huan Library</p>
                 <ul className='nav navbar-dark col-md-4 justify-content-end'>
