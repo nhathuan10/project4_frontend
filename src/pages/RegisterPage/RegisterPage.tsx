@@ -41,7 +41,7 @@ export default function RegisterPage({ }: Props) {
                             </div>
                         }
                         <h5 className='fw-bold text-light'>Name</h5>
-                        <input type="text" className='form-control' id='name'
+                        <input type="text" className='form-control custom-input' id='name'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.name &&
@@ -50,7 +50,7 @@ export default function RegisterPage({ }: Props) {
                     </div>
                     <div className='form-group w-75 my-2'>
                         <h5 className='fw-bold text-light'>Username</h5>
-                        <input type="text" className='form-control' id='username'
+                        <input type="text" className='form-control custom-input' id='username'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.username &&
@@ -59,7 +59,7 @@ export default function RegisterPage({ }: Props) {
                     </div>
                     <div className='form-group w-75 my-2'>
                         <h5 className='fw-bold text-light'>Email</h5>
-                        <input type="text" className='form-control' id='email'
+                        <input type="text" className='form-control custom-input' id='email'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.email &&
@@ -68,7 +68,7 @@ export default function RegisterPage({ }: Props) {
                     </div>
                     <div className='form-group w-75 my-2'>
                         <h5 className='fw-bold text-light'>Password</h5>
-                        <input type="password" className='form-control' id='password'
+                        <input type="password" className='form-control custom-input' id='password'
                             onChange={formSignUp.handleChange} onBlur={formSignUp.handleBlur}
                         />
                         {formSignUp.errors.password &&

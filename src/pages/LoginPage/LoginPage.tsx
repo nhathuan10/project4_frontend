@@ -38,7 +38,7 @@ export default function LoginPage({ }: Props) {
                     }
                     <div className='form-group w-75'>
                         <h5 className='fw-bold text-light'>Username or Email</h5>
-                        <input type="text" className='form-control' id='usernameOrEmail'
+                        <input type="text" className='form-control custom-input' id='usernameOrEmail'
                             onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
                         />
                         {formLogin.errors.usernameOrEmail &&
@@ -47,7 +47,7 @@ export default function LoginPage({ }: Props) {
                     </div>
                     <div className='form-group w-75 mt-3'>
                         <h5 className='fw-bold text-light'>Password</h5>
-                        <input type="password" className='form-control' id='password'
+                        <input type="password" className='form-control custom-input' id='password'
                             onChange={formLogin.handleChange} onBlur={formLogin.handleBlur}
                         />
                         {formLogin.errors.password &&

@@ -50,7 +50,7 @@
     align-items: center !important;
 }
 
-.form-control {
+.custom-input {
     background-color: transparent;
     border-radius: 10px;
     border-color: transparent;
@@ -62,7 +62,7 @@
     opacity: 0.8;
 }
 
-.form-control:focus {
+.custom-input:focus {
     background-color: rgba(229, 234, 180, 0.599);
     color: rgb(43, 42, 39); 
 }

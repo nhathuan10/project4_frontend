@@ -14,7 +14,7 @@ export default function SearchBar({ searchTitle, setSearchTitle, allBooksHandler
             <div className='col-8'>
                 <div className='d-flex'>
                     <input
-                        className='form-control w-75'
+                        className='form-control w-75 custom-input'
                         type='search'
                         placeholder='Search By Title'
                         aria-label='Search'
