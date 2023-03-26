@@ -1,17 +1,18 @@
 .register-container {
-    background-image: linear-gradient(to bottom right, rgb(8, 165, 157), rgb(161, 161, 20), rgba(224, 48, 35, 0.904));
+    background-image: linear-gradient(to right bottom, rgba(194, 74, 74, 0.6), rgba(159, 118, 29, 0.6)),
+        url('../../../img/PublicImages/image-4.jpg');
+    background-size: cover;
     .signup-form-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: rgba(103, 98, 187, 0.5);
+        background-color: rgba(97, 94, 165, 0.5);
         height: 750px;
         animation: blur2 .4s ease-in;
 
         .signup-form {
-            background: rgb(2, 0, 36);
-            background: linear-gradient(45deg, rgba(2, 0, 36, 1) 11%, rgba(68, 9, 121, 0.727328431372549) 50%, rgba(109, 129, 149, 1) 85%, rgba(0, 212, 255, 1) 100%);
+            background: linear-gradient(45deg ,rgb(76, 73, 125) 0%, rgb(105, 71, 7) 20% 30%, rgb(118, 118, 43) 50% 70%, rgb(42, 119, 42) 90% 100%);
             opacity: 0.75;
             width: 50%;
             margin: 20px;
@@ -48,14 +49,14 @@
 
 @keyframes blur2 {
     0% {
-        background-color: rgba(103, 98, 187, 0.9);
+        background-color: rgba(97, 94, 165, 0.9);
     }
 
     50% {
-        background-color: rgba(103, 98, 187, 0.75);
+        background-color: rgba(97, 94, 165, 0.75);
     }
 
     100% {
-        background-color: rgba(103, 98, 187, 0.5);
+        background-color: rgba(97, 94, 165, 0.5);
     }
 }
