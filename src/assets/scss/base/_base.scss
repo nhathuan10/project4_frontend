@@ -50,6 +50,21 @@
     align-items: center !important;
 }
 
+.form-control {
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: transparent;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(111, 92, 220);
+    padding: 8px;
+    opacity: 0.8;
+}
+
+.form-control:focus {
+    background-color: rgba(229, 234, 180, 0.599);
+    color: rgb(43, 42, 39); 
+}
+
 .book-div {
     width: 480px;
     height: 384px;
