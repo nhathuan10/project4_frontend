@@ -6,11 +6,12 @@
         justify-content: center;
         align-items: center;
         background-color: rgba(103, 98, 187, 0.5);
-        height: 700px;
+        height: 750px;
+        animation: blur2 .4s ease-in;
 
         .signup-form {
             background: rgb(2, 0, 36);
-            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 11%, rgba(68, 9, 121, 0.727328431372549) 50%, rgba(109, 129, 149, 1) 85%, rgba(0, 212, 255, 1) 100%);
+            background: linear-gradient(45deg, rgba(2, 0, 36, 1) 11%, rgba(68, 9, 121, 0.727328431372549) 50%, rgba(109, 129, 149, 1) 85%, rgba(0, 212, 255, 1) 100%);
             opacity: 0.75;
             width: 50%;
             margin: 20px;
@@ -19,8 +20,42 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 20px;
-            box-shadow: 10px 10px 10px;
+            border-radius: 40px;
+            box-shadow: 10px 10px 10px rgb(207, 160, 160);
+            animation: zoomOut .5s ease-out;
         }
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        filter: hue-rotate(90deg);
+        transform: scale(1.5);
+        border-radius: 0px;
+    }
+
+    50% {
+        filter: hue-rotate(45deg);
+        transform: scale(1.25);
+        border-radius: 20px;
+    }
+
+    100% {
+        filter: hue-rotate(0deg);
+        transform: scale(1);
+    }
+}
+
+@keyframes blur2 {
+    0% {
+        background-color: rgba(103, 98, 187, 0.9);
+    }
+
+    50% {
+        background-color: rgba(103, 98, 187, 0.75);
+    }
+
+    100% {
+        background-color: rgba(103, 98, 187, 0.5);
     }
 }

@@ -28,6 +28,9 @@ const historyReducer = createSlice({
         verifyBookReturnedAction: (state: HistoryState) => {
             state.verifyResponse = !state.verifyResponse
         },
+        deleteHistoryAction: (state: HistoryState) => {
+            state.verifyResponse = !state.verifyResponse
+        },
     }
 });
 
@@ -35,6 +38,7 @@ export const {
     getAllHistoriesByUserAction,
     getAllHistoriesAction,
     verifyBookReturnedAction,
+    deleteHistoryAction
 } = historyReducer.actions
 
 export default historyReducer.reducer
@@ -66,6 +70,17 @@ export const verifyBookReturnedApi = (historyId: number) => {
         try {
             const result = await http.put(`/api/histories/${historyId}/verifyBookReturned`)
             dispatch(verifyBookReturnedAction())
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const deleteHistoryApi = (historyId: number) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await http.delete(`/api/histories/${historyId}`)
+            dispatch(deleteHistoryAction())
         } catch (err) {
             console.log(err)
         }

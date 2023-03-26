@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { DispatchType, RootState } from '../../redux/configStore'
-import { getAllHistoriesApi, verifyBookReturnedApi } from '../../redux/HistoryReducer/historyReducer'
+import { deleteHistoryApi, getAllHistoriesApi, verifyBookReturnedApi } from '../../redux/HistoryReducer/historyReducer'
 
 type Props = {}
 
@@ -17,6 +17,10 @@ export default function AdminLoanPage({ }: Props) {
 
     const verifyBookReturned = (id: number) => {
         dispatch(verifyBookReturnedApi(id))
+    }
+
+    const deleteHistory = (id: number) => {
+        dispatch(deleteHistoryApi(id))
     }
 
     return (
@@ -55,7 +59,19 @@ export default function AdminLoanPage({ }: Props) {
                                             <hr />
                                             <p className='card-text'> Checked out on: {history.checkoutDate}</p>
                                             <p className='card-text'> Returned on: {history.returnedDate}</p>
-                                            <button className='btn btn-danger' onClick={() => verifyBookReturned(history.id)}>Confirm Book Returned</button>
+                                            <div className='d-flex justify-content-between'>
+                                                {history.verified ?
+                                                    <p className='text-success fst-italic fw-bold'>Book already returned</p>
+                                                    :
+                                                    <button
+                                                        className='btn btn-warning'
+                                                        onClick={() => verifyBookReturned(history.id)}
+                                                    >
+                                                        <span className='fw-bold'>Confirm Book Returned</span>
+                                                    </button>
+                                                }
+                                                <button className='btn btn-danger' onClick={() => deleteHistory(history.id)}>Delete</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

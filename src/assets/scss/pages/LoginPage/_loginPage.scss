@@ -6,11 +6,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(58, 43, 43, 0.7);
-        height: 700px;
+        background-color: rgba(131, 98, 98, 0.699);
+        height: 90vh;
+        animation: blur .4s ease-in;
 
         .login-form {
-            background-image: url('../../../img/PublicImages/image-6.jpg');
+            background-image: url('../../../img/PublicImages/image-5.jpg');
             background-size: repeat;
             opacity: 0.9;
             height: 500px;
@@ -22,7 +23,8 @@
             justify-content: center;
             align-items: center;
             border-radius: 20px;
-            box-shadow: 10px 10px;
+            box-shadow: 15px 13px 8px rgb(54, 54, 56);
+            animation: zoomIn .5s ease-in;
 
             .login-icon {
                 font-size: 65px;
@@ -31,5 +33,50 @@
                 margin-bottom: 15px;
             }
         }
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.65);
+        filter: blur(12px);
+        border-radius: 180px;
+    }
+
+    25% {
+        transform: scale(0.75);
+        filter: blur(9px);
+        border-radius: 150px;
+    }
+
+    50% {
+        transform: scale(0.85);
+        filter: blur(6px);
+        border-radius: 120px;
+    }
+
+    75% {
+        transform: scale(0.95);
+        filter: blur(3px);
+        border-radius: 60px;
+    }
+
+    100% {
+        transform: scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes blur {
+    0% {
+        background-color: rgba(131, 98, 98, 0.103);
+    }
+
+    50% {
+        background-color: rgba(131, 98, 98, 0.342);
+    }
+
+    100% {
+        background-color: rgba(131, 98, 98, 0.699);
     }
 }

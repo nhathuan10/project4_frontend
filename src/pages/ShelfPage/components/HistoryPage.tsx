@@ -50,7 +50,11 @@ export default function HistoryPage({ }: Props) {
                                             <hr />
                                             <p className='card-text'> Checked out on: {history.checkoutDate}</p>
                                             <p className='card-text'> Returned on: {history.returnedDate}</p>
-                                            <p className='text-danger fst-italic'>Waiting for verification !</p>
+                                            {history.verified ?
+                                                <p className='text-success fst-italic fw-bold'>Book returned successfully !</p>
+                                                :
+                                                <p className='text-danger fst-italic fw-bold'>Waiting for verification !</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +66,7 @@ export default function HistoryPage({ }: Props) {
                 :
                 <>
                     <h3 className='mt-3'>Currently no history: </h3>
-                    <Link className='btn btn-primary' to={'search'}>
+                    <Link className='btn btn-primary' to={'/search-books'}>
                         Search for new book
                     </Link>
                 </>

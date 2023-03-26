@@ -6,5 +6,8 @@ export type HistoryModel = {
     title: string
     author: string
     description: string
+    validated: number
+    verified: boolean
     img: string
+    bookId: number
 }

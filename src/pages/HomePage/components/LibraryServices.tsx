@@ -35,7 +35,7 @@ export default function LibraryServices({ }: Props) {
 
     return (
         <div className='container my-5'>
-            <div className='row p-4 align-items-center rounded shadow-lg'>
+            <div className='row p-4 align-items-center rounded-4 shadow-lg'>
                 <div className='col-lg-7 p-3'>
                     <h1 className='display-4 fw-bold'>
                         Can't find what you are looking for?

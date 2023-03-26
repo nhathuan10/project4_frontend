@@ -4,13 +4,13 @@
     height: 75vh !important;
     background-size: cover;
     background-position: top;
-    clip-path: polygon(0 0, 100% 0, 100% 60vh, 0 100%);
-    animation: moveRight 0.5s ease-in;
+    clip-path: polygon(0 0, 100% 0, 100% 55vh, 0 100%);
+    animation: polygonMove 1s ease-in;
 
     .heading-primary {
         font-size: 70px;
         font-weight: 600;
-        animation: moveLeft 1s ease-out;
+        animation: moveLeft 1s ease-in;
         color: rgb(241, 216, 216);
         text-shadow: 3px 3px 5px #551818;
         text-transform: uppercase;
@@ -53,5 +53,32 @@
     100% {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes polygonMove {
+    0% {
+        opacity: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 5vh, 0 100%);
+    }
+
+    25% {
+        opacity: 0.25;
+        clip-path: polygon(0 0, 100% 0, 100% 15vh, 0 100%);
+    }
+
+    50% {
+        opacity: 0.5;
+        clip-path: polygon(0 0, 100% 0, 100% 30vh, 0 100%);
+    }
+
+    75% {
+        opacity: 0.75;
+        clip-path: polygon(0 0, 100% 0, 100% 45vh, 0 100%);
+    }
+
+    100% {
+        opacity: 1;
+        clip-path: polygon(0 0, 100% 0, 100% 55vh, 0 100%);
     }
 }
