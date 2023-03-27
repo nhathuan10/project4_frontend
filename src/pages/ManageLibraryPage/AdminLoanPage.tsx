@@ -70,7 +70,9 @@ export default function AdminLoanPage({ }: Props) {
                                                         <span className='fw-bold'>Confirm Book Returned</span>
                                                     </button>
                                                 }
-                                                <button className='btn btn-danger' onClick={() => deleteHistory(history.id)}>Delete</button>
+                                                {history.verified &&
+                                                    <button className='btn btn-danger' onClick={() => deleteHistory(history.id)}>Delete</button>
+                                                }
                                             </div>
                                         </div>
                                     </div>
