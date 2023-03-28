@@ -3,6 +3,6 @@ export type ReviewModel = {
     userEmail?: string
     date: string 
     rating: number 
-    bookId?: string
+    bookTitle?: string
     description: string
 }

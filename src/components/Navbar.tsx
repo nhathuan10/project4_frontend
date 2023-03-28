@@ -102,6 +102,9 @@ export default function ({ }: Props) {
                                     <li className='nav-item'>
                                         <NavLink className='nav-link text-dark fw-bold' to='/admin/loan'>Loan</NavLink>
                                     </li>
+                                    <li className='nav-item'>
+                                        <NavLink className='nav-link text-dark fw-bold' to='/admin/review'>Review</NavLink>
+                                    </li>
                                 </ul>
                             </div>
 

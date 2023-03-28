@@ -20,6 +20,7 @@ import MessagesPage from './pages/MessagesPage/MessagesPage';
 import AdminMessagesPage from './pages/ManageLibraryPage/AdminMessagesPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import AdminLoanPage from './pages/ManageLibraryPage/AdminLoanPage';
+import AdminReviewPage from './pages/ManageLibraryPage/AdminReviewPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -43,6 +44,7 @@ root.render(
           </Route>
           <Route path='admin/message' element={<AdminMessagesPage />} />
           <Route path='admin/loan' element={<AdminLoanPage />} />
+          <Route path='admin/review' element={<AdminReviewPage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='register' element={<RegisterPage />} />
           <Route path='review-list' element={<ReviewListPage />} />
