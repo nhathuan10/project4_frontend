@@ -8,6 +8,7 @@ export type ReviewState = {
     isReviewLeft: boolean | null
     reviewResponse: ReviewModel | null
     allReviews: ReviewResponse | null
+    reviewsByUserEmail: ReviewModel[]
     flash: boolean
 }
 
@@ -15,6 +16,7 @@ const initialState: ReviewState = {
     isReviewLeft: null,
     reviewResponse: null,
     allReviews: null,
+    reviewsByUserEmail: [],
     flash: false
 }
 
@@ -31,6 +33,9 @@ const reviewReducer = createSlice({
         getAllReviewsAction: (state: ReviewState, action: PayloadAction<ReviewResponse>) => {
             state.allReviews = action.payload
         },
+        getReviewsByUserEmailAction: (state: ReviewState, action: PayloadAction<ReviewModel[]>) => {
+            state.reviewsByUserEmail= action.payload
+        },
         deleteReviewAction: (state: ReviewState) => {
             state.flash = !state.flash
         },
@@ -41,7 +46,8 @@ export const {
     isReviewLeftAction,
     leaveReviewAction,
     getAllReviewsAction,
-    deleteReviewAction
+    deleteReviewAction,
+    getReviewsByUserEmailAction
 } = reviewReducer.actions
 
 export default reviewReducer.reducer
@@ -78,6 +84,17 @@ export const getAllReviewsApi = (pageNo?: number, pageSize?: number) => {
                 const result = await http.get('/api/reviews')
                 dispatch(getAllReviewsAction(result.data))
             }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const getReviewsByUserEmailApi = (userEmail?: string) => {
+    return async (dispatch: DispatchType) => {
+        try {
+            const result = await http.get(`/api/reviews/getReviewsByUserEmail?userEmail=${userEmail}`)
+            dispatch(getReviewsByUserEmailAction(result.data))
         } catch (err) {
             console.log(err)
         }
