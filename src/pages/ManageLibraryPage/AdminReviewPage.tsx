@@ -38,7 +38,6 @@ export default function AdminReviewPage({ }: Props) {
             dispatch(getReviewsByUserEmailApi(userEmail))
         }
     }, [userEmail])
-    console.log(reviewsByUserEmail)
 
     const renderAllReviews = () => {
         return allReviews?.content.map((review: ReviewModel, index: number) => (
