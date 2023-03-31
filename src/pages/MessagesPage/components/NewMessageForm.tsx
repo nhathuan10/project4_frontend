@@ -28,7 +28,7 @@ export default function NewMessageForm({ }: Props) {
     }
 
     return (
-        <div className='card mt-3'>
+        <div className='card mt-3 new-message-form'>
             <div className='card-header text-info fw-bold'>
                 Ask question
             </div>

@@ -1,13 +1,13 @@
 .book-item {
     transition: transform 0.5s;
-    background-color: #E6E6E6;
+    background-color: $message-color;
     border-radius: 10px;
     animation: searchBookMove 0.4s ease-in;
 }
 
 .book-item:hover {
     transform: scale(1.02);
-    filter: saturate(2);
+    filter: saturate(1.5);
     border-color: #3d096e;
     border-width: 1px;
     opacity: 0.85;

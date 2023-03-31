@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+$main-color: #5e1717;
+$message-color: rgb(238, 226, 204);
+$background-image-color: radial-gradient(rgb(216, 188, 188), rgb(241, 197, 115), rgb(35, 110, 223));
+
 :root {
     --mainOpacity: rgba(0, 0, 0, 0.65);
 }
@@ -18,11 +22,11 @@
 }
 
 .background-main-color {
-    background-image: radial-gradient(rgb(216, 188, 188), rgb(241, 197, 115), rgb(35, 110, 223));
+    background-image: $background-image-color;
 }
 
 .text-main-color {
-    color: #5e1717;
+    color: $main-color;
 }
 
 .col-image-left {
@@ -118,7 +122,7 @@
 }
 
 .main-color {
-    background-color: #5e1717;
+    background-color: $main-color;
 }
 
 .main-color::after {

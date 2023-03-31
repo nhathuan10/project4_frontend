@@ -37,7 +37,7 @@ export default function Message({ message }: Props) {
 
     return (
         <div key={message.id}>
-            <div className='card my-2 shadow p-3 bg-body rounded'>
+            <div className='card my-2 shadow p-3 rounded message'>
                 <h5>Question {message.id}: {message.title}</h5>
                 <h6>{message.userEmail}</h6>
                 <p className='fst-italic'>{message.question}</p>

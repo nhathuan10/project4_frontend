@@ -19,7 +19,7 @@ export default function Messages({ }: Props) {
         <div className='mt-2'>
             {messages.length > 0 ?
                 <>
-                    <h5>Current Q/A: </h5>
+                    <h4 className='my-3'>Current Q/A: </h4>
                     {messages.map(message => (
                         <Message message={message} />
                     ))}

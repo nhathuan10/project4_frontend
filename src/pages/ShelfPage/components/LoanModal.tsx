@@ -27,7 +27,7 @@ export default function LoanModal({ mobile, shelfCurrentLoan }: Props) {
         >
             <div className='modal-dialog'>
                 <div className='modal-content'>
-                    <div className='modal-header' style={{backgroundColor: '#C2F003'}}>
+                    <div className='modal-header'>
                         <h5 className='modal-title' id='staticBackdropLabel'>Loans Options</h5>
                         <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                     </div>

@@ -19,10 +19,10 @@ export default function HistoryPage({ }: Props) {
         <div className='mt-2'>
             {historiesByUser.length > 0 ?
                 <>
-                    <h5>Recent History:</h5>
+                    <h3 className='my-3'>Recent History:</h3>
                     {historiesByUser.map(history => (
                         <div key={history.id}>
-                            <div className='card mt-3 shadow p-3 mb-3 bg-body rounded'>
+                            <div className='card mt-3 shadow p-3 mb-3 loan-box rounded'>
                                 <div className='row g-0'>
                                     <div className='col-md-2 mx-4 my-2'>
                                         <div className='d-none d-lg-block'>

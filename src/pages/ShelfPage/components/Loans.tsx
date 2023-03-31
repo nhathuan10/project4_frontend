@@ -32,7 +32,7 @@ export default function Loans({ }: Props) {
                                             <img src={require('../../../assets/img/BooksImages/book_0.png')} className='shelf-book-picture' width='240' height='360' alt="Book" />
                                         }
                                     </div>
-                                    <div className='card col-3 col-md-3 container d-flex'>
+                                    <div className='card col-3 col-md-3 container loan-box'>
                                         <div className='card-body'>
                                             <div className='mt-3'>
                                                 <h4>Loan Options</h4>
@@ -53,8 +53,7 @@ export default function Loans({ }: Props) {
                                                     >
                                                         Manage Loan
                                                     </button>
-                                                    {/* <p className='text-danger'>Waiting for Verification</p> */}
-                                                    <Link to='search' className='list-group-item list-group-item-action'>Search more books?</Link>
+                                                    <Link to='/search-books' className='list-group-item list-group-item-action'>Search more books?</Link>
                                                 </div>
                                             </div>
                                             <hr />
@@ -87,7 +86,7 @@ export default function Loans({ }: Props) {
                                         <img src={require('../../../assets/img/BooksImages/book_0.png')} width='226' height='349' alt="Book" />
                                     }
                                 </div>
-                                <div className='card d-flex mb-3 mt-5'>
+                                <div className='card d-flex mb-3 mt-5 loan-box'>
                                     <div className='card-body container'>
                                         <div className='mt-3'>
                                             <h4>Loan Options</h4>

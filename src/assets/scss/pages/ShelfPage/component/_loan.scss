@@ -7,6 +7,11 @@
     }
 }
 
+.loan-box {
+    background-color: $message-color;
+    animation: moveTop .5s ease-out;
+}
+
 @keyframes moveLeft2 {
     0% {
         opacity: 0;

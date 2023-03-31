@@ -76,10 +76,7 @@ export default function CheckoutAndReviewBox({ mobile }: Props) {
     }
 
     return (
-        <div
-            className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5 rounded-3 checkout-box'}
-            style={{ backgroundColor: '#AAFFFF' }}
-        >
+        <div className={mobile ? 'card d-flex mt-5' : 'card col-3 container d-flex mb-5 rounded-3 checkout-box'}>
             <div className='card-body container'>
                 <div className='mt-3 text-center'>
                     {currentLoansCount == 0 || currentLoansCount == 1 ?

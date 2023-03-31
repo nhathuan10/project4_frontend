@@ -1,0 +1,33 @@
+.new-message-form, .message {
+    background-color: $message-color;
+    animation: expandHorizontal .3s ease-out;
+    width: 100%;
+    opacity: 1;
+}
+
+@keyframes expandHorizontal {
+    0% {
+        opacity: 0;
+        width: 0%;
+    }
+
+    25% {
+        opacity: 0.2;
+        width: 20%;
+    }
+
+    50% {
+        opacity: 0.4;
+        width: 40%;
+    }
+
+    75% {
+        opacity: 0.6;
+        width: 60%;
+    }
+
+    100% {
+        opacity: 0.8;
+        width: 80%;
+    }
+}
