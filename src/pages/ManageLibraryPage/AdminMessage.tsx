@@ -25,7 +25,7 @@ export default function AdminMessage({ message }: Props) {
 
     return (
         <div key={message.id}>
-            <div className='card my-2 shadow p-3 bg-body rounded'>
+            <div className='card my-2 shadow p-3 rounded loan-box'>
                 <h4 className='text-primary'>Question {message.id}: {message.title}</h4>
                 <h6>{message.userEmail}</h6>
                 <p>{message.question}</p>

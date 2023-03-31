@@ -37,7 +37,7 @@ export default function Loans({ }: Props) {
                                             <div className='mt-3'>
                                                 <h4>Loan Options</h4>
                                                 {shelfCurrentLoan.daysLeft > 0 &&
-                                                    <p className='text-secondary'>
+                                                    <p className='text-dark'>
                                                         Due in {shelfCurrentLoan.daysLeft} days
                                                     </p>
                                                 }

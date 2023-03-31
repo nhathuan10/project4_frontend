@@ -27,8 +27,8 @@ export default function LoanModal({ mobile, shelfCurrentLoan }: Props) {
         >
             <div className='modal-dialog'>
                 <div className='modal-content'>
-                    <div className='modal-header'>
-                        <h5 className='modal-title' id='staticBackdropLabel'>Loans Options</h5>
+                    <div className='modal-header main-color'>
+                        <h4 className='modal-title text-light' id='staticBackdropLabel'>Loans Options</h4>
                         <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                     </div>
                     <div className='modal-body'>
@@ -49,12 +49,12 @@ export default function LoanModal({ mobile, shelfCurrentLoan }: Props) {
                                 </div>
                                 <hr />
                                 {shelfCurrentLoan.daysLeft > 0 &&
-                                    <p className='text-secondary'>
+                                    <p className='text-dark'>
                                         Due in {shelfCurrentLoan.daysLeft} days
                                     </p>
                                 }
                                 {shelfCurrentLoan.daysLeft === 0 &&
-                                    <p className='text-sucess'>Due today</p>
+                                    <p className='text-success'>Due today</p>
                                 }
                                 {shelfCurrentLoan.daysLeft < 0 &&
                                     <p className='text-danger'>Past due by {shelfCurrentLoan.daysLeft} days</p>

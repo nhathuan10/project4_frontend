@@ -45,11 +45,11 @@ export default function NewMessageForm({ }: Props) {
                         </div>
                     }
                     <div className='mb-3'>
-                        <label className='form-label'>Title</label>
+                        <label className='form-label fw-bold'>Title</label>
                         <input type="text" className='form-control' placeholder='Title' onChange={e => setTitle(e.target.value)} value={title} />
                     </div>
                     <div className='mb-3'>
-                        <label className='form-label'>Question</label>
+                        <label className='form-label fw-bold'>Question</label>
                         <textarea className='form-control' id='exampleFormControlTextarea1' rows={3}
                             onChange={e => setQuestion(e.target.value)} value={question} maxLength={255}></textarea>
                     </div>

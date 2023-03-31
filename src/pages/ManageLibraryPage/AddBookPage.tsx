@@ -108,7 +108,7 @@ export default function AddBookPage({ }: Props) {
                 <div className='card-header fw-bold'>
                     {id ? 'Update Book' : 'Add New Book'}
                 </div>
-                <div className='card-body'>
+                <div className='card-body loan-box'>
                     <form onSubmit={addBookForm.handleSubmit}>
                         <div className='row'>
                             <div className='col-md-6 mb-3'>
