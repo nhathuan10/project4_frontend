@@ -76,6 +76,10 @@ $background-image-color: radial-gradient(rgb(216, 188, 188), rgb(241, 197, 115),
     height: 384px;
 }
 
+.message {
+    background-color: $message-color;
+}
+
 .inactiveLink {
     pointer-events: none;
     cursor: default;

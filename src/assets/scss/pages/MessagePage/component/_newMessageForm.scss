@@ -1,6 +1,6 @@
-.new-message-form, .message {
+.new-message-form {
     background-color: $message-color;
-    animation: expandHorizontal .3s ease-out;
+    animation: expandHorizontal .4s ease-in;
     width: 100%;
     opacity: 1;
 }
