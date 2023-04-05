@@ -98,7 +98,7 @@ export default function AllBooksPage({ }: Props) {
         <div className='container'>
             <h2 className='text-center m-3'>Books Management</h2>
             <div className='text-end'>
-                <NavLink to='/admin/book/add-book' className='btn btn-primary'>Add Book</NavLink>
+                <NavLink to='/admin/book/add-book' className='btn btn-primary'>+ Add Book</NavLink>
             </div>
             <SearchBar
                 categorySelected={categorySelected}
